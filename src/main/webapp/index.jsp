@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+<!--
 <div class="box center grey-background">
     <h1>Parkhaus Team89</h1>
     <p>Tomcat Version : <%= application.getServerInfo() %></p>
@@ -77,5 +78,6 @@
                          SALT="456">
     </ccm-parkhaus-11-0-0>
 </div>
+    -->
 </body>
 </html>
