@@ -9,6 +9,9 @@ public class BaseServlet extends ParkhausServlet {
         return "Super Duper Parkhaus";
     }
     double sum = 0;
+    double carCounter = 0;
+    long sumDoration = 0;
+
     @Override
     int MAX() {
         return 0;
