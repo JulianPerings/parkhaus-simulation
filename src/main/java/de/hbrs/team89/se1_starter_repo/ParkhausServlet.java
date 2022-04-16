@@ -40,7 +40,7 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "sum":
                 // ToDo: insert algorithm for calculating sum here
-                out.println( "sum = server side calculated sum" );
+                out.println( "sum = " + getContext().getAttribute("sum"+NAME()));
                 break;
             case "avg":
                 // ToDo
@@ -103,6 +103,7 @@ public abstract class ParkhausServlet extends HttpServlet {
                         price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         // store new sum in ServletContext
+                        getContext().setAttribute("sum"+NAME(),getSum() + price/100.d);
                         // ToDo getContext().setAttribute("sum"+NAME(), getSum() + price );
                     }
                 }
@@ -122,6 +123,13 @@ public abstract class ParkhausServlet extends HttpServlet {
                 // System.out.println( "Invalid Command: " + body );
         }
 
+    }
+    double getSum(){
+        if(getContext().getAttribute("sum"+NAME()) == null) {
+            return 0.0;
+        } else {
+            return Double.parseDouble(getContext().getAttribute("sum"+NAME()).toString());
+        }
     }
 
 
