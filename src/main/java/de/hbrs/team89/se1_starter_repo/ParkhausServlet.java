@@ -44,6 +44,18 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "avg":
                 // ToDo
+                long avgTime=0;
+                long avgPrice=0;
+                CarIF[] cars=getCarList();
+                for(int i=0;i<cars.length;i++){
+                //for(CarIF i:cars) {
+                    avgTime += cars[i].duration();
+
+                    avgPrice += cars[i].price();
+                }
+                avgTime/=cars.length;
+                avgPrice/=cars.length;
+                out.println("avgTime in seconds = "+avgTime/1000.+" and avgPrize = € "+((double)(avgPrice/100))/100.0d);
                 break;
             case "min":
                 // ToDo: insert algorithm for calculating min here
@@ -104,6 +116,11 @@ public abstract class ParkhausServlet extends HttpServlet {
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         // store new sum in ServletContext
                         getContext().setAttribute("sum"+NAME(),getSum() + price/100.d);
+                        CarIF[] oldCars=getCarList();
+                        CarIF[] cars=new CarIF[oldCars.length+1];
+                        for(int i=0;i<oldCars.length;i++){cars[i]=oldCars[i];}
+                        cars[oldCars.length]=new Car(restParams);
+                        getContext().setAttribute("carList"+NAME(),cars);
                         // ToDo getContext().setAttribute("sum"+NAME(), getSum() + price );
                     }
                 }
@@ -124,6 +141,15 @@ public abstract class ParkhausServlet extends HttpServlet {
         }
 
     }
+
+    CarIF[] getCarList(){
+        if(getContext().getAttribute("carList"+NAME()) == null) {
+            return new CarIF[0];
+        } else {
+            return ((CarIF[]) getContext().getAttribute("carList"+NAME()));
+        }
+    }
+
     double getSum(){
         if(getContext().getAttribute("sum"+NAME()) == null) {
             return 0.0;
