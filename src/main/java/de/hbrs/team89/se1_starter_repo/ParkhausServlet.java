@@ -40,11 +40,22 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "sum":
                 // ToDo: insert algorithm for calculating sum here
-                out.println( "Summe: " + getSum() + " Euro");
+                out.println( "sum = " + getContext().getAttribute("sum"+NAME()));
                 break;
             case "avg":
                 // ToDo
-                out.println( "Avg Geld: " + getAvg()+" Euro, avg Zeit: " + getAvgTime() + " Sekunden");
+                long avgTime=0;
+                long avgPrice=0;
+                CarIF[] cars=getCarList();
+                for(int i=0;i<cars.length;i++){
+                //for(CarIF i:cars) {
+                    avgTime += cars[i].duration();
+
+                    avgPrice += cars[i].price();
+                }
+                avgTime/=cars.length;
+                avgPrice/=cars.length;
+                out.println("avgTime in seconds = "+avgTime/1000.+" and avgPrize = € "+((double)(avgPrice/100))/100.0d);
                 break;
             case "min":
                 // ToDo: insert algorithm for calculating min here
@@ -100,18 +111,18 @@ public abstract class ParkhausServlet extends HttpServlet {
                 double price = 0.0d;
                 if ( params.length > 4 ){
                     String priceString = params[4];
-                    String durationString = params[3];
                     if ( ! "_".equals( priceString ) ){
                         price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         // store new sum in ServletContext
                         getContext().setAttribute("sum"+NAME(),getSum() + price/100.d);
+                        CarIF[] oldCars=getCarList();
+                        CarIF[] cars=new CarIF[oldCars.length+1];
+                        for(int i=0;i<oldCars.length;i++){cars[i]=oldCars[i];}
+                        cars[oldCars.length]=new Car(restParams);
+                        getContext().setAttribute("carList"+NAME(),cars);
                         // ToDo getContext().setAttribute("sum"+NAME(), getSum() + price );
-                        //increases counter for cars by one
-                        getContext().setAttribute("carCounter"+NAME(), getCarCounter() + 1 );
                     }
-                    int time = new Scanner( durationString ).useDelimiter("\\D+").nextInt();
-                    getContext().setAttribute("sumDuration"+NAME(), getTime() + time/1000); //addiert Zeit in Sekunden
                 }
                 out.println( price );  // server calculated price
                 System.out.println( "leave," + oldCar + ", price = " + price );
@@ -130,44 +141,20 @@ public abstract class ParkhausServlet extends HttpServlet {
         }
 
     }
+
+    CarIF[] getCarList(){
+        if(getContext().getAttribute("carList"+NAME()) == null) {
+            return new CarIF[0];
+        } else {
+            return ((CarIF[]) getContext().getAttribute("carList"+NAME()));
+        }
+    }
+
     double getSum(){
         if(getContext().getAttribute("sum"+NAME()) == null) {
             return 0.0;
         } else {
             return Double.parseDouble(getContext().getAttribute("sum"+NAME()).toString());
-        }
-    }
-    int getCarCounter(){
-        if(getContext().getAttribute("carCounter"+NAME()) == null) {
-            return 0;
-        } else {
-            return Integer.parseInt(getContext().getAttribute("carCounter"+NAME()).toString());
-        }
-    }
-
-    long getTime(){
-        System.out.println(getContext().getAttribute("sumDuration"+NAME()));
-        if(getContext().getAttribute("sumDuration"+NAME()) == null) {
-            return 0;
-        } else {
-            return Long.parseLong(getContext().getAttribute("sumDuration"+NAME()).toString());
-        }
-    }
-
-    int getAvgTime(){
-        int c = getCarCounter();
-        if(c == 0) {
-            return 0;
-        } else {
-            return (int) getTime() / c;
-        }
-    }
-    double getAvg(){
-        int c = getCarCounter();
-        if(c == 0) {
-            return 0.0;
-        } else {
-            return getSum() / c;
         }
     }
 
