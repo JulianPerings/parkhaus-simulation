@@ -34,7 +34,9 @@ public class Car implements CarIF {
     public int price() {
         return new Scanner( params[3] ).useDelimiter("\\D+").nextInt();
     }
-
+    public String getVehicleType(){
+        return params[8].substring(20,params[8].length()-1);
+    }
     @Override
     public String toString(){
         return Arrays.toString( params );

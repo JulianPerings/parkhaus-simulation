@@ -6,4 +6,5 @@ package de.hbrs.team89.se1_starter_repo;
     long end();
     int duration();
     int price();
+    String getVehicleType();
 }

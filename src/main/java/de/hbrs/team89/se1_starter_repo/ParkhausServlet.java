@@ -40,22 +40,29 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "sum":
                 // ToDo: insert algorithm for calculating sum here
-                out.println( "sum = " + getContext().getAttribute("sum"+NAME()));
+                out.println( "sum = " + getSum());
                 break;
             case "avg":
-                // ToDo
-                long avgTime=0;
-                long avgPrice=0;
-                CarIF[] cars=getCarList();
-                for(int i=0;i<cars.length;i++){
-                //for(CarIF i:cars) {
-                    avgTime += cars[i].duration();
-
-                    avgPrice += cars[i].price();
+                out.println("avgTime in seconds = "+ getAvgTime()+" and avgPrize = € "+ getAvg());
+                break;
+            case "stats":
+                CarIF[] cars= getCarList();
+                int[] counter = {0,0,0,0};
+                String[] vehicleType = {"SUV","PKW","MOTORBIKE","E_VEHICLE"};
+                if(cars.length > 0){
+                    for (CarIF car: cars) {
+                        for(int i =0; i < vehicleType.length; i++){
+                            if(car.getVehicleType().equals(vehicleType[i])){
+                                counter[i]++;
+                                continue;
+                            }
+                        }
+                    }
                 }
-                avgTime/=cars.length;
-                avgPrice/=cars.length;
-                out.println("avgTime in seconds = "+avgTime/1000.+" and avgPrize = € "+((double)(avgPrice/100))/100.0d);
+                for(int i = 0; i < counter.length; i++){
+                    out.print(vehicleType[i] + ": " + counter[i] + "; ");
+                }
+
                 break;
             case "min":
                 // ToDo: insert algorithm for calculating min here
@@ -157,8 +164,31 @@ public abstract class ParkhausServlet extends HttpServlet {
             return Double.parseDouble(getContext().getAttribute("sum"+NAME()).toString());
         }
     }
+    double getAvg(){
+        CarIF[] c = getCarList();
+        if(c.length == 0) {
+            return 0.0;
+        } else {
+            double avg = 0;
+            for(int i=0;i<c.length;i++){
+                avg += c[i].price()/10000.;
+            }
+            return avg / c.length;
+        }
+    }
 
-
+    int getAvgTime(){
+        CarIF[] c = getCarList();
+        if(c.length == 0) {
+            return 0;
+        } else {
+            long time = 0;
+            for(int i=0;i<c.length;i++){
+                time += c[i].duration()/1000;
+            }
+            return (int) time / c.length;
+        }
+    }
     // auxiliary methods used in HTTP request processing
 
     /**
