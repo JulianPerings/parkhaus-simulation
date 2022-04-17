@@ -1,6 +1,7 @@
 package de.hbrs.team89.se1_starter_repo;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 // ToDo replace 0 by correct values read from this.params
 public class Car implements CarIF {
@@ -11,27 +12,27 @@ public class Car implements CarIF {
 
     @Override
     public int nr() {
-        return 0;
+        return new Scanner( params[0] ).useDelimiter("\\D+").nextInt();
     }
 
     @Override
     public long begin() {
-        return 0;
+        return new Scanner( params[1] ).useDelimiter("\\D+").nextLong();
     }
 
     @Override
     public long end() {
-        return 0;
+        return this.begin()+this.duration();
     }
 
     @Override
     public int duration() {
-        return 0;
+        return new Scanner( params[2] ).useDelimiter("\\D+").nextInt();
     }
 
     @Override
     public int price() {
-        return 0;
+        return new Scanner( params[3] ).useDelimiter("\\D+").nextInt();
     }
 
     @Override
