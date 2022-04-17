@@ -3,7 +3,7 @@
 <html>
 <head>
 <script src='https://ccmjs.github.io/mkaul-components/parkhaus/versions/ccm.parkhaus-11.0.0.js'></script>
-    <ccm-parkhaus-11-0-0 extra_buttons='["sum","avg"]'
+    <ccm-parkhaus-11-0-0 extra_buttons='["sum","avg","stats"]'
                             key='{"name":"Super Duper Parkhaus",
                                 "background_color":"white",
                                 "max":15,

@@ -8,7 +8,6 @@ public class BaseServlet extends ParkhausServlet {
     String NAME() {
         return "Super Duper Parkhaus";
     }
-
     @Override
     int MAX() {
         return 0;
