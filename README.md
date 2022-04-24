@@ -14,16 +14,15 @@
 
 - **Ticket** : Hexzahl zur Identifizierung einzelner Fahrzeuge
 
-- Eindeutige Fahrzeugtypen? SUV, PKW, Motorbike, E_Vehicle
+- **Unique Cartypes** : SUV, PKW, Motorbike, E_Vehicle
 
-- **Customer/ParkingGarageUser/ParkingGarageOwner** Customer = Parkhausbesitzer,
-                                                    ParkingGarageUser = Autofahrer,
-                                                    ParkingGarageOwner = Parkhausbesitzer 
+- **ParkingGarageOwner** : Parkhausbesitzer
 
+- **ParkingGarageUser** : Autofahrer / Parkplatzsuchende
 
 - **ParkingSpace** : Parkplatz, unterschiedliche Typen
 
-- **Car** : Fahrzeug, unterschiedliche Typen
+- **Car** : Fahrzeug, unterschiedliche Typen (incl. Motorbike)
 
 ## Getting started
 
