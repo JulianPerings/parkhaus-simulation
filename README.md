@@ -1,6 +1,26 @@
 # Parkhaus Simulation Team 13
 
+## Glossar
 
+- **Stats** : Statistik zur Anzahl der verschiedenen Typen
+
+- **Occupied** : belegter Parkplatz
+
+- **Leave** : Fahrzeug verlässt einen Parkplatz
+
+- **Enter** : Fahrzeug “betritt”? Parkhaus
+
+- **CarCounter** : Fahrzeugzähler
+
+- **Ticket** : Parkschein
+
+- Eindeutige Fahrzeugtypen?
+
+- **Customer/ParkingGarageUser/ParkingGarageOwner** Kunde? Parkhausnutzer/Parkhausbesitzer
+
+- **ParkingSpace** : Parkplatz
+
+- **Car** : Fahrzeug
 
 ## Getting started
 
