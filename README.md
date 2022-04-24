@@ -2,25 +2,28 @@
 
 ## Glossar
 
-- **Stats** : Statistik zur Anzahl der verschiedenen Typen
+- **Stats** : Statistik zur Anzahl der verschiedenen Fahrzeugtypen
 
-- **Occupied** : belegter Parkplatz
+- **Occupied** : Zeigt ob noch ein Parkplatz frei ist
 
-- **Leave** : Fahrzeug verlässt einen Parkplatz
+- **Leave** : Fahrzeug verlässt Parkhaus via POST-Request
 
-- **Enter** : Fahrzeug “betritt”? Parkhaus
+- **Enter** : Fahrzeug fährt ins Parkhaus via POST-Request
 
-- **CarCounter** : Fahrzeugzähler
+- **CarCounter** : Anzahl unterschiedlicher Fahrzeugtypen im Parkhaus
 
-- **Ticket** : Parkschein
+- **Ticket** : Hexzahl zur Identifizierung einzelner Fahrzeuge
 
-- Eindeutige Fahrzeugtypen?
+- Eindeutige Fahrzeugtypen? SUV, PKW, Motorbike, E_Vehicle
 
-- **Customer/ParkingGarageUser/ParkingGarageOwner** Kunde? Parkhausnutzer/Parkhausbesitzer
+- **Customer/ParkingGarageUser/ParkingGarageOwner** Customer = Parkhausbesitzer,
+                                                    ParkingGarageUser = Autofahrer,
+                                                    ParkingGarageOwner = Parkhausbesitzer 
 
-- **ParkingSpace** : Parkplatz
 
-- **Car** : Fahrzeug
+- **ParkingSpace** : Parkplatz, unterschiedliche Typen
+
+- **Car** : Fahrzeug, unterschiedliche Typen
 
 ## Getting started
 
