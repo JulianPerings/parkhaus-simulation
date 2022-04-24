@@ -39,7 +39,6 @@ public abstract class ParkhausServlet extends HttpServlet {
                 out.println( config() );
                 break;
             case "sum":
-                // ToDo: insert algorithm for calculating sum here
                 out.println( "sum = " + getSum());
                 break;
             case "avg":
