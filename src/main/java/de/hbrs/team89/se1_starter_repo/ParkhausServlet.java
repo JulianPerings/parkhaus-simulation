@@ -23,6 +23,8 @@ public abstract class ParkhausServlet extends HttpServlet {
     abstract int MAX(); // maximum number of parking slots of a single parking level
     abstract String config(); // configuration of a single parking level
 
+    Statistics stats = new Statistics();
+
     /**
      * HTTP GET
      */
@@ -39,13 +41,13 @@ public abstract class ParkhausServlet extends HttpServlet {
                 out.println( config() );
                 break;
             case "sum":
-                out.println( "sum = " + getSum());
+                out.println( "sum = € " + stats.getSum());
                 break;
             case "avg":
-                out.println("avgTime in seconds = "+ getAvgTime()+" and avgPrize = € "+ getAvg());
+                out.println("avgTime in seconds = "+ stats.getAvgTime()+" and avgPrize = € "+ stats.getAvg());
                 break;
             case "stats":
-                CarIF[] cars= getCarList();
+                CarIF[] cars= stats.getCarList();
                 int[] counter = {0,0,0,0};
                 String[] vehicleType = {"SUV","PKW","MOTORBIKE","E_VEHICLE"};
                 if(cars.length > 0){
@@ -120,14 +122,8 @@ public abstract class ParkhausServlet extends HttpServlet {
                     if ( ! "_".equals( priceString ) ){
                         price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
-                        // store new sum in ServletContext
-                        getContext().setAttribute("sum"+NAME(),getSum() + price/100.d);
-                        CarIF[] oldCars=getCarList();
-                        CarIF[] cars=new CarIF[oldCars.length+1];
-                        for(int i=0;i<oldCars.length;i++){cars[i]=oldCars[i];}
-                        cars[oldCars.length]=new Car(restParams);
-                        getContext().setAttribute("carList"+NAME(),cars);
-                        // ToDo getContext().setAttribute("sum"+NAME(), getSum() + price );
+                        stats.addCar(new Car(restParams));
+                        // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
                     }
                 }
                 out.println( price );  // server calculated price
@@ -148,46 +144,6 @@ public abstract class ParkhausServlet extends HttpServlet {
 
     }
 
-    CarIF[] getCarList(){
-        if(getContext().getAttribute("carList"+NAME()) == null) {
-            return new CarIF[0];
-        } else {
-            return ((CarIF[]) getContext().getAttribute("carList"+NAME()));
-        }
-    }
-
-    double getSum(){
-        if(getContext().getAttribute("sum"+NAME()) == null) {
-            return 0.0;
-        } else {
-            return Double.parseDouble(getContext().getAttribute("sum"+NAME()).toString());
-        }
-    }
-    double getAvg(){
-        CarIF[] c = getCarList();
-        if(c.length == 0) {
-            return 0.0;
-        } else {
-            double avg = 0;
-            for(int i=0;i<c.length;i++){
-                avg += c[i].price()/10000.;
-            }
-            return avg / c.length;
-        }
-    }
-
-    int getAvgTime(){
-        CarIF[] c = getCarList();
-        if(c.length == 0) {
-            return 0;
-        } else {
-            long time = 0;
-            for(int i=0;i<c.length;i++){
-                time += c[i].duration()/1000;
-            }
-            return (int) time / c.length;
-        }
-    }
     // auxiliary methods used in HTTP request processing
 
     /**
