@@ -26,6 +26,7 @@ public abstract class CarParkServlet extends HttpServlet {
     abstract String config(); // configuration of a single parking level
 
     Statistics stats = new Statistics();
+    PriceCalc priceCalc= new PriceCalc();
 
     /**
      * HTTP GET
@@ -124,6 +125,8 @@ public abstract class CarParkServlet extends HttpServlet {
                     if (!"_".equals(priceString)) {
                         price = (double) new Scanner(priceString).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
+                        price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextInt());
+                        restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
                         stats.addCar(new Car(restParams));
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
                     }
