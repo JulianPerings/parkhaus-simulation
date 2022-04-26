@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 // ToDo replace 0 by correct values read from this.params
+
+// ToDo implement priority Array for each car that parses the params and sorts the priority
 public class Car implements CarIF {
     String[] params;
     public Car( String[] params ){
@@ -40,5 +42,9 @@ public class Car implements CarIF {
     @Override
     public String toString(){
         return Arrays.toString( params );
+    }
+    @Override
+    public boolean equals(CarIF c){
+        return Arrays.toString(params).equals(c.toString());
     }
 }
