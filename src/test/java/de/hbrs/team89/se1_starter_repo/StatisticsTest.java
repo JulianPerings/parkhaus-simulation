@@ -10,7 +10,7 @@ public class StatisticsTest {
     @BeforeEach
     void setup(){
         s = new Statistics();
-        String[] params = {"\"nr\": 11",
+        String[] car1 = {"\"nr\": 11",
                 "\"timer\": 1650896019513",
                 "\"duration\": 99100",
                 "\"price\": 991",
@@ -21,7 +21,7 @@ public class StatisticsTest {
                 "\"vehicle_type\": \"PKW\"",
                 "\"license\": \"SU-X 47\""};
 
-        String[] params2 = {"\"nr\": 11",
+        String[] car2 = {"\"nr\": 11",
                 "\"timer\": 1650896019513",
                 "\"duration\": 130000",
                 "\"price\": 1300",
@@ -31,8 +31,8 @@ public class StatisticsTest {
                 "\"client_category\": \"WOMEN\"",
                 "\"vehicle_type\": \"PKW\"",
                 "\"license\": \"SU-X 47\""};
-        s.addCar(new Car(params));
-        s.addCar(new Car(params2));
+        s.addCar(new Car(car1));
+        s.addCar(new Car(car2));
     }
 
     @Test
