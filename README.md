@@ -1,7 +1,8 @@
-# Parkhaus Simulation Team 13
+# CarPark Simulation Team 13
 
 ## Glossar
-
+- **CarPark** : Parkhaus
+  
 - **Stats** : Statistik zur Anzahl der verschiedenen Typen
 
 - **Occupied** : belegter Parkplatz
