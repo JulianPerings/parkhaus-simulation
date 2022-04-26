@@ -17,9 +17,9 @@
 
 - **Unique Cartypes** : SUV, PKW, Motorbike, E_Vehicle
 
-- **ParkingGarageOwner** : Parkhausbesitzer
+- **CarParkOwner** : Parkhausbesitzer
 
-- **ParkingSpace** : Parkplatz
+- **CarParkUser** : Autofahrer / Parkplatzsuchende
 
 - **ParkingSpace** : Parkplatz, unterschiedliche Typen
 
