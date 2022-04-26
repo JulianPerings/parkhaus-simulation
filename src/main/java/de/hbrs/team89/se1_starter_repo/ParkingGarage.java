@@ -5,7 +5,7 @@ public class ParkingGarage implements ParkingGarageIF {
     public ParkingGarage(int m){
         spaces = new ParkingLot[m];
         for(int i = 0; i < spaces.length;i++){
-            spaces[i] = new ParkingLot(new String[]{"ANY"});
+            spaces[i] = new ParkingLot(new String[]{"PKW"});
         }
     }
     @Override
