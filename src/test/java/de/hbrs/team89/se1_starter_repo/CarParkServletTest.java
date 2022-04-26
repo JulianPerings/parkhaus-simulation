@@ -10,6 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 
-public class ParkhausServletTest {
+public class CarParkServletTest {
    //Tomcat tomcat = new Tomcat();
 }

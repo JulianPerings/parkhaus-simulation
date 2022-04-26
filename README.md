@@ -1,8 +1,9 @@
 # Parkhaus Simulation Team 13
 
 ## Glossar
-
-- **Stats** : Statistik zur Anzahl der verschiedenen Fahrzeugtypen
+- **CarPark** : Parkhaus
+  
+- **Stats** : Statistik zur Anzahl der verschiedenen Typen
 
 - **Occupied** : Zeigt ob noch ein Parkplatz frei ist
 
@@ -16,9 +17,9 @@
 
 - **Unique Cartypes** : SUV, PKW, Motorbike, E_Vehicle
 
-- **ParkingGarageOwner** : Parkhausbesitzer
+- **CarParkOwner** : Parkhausbesitzer
 
-- **ParkingGarageUser** : Autofahrer / Parkplatzsuchende
+- **CarParkUser** : Autofahrer / Parkplatzsuchende
 
 - **ParkingSpace** : Parkplatz, unterschiedliche Typen
 

@@ -16,7 +16,7 @@ import java.util.Scanner;
  * common superclass for all servlets
  * groups all auxiliary common methods used in all servlets
  */
-public abstract class ParkhausServlet extends HttpServlet {
+public abstract class CarParkServlet extends HttpServlet {
 
     /* abstract methods, to be defined in subclasses */
     abstract String NAME(); // each ParkhausServlet should have a name, e.g. "Level1"
@@ -38,7 +38,7 @@ public abstract class ParkhausServlet extends HttpServlet {
         System.out.println(cmd + " requested: " + request.getQueryString());
         switch (cmd) {
             case "config":
-                // Overwrite Parkhaus config parameters
+                // Overwrite CarPark config parameters
                 // Max, open_from, open_to, delay, simulation_speed
                 out.println(config());
                 break;
