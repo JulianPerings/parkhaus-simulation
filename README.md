@@ -1,27 +1,29 @@
-# CarPark Simulation Team 13
+# Parkhaus Simulation Team 13
 
 ## Glossar
 - **CarPark** : Parkhaus
   
 - **Stats** : Statistik zur Anzahl der verschiedenen Typen
 
-- **Occupied** : belegter Parkplatz
+- **Occupied** : Zeigt ob noch ein Parkplatz frei ist
 
-- **Leave** : Fahrzeug verlässt einen Parkplatz
+- **Leave** : Fahrzeug verlässt Parkhaus via POST-Request
 
-- **Enter** : Fahrzeug “betritt”? Parkhaus
+- **Enter** : Fahrzeug fährt ins Parkhaus via POST-Request
 
-- **CarCounter** : Fahrzeugzähler
+- **CarCounter** : Anzahl unterschiedlicher Fahrzeugtypen im Parkhaus
 
-- **Ticket** : Parkschein
+- **Ticket** : Hexzahl zur Identifizierung einzelner Fahrzeuge
 
-- Eindeutige Fahrzeugtypen?
+- **Unique Cartypes** : SUV, PKW, Motorbike, E_Vehicle
 
-- **Customer/ParkingGarageUser/ParkingGarageOwner** Kunde? Parkhausnutzer/Parkhausbesitzer
+- **ParkingGarageOwner** : Parkhausbesitzer
 
 - **ParkingSpace** : Parkplatz
 
-- **Car** : Fahrzeug
+- **ParkingSpace** : Parkplatz, unterschiedliche Typen
+
+- **Car** : Fahrzeug, unterschiedliche Typen (incl. Motorbike)
 
 ## Getting started
 
