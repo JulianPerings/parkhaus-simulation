@@ -28,10 +28,12 @@ public class ParkingLot implements ParkingLotIF {
 
     @Override
     public void parkVehicle(CarIF c) {
-        if(vehicle != null){
-            System.out.println(c.nr() + " tried to Park on a occupied Spot");
+        if(vehicle == null){
+            if(isAllowed(c.getVehicleType())) {
+                vehicle = c;
+            }
         } else {
-            vehicle = c;
+            System.out.println(c.nr() + " tried to Park on a occupied Spot");
         }
     }
 
@@ -62,6 +64,9 @@ public class ParkingLot implements ParkingLotIF {
 
     @Override
     public boolean carEquals(CarIF c) {
+        if(vehicle == null){
+            return false;
+        }
         return vehicle.equals(c);
     }
 }

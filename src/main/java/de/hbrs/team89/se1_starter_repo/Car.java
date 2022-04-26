@@ -37,7 +37,8 @@ public class Car implements CarIF {
         return new Scanner( params[3] ).useDelimiter("\\D+").nextInt();
     }
     public String getVehicleType(){
-        return params[8].substring(20,params[8].length()-1);
+        String s =params[8].split(":")[1];
+        return s.substring(2,s.length()-1);
     }
     @Override
     public String toString(){
