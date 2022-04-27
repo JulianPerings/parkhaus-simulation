@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StatisticsTest {
     Statistics s;
+
     @BeforeEach
-    void setup(){
+    void setup() {
         s = new Statistics();
         String[] car1 = {"\"nr\": 11",
                 "\"timer\": 1650896019513",
@@ -36,17 +37,22 @@ public class StatisticsTest {
     }
 
     @Test
-    void testSum(){
-        assertEquals(0.23, s.getSum(), 0.1 );
+    void getSum_2Cars_ShouldReturnValue() {
+        assertEquals(0.23, s.getSum(), 0.1);
     }
 
     @Test
-    void testAvg(){
+    void getTime_2Cars_ShouldReturnValue() {
+        assertEquals(229.1, s.getTime(), 0.1);
+    }
+
+    @Test
+    void getAvg_2Cars_ShouldReturnValue() {
         assertEquals(0.115, s.getAvg(), 0.1);
     }
 
     @Test
-    void testAvgTime(){
+    void getAvgTime_2Cars_ShouldReturnValue() {
         assertEquals(114.5, s.getAvgTime(), 1);
     }
 }
