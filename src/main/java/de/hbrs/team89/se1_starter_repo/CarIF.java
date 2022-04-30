@@ -4,8 +4,11 @@ package de.hbrs.team89.se1_starter_repo;
     int nr();
     long begin();
     long end();
-    int duration();
-    int price();
+    /**Return duration in seconds*/
+    int getDuration();
+
+    /**Returns price in euros*/
+    double getPrice();
     String getVehicleType();
     boolean equals(CarIF c);
 }

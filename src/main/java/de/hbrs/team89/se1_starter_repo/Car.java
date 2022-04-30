@@ -24,17 +24,17 @@ public class Car implements CarIF {
 
     @Override
     public long end() {
-        return this.begin()+this.duration();
+        return this.begin()+this.getDuration();
     }
 
     @Override
-    public int duration() {
-        return new Scanner( params[2] ).useDelimiter("\\D+").nextInt();
+    public int getDuration() {
+        return (int) ((new Scanner( params[2] ).useDelimiter("\\D+").nextInt()) / 1000.);
     }
 
     @Override
-    public int price() {
-        return new Scanner( params[3] ).useDelimiter("\\D+").nextInt();
+    public double getPrice() {
+        return (new Scanner( params[3] ).useDelimiter("\\D+").nextInt())/10000.;
     }
     public String getVehicleType(){
         String s =params[8].split(":")[1];

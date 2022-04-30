@@ -16,7 +16,7 @@ public class Statistics {
     double getSum() {
         double sum = 0;
         for (int i = 0; i < cars.size(); i++) {
-            sum += cars.get(i).price() / 10000.;
+            sum += cars.get(i).getPrice();
         }
         return Math.floor(sum * 100) / 100;
     }
@@ -28,7 +28,7 @@ public class Statistics {
     double getTime() {
         double time = 0;
         for (int i = 0; i < cars.size(); i++) {
-            time += cars.get(i).duration() / 1000.;
+            time += cars.get(i).getDuration();
         }
         return time;
     }
