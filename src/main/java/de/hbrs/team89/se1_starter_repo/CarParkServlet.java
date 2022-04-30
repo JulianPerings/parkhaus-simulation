@@ -119,7 +119,7 @@ public abstract class CarParkServlet extends HttpServlet {
             case "enter":
                 CarIF newCar = new Car(restParams);
                 cars().add(newCar);
-                System.out.println( "enter," + newCar );
+                // System.out.println( "enter," + newCar );
 
                 // re-direct car to another parking lot
                 out.println(locator(newCar));
