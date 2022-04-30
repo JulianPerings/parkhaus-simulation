@@ -58,7 +58,6 @@ public abstract class CarParkServlet extends HttpServlet {
                         for (int i = 0; i < vehicleType.length; i++) {
                             if (car.getVehicleType().equals(vehicleType[i])) {
                                 counter[i]++;
-                                continue;
                             }
                         }
                     }
@@ -77,13 +76,21 @@ public abstract class CarParkServlet extends HttpServlet {
                 out.println("max = server side calculated max");
                 break;
             case "cars":
-                // TODO: Send list of cars stored on the server to the client.
                 // Cars are separated by comma.
                 // Values of a single car are separated by slash.
                 // Format: Nr, timer begin, duration, price, Ticket, color, space, client category, vehicle type, license (PKW Kennzeichen)
                 // For example:
-                // TODO replace by real list of cars
                 // out.println("1/1648465400000/_/_/Ticket1/#0d1e0a/2/any/PKW/1,2/1648465499999/_/_/Ticket2/#dd10aa/3/any/PKW/2");
+                ArrayList<Car> exportCars = stats.getCarList();
+                StringBuilder result = new StringBuilder();
+                for (Car car:
+                     exportCars) {
+                    result.append(car.export());
+                    if(exportCars.indexOf(car) != exportCars.size()-1){
+                        result.append(",");
+                    }
+                }
+                out.println(result);
                 break;
             case "chart":
                 // TODO send chart infos as JSON object to client
@@ -97,7 +104,7 @@ public abstract class CarParkServlet extends HttpServlet {
     /**
      * HTTP POST
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String body = getBody(request);
         response.setContentType("text/html");
@@ -112,7 +119,7 @@ public abstract class CarParkServlet extends HttpServlet {
             case "enter":
                 CarIF newCar = new Car(restParams);
                 cars().add(newCar);
-                // System.out.println( "enter," + newCar );
+                System.out.println( "enter," + newCar );
 
                 // re-direct car to another parking lot
                 out.println(locator(newCar));
@@ -123,7 +130,7 @@ public abstract class CarParkServlet extends HttpServlet {
                 if (params.length > 4) {
                     String priceString = params[4];
                     if (!"_".equals(priceString)) {
-                        price = (double) new Scanner(priceString).useDelimiter("\\D+").nextInt();
+                        price = new Scanner(priceString).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextInt());
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
@@ -199,8 +206,6 @@ public abstract class CarParkServlet extends HttpServlet {
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
                     stringBuilder.append(charBuffer, 0, bytesRead);
                 }
-            } else {
-                stringBuilder.append("");
             }
         } finally {
             if (bufferedReader != null) {
