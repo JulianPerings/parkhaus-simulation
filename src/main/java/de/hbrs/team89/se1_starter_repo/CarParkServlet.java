@@ -1,8 +1,6 @@
 package de.hbrs.team89.se1_starter_repo;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,22 +48,11 @@ public abstract class CarParkServlet extends HttpServlet {
                 out.println("avgTime in seconds = " + stats.getAvgTime() + " and avgPrize = € " + stats.getAvg());
                 break;
             case "stats":
-                ArrayList<Car> cars = stats.getCarList();
-                int[] counter = {0, 0, 0, 0};
-                String[] vehicleType = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
-                if (cars.size() > 0) {
-                    for (CarIF car : cars) {
-                        for (int i = 0; i < vehicleType.length; i++) {
-                            if (car.getVehicleType().equals(vehicleType[i])) {
-                                counter[i]++;
-                            }
-                        }
-                    }
-                }
+                int[] counter = stats.countVehicleType();
+                String[] vehicleType = stats.getVehicleTypes();
                 for (int i = 0; i < counter.length; i++) {
                     out.print(vehicleType[i] + ": " + counter[i] + "; ");
                 }
-
                 break;
             case "min":
                 // ToDo: insert algorithm for calculating min here
@@ -92,8 +79,17 @@ public abstract class CarParkServlet extends HttpServlet {
                 }
                 out.println(result);
                 break;
-            case "chart":
-                // TODO send chart infos as JSON object to client
+            case "clientCategoryChart":
+                out.println(stats.generateClientCategoryChart());
+                break;
+            case "vehicleTypeChart":
+                out.println(stats.generateVehicleTypeChart());
+                break;
+            case "durationChart":
+                out.println(stats.generateDurationChart());
+                break;
+            case "beginHeatmap":
+                out.println(stats.generateBeginHeatmap());
                 break;
             default:
                 System.out.println("Invalid Command: " + request.getQueryString());
