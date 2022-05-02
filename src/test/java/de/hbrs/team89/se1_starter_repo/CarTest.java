@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CarTest {
-    String[] params1,params2;
+    String[] params1,params2,params3;
     Car car1,car2;
     @BeforeEach
     void init(){
@@ -31,6 +31,16 @@ class CarTest {
                 "\"space\": 14",
                 "\"client_category\": \"WOMEN\"",
                 "\"vehicle_type\": \"SUV\"",
+                "\"license\": \"SU-X 47\""};
+        params3 = new String[]{"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"WOMEN\"",
+                "\"vehicle_type\": \"E_VEHICLE\"",
                 "\"license\": \"SU-X 47\""};
         car1 = new Car(params1);
         car2 = new Car(params2);
@@ -85,6 +95,7 @@ class CarTest {
     void sortOutPriority() {
         assertEquals(Arrays.toString(car1.priority),Arrays.toString(new String[]{"HANDICAPPED", "MOTORBIKE", "SUV", "PKW", "ANY"}));
         assertEquals(Arrays.toString(car2.priority),Arrays.toString(new String[]{"WOMEN", "SUV", "PKW", "ANY"}));
+        System.out.println(Arrays.toString(new Car(params3).getPriority()));
     }
 
     @Test
