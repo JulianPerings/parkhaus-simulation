@@ -10,5 +10,7 @@ package de.hbrs.team89.se1_starter_repo;
     /**Returns price in euros*/
     double getPrice();
     String getVehicleType();
+    String getClientCategory();
     boolean equals(CarIF c);
+    void sortOutPriority();
 }

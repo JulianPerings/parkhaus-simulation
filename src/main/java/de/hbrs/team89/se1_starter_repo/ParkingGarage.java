@@ -2,8 +2,10 @@ package de.hbrs.team89.se1_starter_repo;
 
 public class ParkingGarage implements ParkingGarageIF {
     ParkingLot[] spaces;
+    int max;
     public ParkingGarage(int m){
-        spaces = new ParkingLot[m];
+        max = m;
+        spaces = new ParkingLot[max];
         for(int i = 0; i < spaces.length;i++){
             spaces[i] = new ParkingLot(new String[]{"PKW"});
         }
@@ -20,14 +22,14 @@ public class ParkingGarage implements ParkingGarageIF {
 
     @Override
     //without priority atm
-    public boolean parkCar(CarIF c) {
-        for(ParkingLot p : spaces){
-            if(p.canPark(c)){
-                p.parkVehicle(c);
-                return true;
+    public int parkCar(Car c) {
+        for(int i= 0; i < spaces.length; i++){
+            if(spaces[i].canPark(c)){
+                spaces[i].parkVehicle(c);
+                return i+1;
             }
         }
-        return false;
+        return 0;
     }
 
     @Override
@@ -69,12 +71,23 @@ public class ParkingGarage implements ParkingGarageIF {
     }
 
     @Override
-    public CarIF removeCar(CarIF c) {
+    public Car removeCar(Car c) {
         for(ParkingLot p : spaces){
             if(p.carEquals(c)){
                 return p.removeVehicle();
             }
         }
         return null;
+    }
+
+    @Override
+    public void resize() {
+        if(max != spaces.length){
+
+        }
+    }
+    @Override
+    public void changeMax(int m){
+        max = m;
     }
 }

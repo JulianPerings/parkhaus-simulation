@@ -2,7 +2,7 @@ package de.hbrs.team89.se1_starter_repo;
 
 public class ParkingLot implements ParkingLotIF {
     String[] allowed;
-    CarIF vehicle = null;
+    Car vehicle = null;
     public ParkingLot(){
         allowed = null;
     }
@@ -15,19 +15,19 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public boolean canPark(CarIF c) {
+    public boolean canPark(Car c) {
         return !isOccupied() && isAllowed(c.getVehicleType());
     }
 
     @Override
-    public CarIF removeVehicle() {
-        CarIF temp = vehicle;
+    public Car removeVehicle() {
+        Car temp = vehicle;
         vehicle = null;
         return temp;
     }
 
     @Override
-    public void parkVehicle(CarIF c) {
+    public void parkVehicle(Car c) {
         if(vehicle == null){
             if(isAllowed(c.getVehicleType())) {
                 vehicle = c;
@@ -38,7 +38,7 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public CarIF getVehicle() {
+    public Car getVehicle() {
         return vehicle;
     }
 
@@ -63,7 +63,7 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public boolean carEquals(CarIF c) {
+    public boolean carEquals(Car c) {
         if(vehicle == null){
             return false;
         }

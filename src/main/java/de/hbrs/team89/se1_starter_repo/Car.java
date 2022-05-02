@@ -1,5 +1,6 @@
 package de.hbrs.team89.se1_starter_repo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,8 +9,10 @@ import java.util.Scanner;
 // ToDo implement priority Array for each car that parses the params and sorts the priority
 public class Car implements CarIF {
     String[] params;
+    String[] priority;
     public Car( String[] params ){
         this.params = params;
+        sortOutPriority();
     }
 
     @Override
@@ -40,6 +43,10 @@ public class Car implements CarIF {
         String s =params[8].split(":")[1];
         return s.substring(2,s.length()-1);
     }
+    public String getClientCategory(){
+        String s = params[7].split(":")[1];
+        return s.substring(2,s.length()-1);
+    }
     @Override
     public String toString(){
         return Arrays.toString( params );
@@ -47,5 +54,15 @@ public class Car implements CarIF {
     @Override
     public boolean equals(CarIF c){
         return Arrays.toString(params).equals(c.toString());
+    }
+    //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
+      //      "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
+    @Override
+    public void sortOutPriority(){
+        ArrayList<String> sortOrder = new ArrayList<String>();
+        String[] s = new String[]{"HANDICAPPED","MOTORBIKE","E_VEHICLE","WOMEN","FAMILY","SUV","PKW","ANY"};
+        for(String s1 : s){
+            sortOrder.add(s1);
+        }
     }
 }

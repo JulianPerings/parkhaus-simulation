@@ -46,9 +46,9 @@ class ParkingGarageIFTest {
     @Test
     void parkCar() {
         Car c = new Car(params);
-        assertTrue(p.parkCar(c));
+        assertTrue(1==p.parkCar(c));
         Car c2 = new Car(params2);
-        assertFalse(p.parkCar(c2));
+        assertFalse(0==p.parkCar(c2));
 
     }
 
@@ -68,7 +68,7 @@ class ParkingGarageIFTest {
     @Test
     void removeCar() {
         Car c = new Car(params);
-        assertTrue(p.parkCar(c));
+        assertTrue(1==p.parkCar(c));
         CarIF d;
         d = p.removeCar(c);
         assertTrue(d.equals(c));
