@@ -13,4 +13,5 @@ package de.hbrs.team89.se1_starter_repo;
     String getClientCategory();
     boolean equals(CarIF c);
     void sortOutPriority();
+    String[] getPriority();
 }

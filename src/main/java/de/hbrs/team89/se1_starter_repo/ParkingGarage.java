@@ -7,7 +7,7 @@ public class ParkingGarage implements ParkingGarageIF {
         max = m;
         spaces = new ParkingLot[max];
         for(int i = 0; i < spaces.length;i++){
-            spaces[i] = new ParkingLot(new String[]{"PKW"});
+            spaces[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
         }
     }
     @Override
@@ -39,7 +39,7 @@ public class ParkingGarage implements ParkingGarageIF {
             for (int i = 0; i < s.length; i++) {
                 counter[i] = 0;
                 for (ParkingLot p : spaces) {
-                    if (p.isAllowed(s[i])) {
+                    if (p.isAllowed(new String[]{s[i]})) {
                         if (!p.isOccupied()) {
                             counter[i]++;
                         }
@@ -59,7 +59,7 @@ public class ParkingGarage implements ParkingGarageIF {
             for (int i = 0; i < s.length; i++) {
                 counter[i] = 0;
                 for (ParkingLot p : spaces) {
-                    if (p.isAllowed(s[i])) {
+                    if (p.isAllowed(new String[]{s[i]})) {
                         counter[i]++;
                     }
                 }

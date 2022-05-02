@@ -8,6 +8,6 @@ public interface ParkingLotIF {
     Car getVehicle();
     String[] getAllowed();
     void setAllowed(String[] s);
-    boolean isAllowed(String s);
+    boolean isAllowed(String[] s);
     boolean carEquals(Car c);
 }

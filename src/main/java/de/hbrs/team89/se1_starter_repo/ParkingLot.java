@@ -16,7 +16,7 @@ public class ParkingLot implements ParkingLotIF {
 
     @Override
     public boolean canPark(Car c) {
-        return !isOccupied() && isAllowed(c.getVehicleType());
+        return !isOccupied() && isAllowed(c.getPriority());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ParkingLot implements ParkingLotIF {
     @Override
     public void parkVehicle(Car c) {
         if(vehicle == null){
-            if(isAllowed(c.getVehicleType())) {
+            if(isAllowed(c.getPriority())) {
                 vehicle = c;
             }
         } else {
@@ -53,10 +53,11 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public boolean isAllowed(String s) {
+    public boolean isAllowed(String[] s) {
         for (String s1 : allowed){
-            if(s1.equals(s)){
-                return true;
+            for(String s2 : s)
+                if(s1.equals(s2)){
+                    return true;
             }
         }
         return false;
