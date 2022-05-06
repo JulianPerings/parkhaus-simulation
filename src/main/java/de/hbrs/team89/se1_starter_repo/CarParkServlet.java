@@ -91,6 +91,10 @@ public abstract class CarParkServlet extends HttpServlet {
             case "beginHeatmap":
                 out.println(stats.generateBeginHeatmap());
                 break;
+            case "getPrices":
+                PriceCalc p = new PriceCalc();
+                out.println("Tagpreis: " + p.getDayPrice()+", Nachtpreis: " + p.getNightPrice());
+                break;
             default:
                 System.out.println("Invalid Command: " + request.getQueryString());
         }
