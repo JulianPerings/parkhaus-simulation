@@ -10,7 +10,9 @@ public class Car implements CarIF {
     String[] priority;
     public Car( String[] params ){
         this.params = params;
-        sortOutPriority();
+        if(this.params != null) {
+            sortOutPriority();
+        }
     }
 
     @Override

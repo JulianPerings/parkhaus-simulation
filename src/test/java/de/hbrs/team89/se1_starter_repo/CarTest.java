@@ -8,8 +8,17 @@ public class CarTest {
     Car car,car1,car2;
     @BeforeEach
     void setup() {
-
-        String[] car1Params = {"\"nr\": 11",
+        params1 = new String[]{"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"HANDICAPPED\"",
+                "\"vehicle_type\": \"MOTORBIKE\"",
+                "\"license\": \"SU-X 47\""};
+        params2 = new String[]{"\"nr\": 11",
                 "\"timer\": 1650896019513",
                 "\"duration\": 99100",
                 "\"price\": 991",
@@ -81,6 +90,7 @@ public class CarTest {
     @Test
     void sortOutPriority() {
         assertEquals(Arrays.toString(car1.priority),Arrays.toString(new String[]{"HANDICAPPED", "MOTORBIKE", "SUV", "PKW", "ANY"}));
+        System.out.println(Arrays.toString(car2.priority));
         assertEquals(Arrays.toString(car2.priority),Arrays.toString(new String[]{"WOMEN", "SUV", "PKW", "ANY"}));
         System.out.println(Arrays.toString(new Car(params3).getPriority()));
     }
@@ -93,12 +103,12 @@ public class CarTest {
 
     @Test
     void equals_2Cars_ShouldReturnFalse() {
-        assertFalse(car.equals(car2));
+        assertFalse(car1.equals(car2));
     }
 
     @Test
     void export_SingleCar_ShouldReturnExportStringInFormat(){
-        assertEquals("11/1650896019513/99/0.0991/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/WOMEN/PKW/SU-X 47", car1.export());
-        assertEquals("12/1650896019513/130/0.13/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/WOMEN/E_VEHICLE/SU-X 47", car2.export());
+        assertEquals("11/1650896019513/99/0.0991/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/HANDICAPPED/MOTORBIKE/SU-X 47", car1.export());
+        assertEquals("11/1650896019513/99/0.0991/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/WOMEN/SUV/SU-X 47", car2.export());
     }
 }
