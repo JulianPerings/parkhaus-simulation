@@ -2,7 +2,7 @@ package de.hbrs.team89.se1_starter_repo;
 
 public class ParkingLot implements ParkingLotIF {
     String[] allowed;
-    CarIF vehicle = null;
+    Car vehicle = null;
     public ParkingLot(){
         allowed = null;
     }
@@ -15,21 +15,21 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public boolean canPark(CarIF c) {
-        return !isOccupied() && isAllowed(c.getVehicleType());
+    public boolean canPark(Car c) {
+        return !isOccupied() && isAllowed(c.getPriority());
     }
 
     @Override
-    public CarIF removeVehicle() {
-        CarIF temp = vehicle;
+    public Car removeVehicle() {
+        Car temp = vehicle;
         vehicle = null;
         return temp;
     }
 
     @Override
-    public void parkVehicle(CarIF c) {
+    public void parkVehicle(Car c) {
         if(vehicle == null){
-            if(isAllowed(c.getVehicleType())) {
+            if(isAllowed(c.getPriority())) {
                 vehicle = c;
             }
         } else {
@@ -38,7 +38,7 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public CarIF getVehicle() {
+    public Car getVehicle() {
         return vehicle;
     }
 
@@ -53,17 +53,18 @@ public class ParkingLot implements ParkingLotIF {
     }
 
     @Override
-    public boolean isAllowed(String s) {
+    public boolean isAllowed(String[] s) {
         for (String s1 : allowed){
-            if(s1.equals(s)){
-                return true;
+            for(String s2 : s)
+                if(s1.equals(s2)){
+                    return true;
             }
         }
         return false;
     }
 
     @Override
-    public boolean carEquals(CarIF c) {
+    public boolean carEquals(Car c) {
         if(vehicle == null){
             return false;
         }

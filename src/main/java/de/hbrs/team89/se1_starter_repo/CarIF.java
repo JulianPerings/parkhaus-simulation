@@ -17,4 +17,6 @@ package de.hbrs.team89.se1_starter_repo;
     String getClientCategory();
     String getLicense();
     String export();
+    void sortOutPriority();
+    String[] getPriority();
 }

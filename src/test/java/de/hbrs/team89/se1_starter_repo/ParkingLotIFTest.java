@@ -81,9 +81,9 @@ class ParkingLotIFTest {
 
     @Test
     void isAllowed() {
-        assertTrue(p1.isAllowed("PKW"));
-        assertFalse(p1.isAllowed("SUV"));
-        assertFalse(p1.isAllowed(null));
+        assertTrue(p1.isAllowed(new String[]{"PKW"}));
+        assertFalse(p1.isAllowed(new String[]{"SUV"}));
+        assertFalse(p1.isAllowed(new String[]{}));
     }
 
     @Test
