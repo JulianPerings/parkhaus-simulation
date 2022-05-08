@@ -115,7 +115,13 @@ public abstract class CarParkServlet extends HttpServlet {
                 // System.out.println( "enter," + newCar );
 
                 // re-direct car to another parking lot
-                out.println(locator(newCar));
+                int xi = locator(newCar);
+                if(xi == 0) {
+                    out.println("");
+                } else {
+                    out.println(xi);
+                }
+
                 break;
             case "leave":  // ToDo remove car from list
                 //ToDo needs to be own method so i can call it for resizing
@@ -143,6 +149,10 @@ public abstract class CarParkServlet extends HttpServlet {
                         + getServletConfig().getServletContext().getMajorVersion()
                         + getServletConfig().getServletContext().getMinorVersion());
                 break;
+            case "change_max":
+                System.out.println(Integer.valueOf(restParams[0]));
+                garage.changeMax(Integer.valueOf(restParams[0]));
+                break;
             default:
                 System.out.println(body);
                 // System.out.println( "Invalid Command: " + body );
@@ -151,9 +161,6 @@ public abstract class CarParkServlet extends HttpServlet {
     }
 
     // auxiliary methods used in HTTP request processing
-    void leave(){
-
-    }
     /**
      * @return the servlet context
      */

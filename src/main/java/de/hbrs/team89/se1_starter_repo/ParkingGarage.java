@@ -26,6 +26,7 @@ public class ParkingGarage implements ParkingGarageIF {
         for(int i= 0; i < spaces.length; i++){
             if(spaces[i].canPark(c)){
                 spaces[i].parkVehicle(c);
+                System.out.println("Parked at spot" + (i+1));
                 return i+1;
             }
         }
@@ -82,12 +83,21 @@ public class ParkingGarage implements ParkingGarageIF {
 
     @Override
     public void resize() {
-        if(max != spaces.length){
-
+        if(max != spaces.length && max >= 0){
+                ParkingLot[] temp = new ParkingLot[max];
+                for(int i = 0 ; i < temp.length; i++){
+                    if(spaces.length > i){
+                        temp[i] = spaces[i];
+                    } else {
+                        temp[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
+                    }
+                }
+                spaces = temp;
         }
     }
     @Override
     public void changeMax(int m){
         max = m;
+        resize();
     }
 }

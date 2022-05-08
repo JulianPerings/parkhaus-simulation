@@ -75,4 +75,32 @@ class ParkingGarageIFTest {
     }
 
 
+    @Test
+    void resize() {
+    }
+
+    @Test
+    void changeMax() {
+        p.spaces[9].parkVehicle(new Car(params));
+        p.changeMax(9);
+        for(ParkingLot pl : p.spaces){
+            assertNotNull(pl);
+            assertNull(pl.vehicle);
+        }
+        p.changeMax(11);
+        for(ParkingLot pl : p.spaces){
+            assertNotNull(pl);
+        }
+        p.changeMax(111);
+        for(ParkingLot pl : p.spaces){
+            assertNotNull(pl);
+        }
+        p.changeMax(0);
+        for(ParkingLot pl : p.spaces){
+            assertNotNull(pl);
+        }
+
+        p.changeMax(-1);
+        assertEquals(0,p.spaces.length);
+    }
 }
