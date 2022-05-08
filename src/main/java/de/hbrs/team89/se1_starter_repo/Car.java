@@ -90,7 +90,7 @@ public class Car implements CarIF {
 
     @Override
     public boolean equals(CarIF c) {
-        return Arrays.toString(params).equals(c.toString());
+        return getTicket().equals(c.getTicket());
     }
     //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
     // "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
