@@ -117,7 +117,6 @@ public abstract class CarParkServlet extends HttpServlet {
                 // re-direct car to another parking lot
                 int xi = locator(newCar);
                 if(xi == 0) {
-                    out.println("");
                 } else {
                     out.println(xi);
                 }
