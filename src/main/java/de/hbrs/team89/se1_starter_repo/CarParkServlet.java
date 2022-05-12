@@ -141,10 +141,11 @@ public abstract class CarParkServlet extends HttpServlet {
                 out.println(price);  // server calculated price
                 System.out.println("leave," + oldCar + ", price = " + price);
                 break;
-            case "invalid":
+/*            case "invalid":
+                break;
             case "occupied":
                 System.out.println(body);
-                break;
+                break;*/
             case "tomcat":
                 out.println(getServletConfig().getServletContext().getServerInfo()
                         + getServletConfig().getServletContext().getMajorVersion()
@@ -202,7 +203,7 @@ public abstract class CarParkServlet extends HttpServlet {
             if (inputStream != null) {
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 char[] charBuffer = new char[128];
-                int bytesRead = -1;
+                int bytesRead;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
                     stringBuilder.append(charBuffer, 0, bytesRead);
                 }
