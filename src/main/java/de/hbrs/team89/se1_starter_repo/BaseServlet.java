@@ -10,7 +10,7 @@ public class BaseServlet extends CarParkServlet {
     }
     @Override
     int MAX() {
-        return 0;
+        return 10;
     }
 
     @Override

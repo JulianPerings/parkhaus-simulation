@@ -2,11 +2,13 @@ package de.hbrs.team89.se1_starter_repo;
 
 public class ParkingGarage implements ParkingGarageIF {
     ParkingLot[] spaces;
+    int max;
     /**Initialize ParkingGarage with m parking lots which only allow PKW's.*/
     public ParkingGarage(int m){
-        spaces = new ParkingLot[m];
+        max = m;
+        spaces = new ParkingLot[max];
         for(int i = 0; i < spaces.length;i++){
-            spaces[i] = new ParkingLot(new String[]{"PKW"});
+            spaces[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
         }
     }
     /**Returns clone of garage.*/
@@ -24,14 +26,15 @@ public class ParkingGarage implements ParkingGarageIF {
     /**Parks car in garage, returns true if parked successful and false if there was no fitting parking spot.  */
     @Override
     //without priority atm
-    public boolean parkCar(CarIF c) {
-        for(ParkingLot p : spaces){
-            if(p.canPark(c)){
-                p.parkVehicle(c);
-                return true;
+    public int parkCar(Car c) {
+        for(int i= 0; i < spaces.length; i++){
+            if(spaces[i].canPark(c)){
+                spaces[i].parkVehicle(c);
+                System.out.println("Parked at spot" + (i+1));
+                return i+1;
             }
         }
-        return false;
+        return 0;
     }
 
     /**Takes string array of vehicle types and returns int array of free parking lots for given types.
@@ -44,7 +47,7 @@ public class ParkingGarage implements ParkingGarageIF {
             for (int i = 0; i < s.length; i++) {
                 counter[i] = 0;
                 for (ParkingLot p : spaces) {
-                    if (p.isAllowed(s[i])) {
+                    if (p.isAllowed(new String[]{s[i]})) {
                         if (!p.isOccupied()) {
                             counter[i]++;
                         }
@@ -66,7 +69,7 @@ public class ParkingGarage implements ParkingGarageIF {
             for (int i = 0; i < s.length; i++) {
                 counter[i] = 0;
                 for (ParkingLot p : spaces) {
-                    if (p.isAllowed(s[i])) {
+                    if (p.isAllowed(new String[]{s[i]})) {
                         counter[i]++;
                     }
                 }
@@ -79,12 +82,32 @@ public class ParkingGarage implements ParkingGarageIF {
 
     /**Removes and returns given car from the garage.*/
     @Override
-    public CarIF removeCar(CarIF c) {
+    public Car removeCar(Car c) {
         for(ParkingLot p : spaces){
             if(p.carEquals(c)){
                 return p.removeVehicle();
             }
         }
         return null;
+    }
+
+    @Override
+    public void resize() {
+        if(max != spaces.length && max >= 0){
+                ParkingLot[] temp = new ParkingLot[max];
+                for(int i = 0 ; i < temp.length; i++){
+                    if(spaces.length > i){
+                        temp[i] = spaces[i];
+                    } else {
+                        temp[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
+                    }
+                }
+                spaces = temp;
+        }
+    }
+    @Override
+    public void changeMax(int m){
+        max = m;
+        resize();
     }
 }

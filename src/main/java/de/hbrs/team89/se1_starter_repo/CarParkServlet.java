@@ -25,6 +25,7 @@ public abstract class CarParkServlet extends HttpServlet {
 
     Statistics stats = new Statistics();
     PriceCalc priceCalc= new PriceCalc();
+    ParkingGarage garage = new ParkingGarage(this.MAX());
 
     /**
      * HTTP GET
@@ -117,15 +118,19 @@ public abstract class CarParkServlet extends HttpServlet {
 
         switch (event) {
             case "enter":
-                CarIF newCar = new Car(restParams);
-                cars().add(newCar);
+                Car newCar = new Car(restParams);
                 // System.out.println( "enter," + newCar );
 
                 // re-direct car to another parking lot
-                out.println(locator(newCar));
+                int xi = locator(newCar);
+                if(xi == 0) {
+                } else {
+                    out.println(xi);
+                }
+
                 break;
-            case "leave":
-                CarIF oldCar = cars().get(0);  // ToDo remove car from list
+            case "leave":  // ToDo remove car from list
+                //ToDo needs to be own method so i can call it for resizing
                 double price = 0.0d;
                 if (params.length > 4) {
                     String priceString = params[4];
@@ -134,12 +139,14 @@ public abstract class CarParkServlet extends HttpServlet {
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextInt());
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
-                        stats.addCar(new Car(restParams));
+                        Car xc = new Car(restParams); ;
+                        System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
+                        stats.addCar(xc);
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
                     }
                 }
                 out.println(price);  // server calculated price
-                System.out.println("leave," + oldCar + ", price = " + price);
+                System.out.println("leave," + Arrays.toString(restParams) + ", price = " + price);
                 break;
 /*            case "invalid":
                 break;
@@ -151,6 +158,10 @@ public abstract class CarParkServlet extends HttpServlet {
                         + getServletConfig().getServletContext().getMajorVersion()
                         + getServletConfig().getServletContext().getMinorVersion());
                 break;
+            case "change_max":
+                System.out.println(Integer.valueOf(restParams[0]));
+                garage.changeMax(Integer.valueOf(restParams[0]));
+                break;
             default:
                 System.out.println(body);
                 // System.out.println( "Invalid Command: " + body );
@@ -159,7 +170,6 @@ public abstract class CarParkServlet extends HttpServlet {
     }
 
     // auxiliary methods used in HTTP request processing
-
     /**
      * @return the servlet context
      */
@@ -172,21 +182,21 @@ public abstract class CarParkServlet extends HttpServlet {
      *
      * @return the number of the free parking lot to which the next incoming car will be directed
      */
-    int locator(CarIF car) {
+    int locator(Car car) {
         // numbers of parking lots start at 1, not zero
         // return 1;  // always use the first space
-        return 1 + ((cars().size() - 1) % this.MAX());
+        return cars().parkCar(car);
     }
 
     /**
      * @return the list of all cars stored in the servlet context so far
      */
     @SuppressWarnings("unchecked")
-    List<CarIF> cars() {
+    ParkingGarage cars() {
         if (getContext().getAttribute("cars" + NAME()) == null) {
-            getContext().setAttribute("cars" + NAME(), new ArrayList<Car>());
+            getContext().setAttribute("cars" + NAME(), garage);
         }
-        return (List<CarIF>) getContext().getAttribute("cars" + NAME());
+        return (ParkingGarage) getContext().getAttribute("cars" + NAME());
     }
 
     /**
