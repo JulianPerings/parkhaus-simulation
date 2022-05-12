@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 public class CarTest {
     String[] params1,params2,params3;
-    Car car,car1,car2;
+    Car car1,car2;
     @BeforeEach
     void setup() {
         params1 = new String[]{"\"nr\": 11",
