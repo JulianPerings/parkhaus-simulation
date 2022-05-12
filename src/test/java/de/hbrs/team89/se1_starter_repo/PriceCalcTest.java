@@ -10,9 +10,8 @@ class PriceCalcTest {
     void calcDayNightPrice_methodCorrect_expectedNear8() {
         long duration=1000*60*60*5;  //5 hours
         long begin=0;
-        double price=10;    //price in euros?
-        double expectedPrice=10*0.8;    //should cost 8 cent
-        assertEquals(expectedPrice,testCalc.calcDayNightPrice(price,begin,duration),0.01);
+        double expectedPrice=((5*60*60)/10d)*0.8;    //should cost 8 cent
+        assertEquals(expectedPrice,testCalc.calcDayNightPrice(begin,duration),0.01);
         assertEquals(expectedPrice,testCalc.calcDayNightPrice(begin,duration),0.01);
     }
     @Test
@@ -21,6 +20,6 @@ class PriceCalcTest {
         long begin=-10;
         double price=-10;
         double expectedPrice=0;
-        assertEquals(expectedPrice,testCalc.calcDayNightPrice(price,begin,duration));
+        assertEquals(expectedPrice,testCalc.calcDayNightPrice(begin,duration));
     }
 }
