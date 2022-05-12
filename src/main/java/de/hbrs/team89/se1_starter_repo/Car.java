@@ -2,6 +2,7 @@ package de.hbrs.team89.se1_starter_repo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 //ToDO Protect against NULL PARAMS
@@ -97,16 +98,14 @@ public class Car implements CarIF {
     @Override
     public void sortOutPriority(){
         if(params.length >= 8) {    //ToDO Protect against NULL PARAMS
-            ArrayList<String> sortOrder = new ArrayList<String>();
+            ArrayList<String> sortOrder = new ArrayList<>();
             String[] s = new String[]{"HANDICAPPED", "MOTORBIKE", "E_VEHICLE", "WOMEN", "FAMILY", "SUV", "PKW", "ANY"};
-            for (String s1 : s) {
-                sortOrder.add(s1);
-            }
+            Collections.addAll(sortOrder, s);
 
-            ArrayList<String> vSa = new ArrayList<String>();
+            ArrayList<String> vSa = new ArrayList<>();
             String vHS = getVehicleType();
             addMissing(vSa, vHS, new String[]{"SUV", "PKW"});
-            ArrayList<String> cSa = new ArrayList<String>();
+            ArrayList<String> cSa = new ArrayList<>();
             String cHS = getClientCategory();
             addMissing(cSa, cHS, new String[]{"ANY"});
             priority = new String[vSa.size() + cSa.size()];

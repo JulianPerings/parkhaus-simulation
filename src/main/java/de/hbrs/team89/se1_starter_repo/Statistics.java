@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Statistics {
-    ArrayList<Car> cars = new ArrayList<Car>();
+    ArrayList<Car> cars = new ArrayList<>();
     String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
     String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
     String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -31,8 +31,8 @@ public class Statistics {
 
     double getSum() {
         double sum = 0;
-        for (int i = 0; i < cars.size(); i++) {
-            sum += cars.get(i).getPrice();
+        for (Car car : cars) {
+            sum += car.getPrice();
         }
         return Math.floor(sum * 100) / 100;
     }
@@ -43,8 +43,8 @@ public class Statistics {
 
     double getTime() {
         double time = 0;
-        for (int i = 0; i < cars.size(); i++) {
-            time += cars.get(i).getDuration();
+        for (Car car : cars) {
+            time += car.getDuration();
         }
         return time;
     }

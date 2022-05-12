@@ -1,8 +1,8 @@
 package de.hbrs.team89.se1_starter_repo;
 
 public class PriceCalc {
-    private float dayPrice=1.0f;
-    private float nightPrice=0.8f;
+    private final float dayPrice=1.0f;
+    private final float nightPrice=0.8f;
     public PriceCalc(){
 
     }
