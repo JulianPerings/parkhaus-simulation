@@ -89,6 +89,31 @@ public class Statistics {
         return counterVehicleTypes;
     }
 
+    Car getMin(){
+        if(cars.size()==0){
+            return null;
+        }
+        Car min=cars.get(0);
+        for(Car a:cars){
+            if(a.getDuration()<min.getDuration()){
+                min=a;
+            }
+        }
+        return min;
+    }
+
+    Car getMax(){
+        if(cars.size()==0){
+            return null;
+        }
+        Car max=cars.get(0);
+        for(Car a:cars){
+            if(a.getDuration()>max.getDuration()){
+                max=a;
+            }
+        }
+        return max;
+    }
 
     String generateClientCategoryChart() {
         JsonArrayBuilder clientCategoryBuilder = Json.createArrayBuilder();
