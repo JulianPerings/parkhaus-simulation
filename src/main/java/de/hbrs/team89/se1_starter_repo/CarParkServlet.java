@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -123,8 +122,7 @@ public abstract class CarParkServlet extends HttpServlet {
 
                 // re-direct car to another parking lot
                 int xi = locator(newCar);
-                if(xi == 0) {
-                } else {
+                if(xi != 0)  {
                     out.println(xi);
                 }
 
@@ -139,7 +137,7 @@ public abstract class CarParkServlet extends HttpServlet {
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextInt());
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
-                        Car xc = new Car(restParams); ;
+                        Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
                         stats.addCar(xc);
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
@@ -159,8 +157,9 @@ public abstract class CarParkServlet extends HttpServlet {
                         + getServletConfig().getServletContext().getMinorVersion());
                 break;
             case "change_max":
-                System.out.println(Integer.valueOf(restParams[0]));
-                garage.changeMax(Integer.valueOf(restParams[0]));
+                Integer i = Integer.valueOf(restParams[0]);
+                System.out.println(i);
+                garage.changeMax(i);
                 break;
             default:
                 System.out.println(body);
@@ -191,7 +190,7 @@ public abstract class CarParkServlet extends HttpServlet {
     /**
      * @return the list of all cars stored in the servlet context so far
      */
-    @SuppressWarnings("unchecked")
+
     ParkingGarage cars() {
         if (getContext().getAttribute("cars" + NAME()) == null) {
             getContext().setAttribute("cars" + NAME(), garage);
