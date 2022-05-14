@@ -8,7 +8,7 @@ class PriceCalcTest {
     PriceCalc testCalc = new PriceCalc();
     @Test
     void calcDayNightPrice_methodCorrect_expectedNear8() {
-        int duration=1000*60*60*5;  //5 hours
+        long duration=1000*60*60*5;  //5 hours
         long begin=0;
         double price=10;    //price in euros?
         double expectedPrice=10*0.8;    //should cost 8 cent
@@ -17,7 +17,7 @@ class PriceCalcTest {
     }
     @Test
     void calcDayNightPrice_wrongInput_expected0(){
-        int duration=-1000*60*60*5;
+        long duration=-1000*60*60*5;
         long begin=-10;
         double price=-10;
         double expectedPrice=0;

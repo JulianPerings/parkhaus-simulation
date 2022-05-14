@@ -100,8 +100,15 @@ public abstract class CarParkServlet extends HttpServlet {
                 out.println(stats.generateBeginHeatmap());
                 break;
             case "getPrices":
-                PriceCalc p = new PriceCalc();
-                out.println("Tagpreis: " + p.getDayPrice()+", Nachtpreis: " + p.getNightPrice());
+                out.println(" price per minute day/night:€"+priceCalc.calcDayNightPrice(12*60*60*1000,60*1000)+"/€"+priceCalc.calcDayNightPrice(0,60*1000)+
+                        " | "+
+                        " price per hour day/night:€"+priceCalc.calcDayNightPrice(12*60*60*1000,60*60*1000)+"/€"+priceCalc.calcDayNightPrice(0,60*60*1000)+
+                        " | "+
+                        " price per 24 hours:€"+priceCalc.calcDayNightPrice(0,24*60*60*1000)+
+                        " | "+
+                        " price per month:€"+priceCalc.calcDayNightPrice(0,(30L*24*60*60*1000))+
+                        " | "+
+                        " price per year:€"+priceCalc.calcDayNightPrice(0, 365L*24*60*60*1000));
                 break;
             default:
                 System.out.println("Invalid Command: " + request.getQueryString());
@@ -143,7 +150,7 @@ public abstract class CarParkServlet extends HttpServlet {
                     if (!"_".equals(priceString)) {
                         price = new Scanner(priceString).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
-                        price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextInt());
+                        price=priceCalc.calcDayNightPrice(price,new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextLong());
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
                         Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
