@@ -1,5 +1,6 @@
-package de.hbrs.team89.se1_starter_repo; /**
- * Created by mkaul2m on 16.04.19.
+package de.hbrs.team89.se1_starter_repo;
+/*
+  Created by mkaul2m on 16.04.19.
  */
 
 import javax.servlet.*;

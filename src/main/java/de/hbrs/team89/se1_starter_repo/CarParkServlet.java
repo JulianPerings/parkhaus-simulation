@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -56,12 +55,20 @@ public abstract class CarParkServlet extends HttpServlet {
                 }
                 break;
             case "min":
-                // ToDo: insert algorithm for calculating min here
-                out.println("min = server side calculated min");
+                if(stats.getMin() != null){
+                    Car min=stats.getMin();
+                    out.println("Car "+min.getLicense()+" with "+min.getDuration()+" seconds");
+                }else{
+                    out.println("No car left the carpark");
+                }
                 break;
             case "max":
-                // ToDo: insert algorithm for calculating max here
-                out.println("max = server side calculated max");
+                if(stats.getMax() != null){
+                    Car max=stats.getMax();
+                    out.println("Car "+max.getLicense()+" with "+max.getDuration()+" seconds");
+                }else{
+                    out.println("No car left the carpark");
+                }
                 break;
             case "cars":
                 // Cars are separated by comma.
@@ -134,8 +141,7 @@ public abstract class CarParkServlet extends HttpServlet {
 
                 // re-direct car to another parking lot
                 int xi = locator(newCar);
-                if(xi == 0) {
-                } else {
+                if(xi != 0)  {
                     out.println(xi);
                 }
 
@@ -148,7 +154,7 @@ public abstract class CarParkServlet extends HttpServlet {
                     if (!"_".equals(priceString)) {
                         price=priceCalc.calcDayNightPrice(new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextLong());
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
-                        Car xc = new Car(restParams); ;
+                        Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
                         stats.addCar(xc);
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
@@ -157,18 +163,20 @@ public abstract class CarParkServlet extends HttpServlet {
                 out.println(price);  // server calculated price
                 System.out.println("leave," + Arrays.toString(restParams) + ", price = " + price);
                 break;
-            case "invalid":
+/*            case "invalid":
+                break;
             case "occupied":
                 System.out.println(body);
-                break;
+                break;*/
             case "tomcat":
                 out.println(getServletConfig().getServletContext().getServerInfo()
                         + getServletConfig().getServletContext().getMajorVersion()
                         + getServletConfig().getServletContext().getMinorVersion());
                 break;
             case "change_max":
-                System.out.println(Integer.valueOf(restParams[0]));
-                garage.changeMax(Integer.valueOf(restParams[0]));
+                Integer i = Integer.valueOf(restParams[0]);
+                System.out.println(i);
+                garage.changeMax(i);
                 break;
             default:
                 System.out.println(body);
@@ -199,7 +207,7 @@ public abstract class CarParkServlet extends HttpServlet {
     /**
      * @return the list of all cars stored in the servlet context so far
      */
-    @SuppressWarnings("unchecked")
+
     ParkingGarage cars() {
         if (getContext().getAttribute("cars" + NAME()) == null) {
             getContext().setAttribute("cars" + NAME(), garage);
@@ -221,7 +229,7 @@ public abstract class CarParkServlet extends HttpServlet {
             if (inputStream != null) {
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 char[] charBuffer = new char[128];
-                int bytesRead = -1;
+                int bytesRead;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
                     stringBuilder.append(charBuffer, 0, bytesRead);
                 }

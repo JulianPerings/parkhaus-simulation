@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Statistics {
-    ArrayList<Car> cars = new ArrayList<Car>();
+    ArrayList<Car> cars = new ArrayList<>();
     String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
     String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
     String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -31,8 +31,8 @@ public class Statistics {
 
     double getSum() {
         double sum = 0;
-        for (int i = 0; i < cars.size(); i++) {
-            sum += cars.get(i).getPrice();
+        for (Car car : cars) {
+            sum += car.getPrice();
         }
         return Math.floor(sum * 100) / 100;
     }
@@ -43,8 +43,8 @@ public class Statistics {
 
     double getTime() {
         double time = 0;
-        for (int i = 0; i < cars.size(); i++) {
-            time += cars.get(i).getDuration();
+        for (Car car : cars) {
+            time += car.getDuration();
         }
         return time;
     }
@@ -89,6 +89,31 @@ public class Statistics {
         return counterVehicleTypes;
     }
 
+    Car getMin(){
+        if(cars.size()==0){
+            return null;
+        }
+        Car min=cars.get(0);
+        for(Car a:cars){
+            if(a.getDuration()<min.getDuration()){
+                min=a;
+            }
+        }
+        return min;
+    }
+
+    Car getMax(){
+        if(cars.size()==0){
+            return null;
+        }
+        Car max=cars.get(0);
+        for(Car a:cars){
+            if(a.getDuration()>max.getDuration()){
+                max=a;
+            }
+        }
+        return max;
+    }
 
     String generateClientCategoryChart() {
         JsonArrayBuilder clientCategoryBuilder = Json.createArrayBuilder();

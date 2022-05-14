@@ -86,4 +86,12 @@ public class StatisticsTest {
                         "\"05:00pm\",\"06:00pm\",\"07:00pm\",\"08:00pm\",\"09:00pm\",\"10:00pm\",\"11:00pm\"],\"type\":\"heatmap\"}]}",
                 s.generateBeginHeatmap());
     }
+    @Test
+    void getMin_2Cars_ShouldReturnCar1(){
+        assertEquals(s.getCarList().get(0),s.getMin());
+    }
+    @Test
+    void getMax_2Cars_ShouldReturnCar2(){
+        assertEquals(s.getCarList().get(1),s.getMax());
+    }
 }
