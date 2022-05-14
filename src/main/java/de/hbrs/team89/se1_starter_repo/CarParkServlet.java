@@ -55,12 +55,20 @@ public abstract class CarParkServlet extends HttpServlet {
                 }
                 break;
             case "min":
-                // ToDo: insert algorithm for calculating min here
-                out.println("min = server side calculated min");
+                if(stats.getMin() != null){
+                    Car min=stats.getMin();
+                    out.println("Car "+min.getLicense()+" with "+min.getDuration()+" seconds");
+                }else{
+                    out.println("No car left the carpark");
+                }
                 break;
             case "max":
-                // ToDo: insert algorithm for calculating max here
-                out.println("max = server side calculated max");
+                if(stats.getMax() != null){
+                    Car max=stats.getMax();
+                    out.println("Car "+max.getLicense()+" with "+max.getDuration()+" seconds");
+                }else{
+                    out.println("No car left the carpark");
+                }
                 break;
             case "cars":
                 // Cars are separated by comma.
