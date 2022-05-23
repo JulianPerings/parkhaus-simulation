@@ -8,6 +8,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
 
 public class Statistics {
     ArrayList<Car> cars = new ArrayList<>();
@@ -29,24 +31,18 @@ public class Statistics {
         return cars;
     }
 
+    /**Returns the sum of all prices in cents.*/
     double getSum() {
-        double sum = 0;
-        for (Car car : cars) {
-            sum += car.getPrice();
-        }
-        return Math.floor(sum * 100) / 100;
+        return cars.stream().map(Car::getPrice).reduce( 0., (x, y) -> x + y );
     }
 
+    /**Return the average price in cents cut after 2 decimal places.  */
     double getAvg() {
         return cars.size() == 0 ? 0 : Math.floor((getSum() / cars.size()) * 100) / 100;
     }
 
     double getTime() {
-        double time = 0;
-        for (Car car : cars) {
-            time += car.getDuration();
-        }
-        return time;
+        return cars.stream().map(Car::getDuration).reduce( 0, (x, y) -> x + y );
     }
 
     int getAvgTime() {
@@ -63,55 +59,34 @@ public class Statistics {
 
     int[] countClientCategoryTypes() {
         int[] counterClientCategory = {0, 0, 0, 0};
-        if (cars.size() > 0) {
-            for (CarIF car : cars) {
-                for (int i = 0; i < clientCategory.length; i++) {
-                    if (car.getClientCategory().equals(clientCategory[i])) {
-                        counterClientCategory[i]++;
-                    }
-                }
-            }
+        for(int i = 0; i < 4; i++){
+            String category = clientCategory[i];
+            counterClientCategory[i] = (int) cars.stream().map(Car::getClientCategory).filter(e -> e.equals(category)).count();
         }
         return counterClientCategory;
+
     }
 
     int[] countVehicleType() {
         int[] counterVehicleTypes = {0, 0, 0, 0};
-        if (cars.size() > 0) {
-            for (CarIF car : cars) {
-                for (int i = 0; i < vehicleTypes.length; i++) {
-                    if (car.getVehicleType().equals(vehicleTypes[i])) {
-                        counterVehicleTypes[i]++;
-                    }
-                }
-            }
+
+        for(int i = 0; i < 4; i++){
+            String type = vehicleTypes[i];
+            counterVehicleTypes[i] = (int) cars.stream().map(Car::getVehicleType).filter(e -> e.equals(type)).count();
         }
+
         return counterVehicleTypes;
     }
 
     Car getMin(){
-        if(cars.size()==0){
-            return null;
-        }
-        Car min=cars.get(0);
-        for(Car a:cars){
-            if(a.getDuration()<min.getDuration()){
-                min=a;
-            }
-        }
+        Comparator<Car> c = (s1, s2) -> s1.getDuration() - s2.getDuration();
+        Car min = cars.stream().reduce((c1, c2) -> c.compare(c1, c2) <= 0 ? c1 : c2).orElse(null);
         return min;
     }
 
     Car getMax(){
-        if(cars.size()==0){
-            return null;
-        }
-        Car max=cars.get(0);
-        for(Car a:cars){
-            if(a.getDuration()>max.getDuration()){
-                max=a;
-            }
-        }
+        Comparator<Car> c = (s1, s2) -> s1.getDuration() - s2.getDuration();
+        Car max = cars.stream().reduce((c1, c2) -> c.compare(c1, c2) >= 0 ? c1 : c2).orElse(null);
         return max;
     }
 
@@ -149,7 +124,7 @@ public class Statistics {
         int total = Arrays.stream(counter).sum();
         JsonArrayBuilder percentageVehicleTypeBuilder = Json.createArrayBuilder();
         for (int vehicleTypeCount : counter) {
-            percentageVehicleTypeBuilder.add((float) vehicleTypeCount / total * 100);
+            percentageVehicleTypeBuilder.add( (float) vehicleTypeCount / total * 100);
         }
 
         JsonObject vehicleTypeRoot = Json.createObjectBuilder()
