@@ -103,4 +103,30 @@ class ParkingGarageIFTest {
         p.changeMax(-1);
         assertEquals(0,p.spaces.length);
     }
+
+    @Test
+    void hasNext() {
+        assertFalse(p.hasNext());
+        Car c = new Car(params);
+        p.parkCar(c);
+        assertTrue(p.hasNext());
+        p.removeCar(c);
+        assertFalse(p.hasNext());
+    }
+
+    @Test
+    void next() {
+        Car car1 = new Car(params);
+        Car car2 = new Car(params2);
+        p.parkCar(car1);
+        p.parkCar(car2);
+        Car[] cArray = new Car[]{car1,car2};
+        int i = 0;
+        for( Car c : p){
+            assertEquals(c,cArray[i++]);
+        }
+        p.removeCar(car1);
+        p.removeCar(car2);
+        assertNull(p.next());
+    }
 }

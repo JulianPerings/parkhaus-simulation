@@ -1,7 +1,11 @@
 package de.hbrs.team89.se1_starter_repo;
 
-public class ParkingGarage implements ParkingGarageIF {
+import java.util.Iterator;
+
+public class ParkingGarage implements ParkingGarageIF,Iterator ,Iterable<Car> {
     ParkingLot[] spaces;
+    private int cursor = 0;
+    private int counter;
     int max;
     /**Initialize ParkingGarage with m parking lots which only allow PKW's.*/
     public ParkingGarage(int m){
@@ -31,6 +35,7 @@ public class ParkingGarage implements ParkingGarageIF {
             if(spaces[i].canPark(c)){
                 spaces[i].parkVehicle(c);
                 System.out.println("Parked at spot" + (i+1));
+                counter++;
                 return i+1;
             }
         }
@@ -85,6 +90,7 @@ public class ParkingGarage implements ParkingGarageIF {
     public Car removeCar(Car c) {
         for(ParkingLot p : spaces){
             if(p.carEquals(c)){
+                counter--;
                 return p.removeVehicle();
             }
         }
@@ -109,5 +115,27 @@ public class ParkingGarage implements ParkingGarageIF {
     public void changeMax(int m){
         max = m;
         resize();
+    }
+    @Override
+    public boolean hasNext() {
+        return cursor < counter;
+    }
+
+    @Override
+    public Car next() {
+        if(hasNext()) {
+            for (int i = cursor; i < spaces.length; i++) {
+                if(spaces[i].isOccupied()){
+                    cursor++;
+                    return spaces[i].getVehicle();
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return this;
     }
 }
