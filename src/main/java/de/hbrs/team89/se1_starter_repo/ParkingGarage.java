@@ -1,8 +1,9 @@
 package de.hbrs.team89.se1_starter_repo;
 
 import java.util.Iterator;
+import java.util.Observable;
 
-public class ParkingGarage implements ParkingGarageIF,Iterator ,Iterable<Car> {
+public class ParkingGarage extends Observable implements ParkingGarageIF,Iterator ,Iterable<Car> {
     ParkingLot[] spaces;
     private int cursor = 0;
     private int counter;
@@ -36,6 +37,8 @@ public class ParkingGarage implements ParkingGarageIF,Iterator ,Iterable<Car> {
                 spaces[i].parkVehicle(c);
                 System.out.println("Parked at spot" + (i+1));
                 counter++;
+                setChanged();
+                notifyObservers(this);
                 return i+1;
             }
         }
@@ -91,7 +94,18 @@ public class ParkingGarage implements ParkingGarageIF,Iterator ,Iterable<Car> {
         for(ParkingLot p : spaces){
             if(p.carEquals(c)){
                 counter--;
+                setChanged();
+                notifyObservers();
                 return p.removeVehicle();
+            }
+        }
+        return null;
+    }
+
+    public Car findCar(String license){
+        for(ParkingLot p : spaces){
+            if(p.getVehicle().getLicense().equals(license)){
+                return p.getVehicle();
             }
         }
         return null;
