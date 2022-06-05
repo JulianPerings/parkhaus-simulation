@@ -20,7 +20,7 @@ class ViewCurrentCostTest {
                 "\"license\": \"SU-X 47\""};
 
         Car car = new Car(params);
-        ParkingGarage p = new ParkingGarage(10);
+        ParkingGarage p = new ParkingGarage();
 
         ViewCurrentCost v = new ViewCurrentCost(p, "SU-X 47");
         PriceCalc price = new PriceCalc();

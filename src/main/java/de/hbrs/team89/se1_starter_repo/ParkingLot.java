@@ -29,7 +29,7 @@ public class ParkingLot implements ParkingLotIF {
     @Override
     public void parkVehicle(Car c) {
         if(vehicle == null){
-            if(isAllowed(c.getPriority())) {
+            if(canPark(c)) {
                 vehicle = c;
             }
         } else {
