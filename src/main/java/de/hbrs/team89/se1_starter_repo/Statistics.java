@@ -6,12 +6,10 @@ import javax.json.JsonObject;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.Flow;
 
-public class Statistics {
+public class Statistics extends Observable {
     ArrayList<Car> cars = new ArrayList<>();
     String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
     String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
@@ -23,8 +21,14 @@ public class Statistics {
             "04:00pm", "05:00pm", "06:00pm", "07:00pm",
             "08:00pm", "09:00pm", "10:00pm", "11:00pm"};
 
+
+    ArrayList<Car> getState(){
+        return cars;
+    }
     void addCar(Car car) {
         cars.add(car);
+        setChanged();
+        notifyObservers(cars);
     }
 
     ArrayList<Car> getCarList() {

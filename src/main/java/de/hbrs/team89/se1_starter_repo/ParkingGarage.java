@@ -1,6 +1,9 @@
 package de.hbrs.team89.se1_starter_repo;
 
-public class ParkingGarage implements ParkingGarageIF {
+import java.io.ObjectStreamClass;
+import java.util.Observable;
+
+public class ParkingGarage extends Observable implements ParkingGarageIF {
     ParkingLot[] spaces;
     int max;
     /**Initialize ParkingGarage with m parking lots which only allow PKW's.*/
@@ -11,6 +14,8 @@ public class ParkingGarage implements ParkingGarageIF {
             spaces[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
         }
     }
+
+
     /**Returns clone of garage.*/
     @Override
     public ParkingLotIF[] getGarage() {
@@ -31,6 +36,8 @@ public class ParkingGarage implements ParkingGarageIF {
             if(spaces[i].canPark(c)){
                 spaces[i].parkVehicle(c);
                 System.out.println("Parked at spot" + (i+1));
+                setChanged();
+                notifyObservers(this);
                 return i+1;
             }
         }
@@ -85,7 +92,19 @@ public class ParkingGarage implements ParkingGarageIF {
     public Car removeCar(Car c) {
         for(ParkingLot p : spaces){
             if(p.carEquals(c)){
+                setChanged();
+                notifyObservers(this);
                 return p.removeVehicle();
+            }
+        }
+        return null;
+    }
+
+    /**Finds and returns car with matching license-plate.*/
+    public Car findCar(String kennzeichen){
+        for(ParkingLot p : spaces){
+            if(p.getVehicle().getLicense().equals(kennzeichen)){
+                return p.getVehicle();
             }
         }
         return null;
