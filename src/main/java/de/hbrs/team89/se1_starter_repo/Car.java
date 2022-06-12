@@ -15,12 +15,6 @@ public class Car implements CarIF {
             sortOutPriority();
         }
     }
-    public static void main(String[] args){
-        ParkingGarage a=  new ParkingGarage(10);
-        a.parkCar(new Car());
-        System.out.println(new Car());
-    }
-
     /**
      * random generator for car constructor with start time and duration based on current time and random nr
      */
