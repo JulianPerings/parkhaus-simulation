@@ -19,7 +19,16 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
     /**Returns clone of garage.*/
     @Override
     public ParkingLotIF[] getGarage() {
-        return spaces.clone();
+        ParkingLotIF[] p = new ParkingLotIF[spaces.length];
+        for( int i = 0; i < spaces.length; i++){
+            ParkingLot p2 = new ParkingLot();
+            p2.allowed = spaces[i].allowed;
+            if(spaces[i].getVehicle() != null) {
+                p2.vehicle = new Car(spaces[i].getVehicle().params);
+            }
+            p[i] = p2;
+        }
+        return p;
     }
 
     /**Returns reference to original garage so that garage can be changed.*/
@@ -110,6 +119,14 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
         }
         return null;
     }
+    public int findCar(Car c){
+        for(int i = 0; i < spaces.length; i++){
+            if(spaces[i].getVehicle().equals(c)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @Override
     public void resize() {
@@ -151,5 +168,19 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
     @Override
     public Iterator<Car> iterator() {
         return this;
+    }
+    public boolean parkCarAt(Car c, int i){
+        if(i >= spaces.length || i < 0){
+            return false;
+        }
+        if(spaces[i].canPark(c)){
+            spaces[i].parkVehicle(c);
+            System.out.println("Parked at spot" + (i+1));
+            counter++;
+            setChanged();
+            notifyObservers(this);
+            return true;
+        }
+        return false;
     }
 }
