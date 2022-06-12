@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  * common superclass for all servlets
@@ -25,6 +27,8 @@ public abstract class CarParkServlet extends HttpServlet {
     Statistics stats = new Statistics();
     PriceCalc priceCalc= new PriceCalc();
     ParkingGarage garage = new ParkingGarage(this.MAX());
+    List<Consumer<UndoCommand>> undoList = new ArrayList<Consumer<UndoCommand>>();
+    UndoCommand uComm = new UndoCommand();
 
     /**
      * HTTP GET
@@ -69,6 +73,9 @@ public abstract class CarParkServlet extends HttpServlet {
                 }else{
                     out.println("No car left the carpark");
                 }
+                break;
+            case "undo":
+                uComm.undo(undoList);
                 break;
             case "cars":
                 // Cars are separated by comma.
@@ -142,6 +149,7 @@ public abstract class CarParkServlet extends HttpServlet {
                 // re-direct car to another parking lot
                 int xi = locator(newCar);
                 if(xi != 0)  {
+                    undoList.add(uC -> uC.enter(garage,newCar));
                     out.println(xi);
                 }
 
@@ -157,6 +165,7 @@ public abstract class CarParkServlet extends HttpServlet {
                         Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
                         stats.addCar(xc);
+                        undoList.add(uC -> uC.leave(stats,garage));
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
                     }
                 }
