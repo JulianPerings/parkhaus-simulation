@@ -12,5 +12,5 @@ public interface ParkingGarageIF {
     Car removeCar(Car c);
     void resize();
     void changeMax(int m);
-
+    boolean parkCarAt(Car c, int i);
 }

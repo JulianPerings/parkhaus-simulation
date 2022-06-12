@@ -2,21 +2,12 @@ package de.hbrs.team89.se1_starter_repo;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import java.sql.Timestamp;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.Flow;
 
 public class Statistics extends Observable {
-    ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
     String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
     String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
-
-    ArrayList<Car> getState(){
-        return cars;
-    }
     void addCar(Car car) {
         cars.add(car);
         setChanged();
@@ -79,87 +70,16 @@ public class Statistics extends Observable {
     }
 
     String generateClientCategoryChart() {
-        /*
-        JsonArrayBuilder clientCategoryBuilder = Json.createArrayBuilder();
-        for (String clientCat : clientCategory) {
-            clientCategoryBuilder.add(clientCat);
-        }
-
-        int[] counter = countClientCategoryTypes();
-        int total = Arrays.stream(counter).sum();
-        JsonArrayBuilder percentageClientCategoryBuilder = Json.createArrayBuilder();
-        for (int clientCategoryCount : counter) {
-            percentageClientCategoryBuilder.add((float) clientCategoryCount / total * 100);
-        }
-
-        JsonObject clientCategoryRoot = Json.createObjectBuilder()
-                .add("data", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("values", percentageClientCategoryBuilder)
-                                .add("labels", clientCategoryBuilder)
-                                .add("type", "pie")
-                        )
-                ).build();
-        return clientCategoryRoot.toString();
-        */
          ClientTypeChart chart = new ClientTypeChart(cars);
          return chart.createJSON().build().get(0).toString();
     }
 
     String generateVehicleTypeChart() {
-        /*
-        JsonArrayBuilder vehicleTypeBuilder = Json.createArrayBuilder();
-        for (String vehicleType : vehicleTypes) {
-            vehicleTypeBuilder.add(vehicleType);
-        }
-
-        int[] counter = countVehicleType();
-        int total = Arrays.stream(counter).sum();
-        JsonArrayBuilder percentageVehicleTypeBuilder = Json.createArrayBuilder();
-        for (int vehicleTypeCount : counter) {
-            percentageVehicleTypeBuilder.add( (float) vehicleTypeCount / total * 100);
-        }
-
-        JsonObject vehicleTypeRoot = Json.createObjectBuilder()
-                .add("data", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("values", percentageVehicleTypeBuilder)
-                                .add("labels", vehicleTypeBuilder)
-                                .add("type", "pie")
-                        )
-                ).build();
-        return vehicleTypeRoot.toString();
-        */
         VehicleTypeChart chart = new VehicleTypeChart(cars);
         return chart.createJSON().build().get(0).toString();
     }
 
     public String generateDurationChart() {
-        /*
-        JsonObject root = Json.createObjectBuilder()
-                .add("data", Json.createArrayBuilder()
-                                .add(Json.createObjectBuilder()
-                                        .add("x", carsAsNrArray())
-                                        .add("y", carsAsDurationArray())
-                                        .add("type", "bar")
-                                        .add("name", "Duration")
-                                )
-                        .add(Json.createObjectBuilder()
-                                .add("x", carsAsNrArray())
-                                .add("y", carsAsBeginArray())
-                                .add("type", "bar")
-                                .add("name", "Begin")
-                        )
-                        .add(Json.createObjectBuilder()
-                                .add("x",carsAsNrArray())
-                                .add("y", carsAsEndArray())
-                                .add("type", "bar")
-                                .add("name", "End")
-                        )
-
-
-                ).build();
-        return root.toString();*/
         JSONDurationChart chart = new JSONDurationChart(cars);
         return chart.createJSON().build().get(0).toString();
     }
@@ -167,28 +87,6 @@ public class Statistics extends Observable {
 
 
     public String generateBeginHeatmap() {
-        /*
-        JsonArrayBuilder data = Json.createArrayBuilder();
-
-        for (String hour : hours) {
-            JsonArrayBuilder hourBuilder = Json.createArrayBuilder();
-            for (String day :
-                    days) {
-                hourBuilder.add(countCarsForHourAndDay(hour, day));
-            }
-            data.add(hourBuilder);
-        }
-
-        JsonObject root = Json.createObjectBuilder()
-                .add("data", Json.createArrayBuilder()
-                        .add(Json.createObjectBuilder()
-                                .add("z", data)
-                                .add("x", daysAsArray())
-                                .add("y", hoursAsArray())
-                                .add("type", "heatmap")
-                        )
-                ).build();
-        return root.toString();*/
         JSONHeatmap h = new JSONHeatmap(cars);
         return h.createJSON().build().get(0).toString();
     }
