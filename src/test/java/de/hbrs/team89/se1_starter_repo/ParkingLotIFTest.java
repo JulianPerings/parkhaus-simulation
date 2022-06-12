@@ -29,7 +29,7 @@ class ParkingLotIFTest {
     @Test
     void isOccupied() {
         assertFalse(p.isOccupied());
-        p.vehicle = new Car(new String[]{""});
+        p.vehicle = new Car();
         assertTrue(p.isOccupied());
     }
 
@@ -40,7 +40,7 @@ class ParkingLotIFTest {
 
     @Test
     void removeVehicle() {
-        Car c= new Car(params);
+        Car c= new Car();
         p1.parkVehicle(c);
         CarIF c1 = p1.removeVehicle();
         assertTrue(c.equals(c1));
