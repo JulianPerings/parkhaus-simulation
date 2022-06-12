@@ -14,17 +14,7 @@ class ParkingLotIFTest {
     @BeforeEach
     void setup(){
         p = new ParkingLot(new String[]{""});
-        p1 = new ParkingLot(new String[]{"PKW"});
-        params = new String[]{"\"nr\": 11",
-                 "\"timer\": 1650896019513",
-                "\"duration\": 99100",
-                "\"price\": 991",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"WOMEN\"",
-                "\"vehicle_type\": \"PKW\"",
-                "\"license\": \"SU-X 47\""};
+        p1 = new ParkingLot(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"});
     }
     @Test
     void isOccupied() {
@@ -35,7 +25,7 @@ class ParkingLotIFTest {
 
     @Test
     void canPark() {
-        assertTrue(p1.canPark(new Car(params)));
+        assertTrue(p1.canPark(new Car()));
     }
 
     @Test
@@ -49,17 +39,17 @@ class ParkingLotIFTest {
 
     @Test
     void parkVehicle() {
-        Car c= new Car(params);
+        Car c= new Car();
         p1.parkVehicle(c);
         assertTrue(p1.vehicle.equals(c));
-        c= new Car(params);
+        c= new Car();
         p.parkVehicle(c);
         assertFalse(p.carEquals(c));
     }
 
     @Test
     void getVehicle() {
-        Car c= new Car(params);
+        Car c= new Car();
         p1.parkVehicle(c);
         assertTrue(p1.getVehicle().equals(c));
         c = null;
@@ -82,13 +72,13 @@ class ParkingLotIFTest {
     @Test
     void isAllowed() {
         assertTrue(p1.isAllowed(new String[]{"PKW"}));
-        assertFalse(p1.isAllowed(new String[]{"SUV"}));
+        assertFalse(p.isAllowed(new String[]{"SUV"}));
         assertFalse(p1.isAllowed(new String[]{}));
     }
 
     @Test
     void carEquals() {
-        Car c= new Car(params);
+        Car c= new Car();
         p1.parkVehicle(c);
         assertTrue(p1.carEquals(c));
     }
