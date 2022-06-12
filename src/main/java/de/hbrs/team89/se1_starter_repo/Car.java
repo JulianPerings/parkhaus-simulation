@@ -15,7 +15,56 @@ public class Car implements CarIF {
             sortOutPriority();
         }
     }
+    /**
+     * random generator for car constructor with start time and duration based on current time and random nr
+     */
+    public Car(){
+        long startzeit=System.currentTimeMillis()-((long) (Math.random() * 1000 * 60 * 60 * 24));
+        long dauer=(long)(Math.random()*(System.currentTimeMillis()-startzeit));
+        StringBuilder hash= new StringBuilder();
+        for(int i=0;i<32;i++){
+            hash.append(Integer.toHexString((int) (Math.random() * 16)));
+        }
+        String[] randParams=new String[10];
+        randParams[0]="\"nr\": "+ (int) (Math.random() * 1000);
+        randParams[1]="\"timer\": "+startzeit;
+        randParams[2]="\"duration\": "+dauer;
+        randParams[3]="\"price\": "+(dauer/10000L);
+        randParams[4]="\"hash\": \""+hash.toString()+"\"";
+        randParams[5]="\"color\": \"#"+hash.substring(0,6)+"\"";
+        randParams[6]="\"space\": "+(int)(Math.random()*20);
+        randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[(int)(Math.random()*4)])+"\"";
+        randParams[8]="\"vehicle_type\": \""+(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"}[(int)(Math.random()*4)])+"\"";
+        randParams[9]="\"license\": \"SU-X "+(int)(Math.random()*100)+"\"";
+        this.params=randParams;
+        sortOutPriority();
+    }
 
+    /**
+     * random generator for car constructor with start time and duration based on current time
+     * @param nr sets the first param value
+     */
+    public Car(int nr){
+        long startzeit=System.currentTimeMillis()-((long) (Math.random() * 1000 * 60 * 60 * 24));
+        long dauer=(long)(Math.random()*(System.currentTimeMillis()-startzeit));
+        StringBuilder hash= new StringBuilder();
+        for(int i=0;i<32;i++){
+            hash.append(Integer.toHexString((int) (Math.random() * 16)));
+        }
+        String[] randParams=new String[10];
+        randParams[0]="\"nr\": "+ nr;
+        randParams[1]="\"timer\": "+startzeit;
+        randParams[2]="\"duration\": "+dauer;
+        randParams[3]="\"price\": "+(dauer/10000L);
+        randParams[4]="\"hash\": \""+hash.toString()+"\"";
+        randParams[5]="\"color\": \"#"+hash.substring(0,6)+"\"";
+        randParams[6]="\"space\": "+(int)(Math.random()*20);
+        randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[(int)(Math.random()*4)])+"\"";
+        randParams[8]="\"vehicle_type\": \""+(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"}[(int)(Math.random()*4)])+"\"";
+        randParams[9]="\"license\": \"SU-X "+(int)(Math.random()*100)+"\"";
+        this.params=randParams;
+        sortOutPriority();
+    }
     @Override
     public int nr() {
         return new Scanner(params[0]).useDelimiter("\\D+").nextInt();
