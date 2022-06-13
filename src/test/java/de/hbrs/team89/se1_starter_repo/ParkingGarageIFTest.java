@@ -45,9 +45,9 @@ class ParkingGarageIFTest {
 
     @Test
     void parkCar() {
-        Car c = new Car(params);
+        Car c = new Car();
         assertTrue(1==p.parkCar(c));
-        Car c2 = new Car(params2);
+        Car c2 = new Car();
         assertFalse(0==p.parkCar(c2));
 
     }
@@ -55,19 +55,19 @@ class ParkingGarageIFTest {
     @Test
     void getFreeParkingSpaces() {
         assertEquals(10,p.getFreeParkingSpaces(new String[]{"PKW"})[0]);
-        p.parkCar(new Car(params));
+        p.parkCar(new Car());
         assertEquals(9,p.getFreeParkingSpaces(new String[]{"PKW"})[0]);
 
     }
     @Test
     void getParkingSpaces() {
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
-        p.parkCar(new Car(params));
+        p.parkCar(new Car());
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
     }
     @Test
     void removeCar() {
-        Car c = new Car(params);
+        Car c = new Car();
         assertTrue(1==p.parkCar(c));
         CarIF d;
         d = p.removeCar(c);
@@ -107,7 +107,7 @@ class ParkingGarageIFTest {
     @Test
     void hasNext() {
         assertFalse(p.hasNext());
-        Car c = new Car(params);
+        Car c = new Car();
         p.parkCar(c);
         assertTrue(p.hasNext());
         p.removeCar(c);
@@ -116,8 +116,8 @@ class ParkingGarageIFTest {
 
     @Test
     void next() {
-        Car car1 = new Car(params);
-        Car car2 = new Car(params2);
+        Car car1 = new Car();
+        Car car2 = new Car();
         p.parkCar(car1);
         p.parkCar(car2);
         Car[] cArray = new Car[]{car1,car2};
