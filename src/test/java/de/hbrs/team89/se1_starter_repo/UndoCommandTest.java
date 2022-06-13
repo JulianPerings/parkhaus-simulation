@@ -35,7 +35,7 @@ class UndoCommandTest {
     void enter() {
         ParkingLotIF[] p2 = pg.getGarage();
         pg.parkCar(car1);
-        undoList.add(uC->uC.enter(pg,car1));
+        undoList.add(uC->uC.undoEnter(pg,car1));
         assertFalse(equals(p2,pg.getGarage()));
         undo();
         assertTrue(equals(p2,pg.getGarage()));
@@ -45,7 +45,7 @@ class UndoCommandTest {
         pg.parkCar(car1);
         ParkingLotIF[] p2 = pg.getGarage();
         s.addCar(pg.removeCar(car1));
-        undoList.add(uC->uC.leave(s,pg));
+        undoList.add(uC->uC.undoLeave(s,pg));
         assertFalse(equals(p2,pg.getGarage()));
         assertTrue(s.getCarList().get(0).equals(car1));
         undo();
