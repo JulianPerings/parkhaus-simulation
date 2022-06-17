@@ -24,11 +24,11 @@ public abstract class CarParkServlet extends HttpServlet {
 
     abstract String config(); // configuration of a single parking level
 
-    Statistics stats = new Statistics();
-    PriceCalc priceCalc= new PriceCalc();
-    ParkingGarage garage = new ParkingGarage(this.MAX());
-    List<Consumer<UndoCommand>> undoList = new ArrayList<Consumer<UndoCommand>>();
-    UndoCommand uComm = new UndoCommand();
+    Statistics stats = new Statistics();    //Handles all our statistics
+    PriceCalc priceCalc= new PriceCalc();   //Handles price calculations
+    ParkingGarage garage = new ParkingGarage(this.MAX());   //Stores vehicles currently parking in our garage
+    List<Consumer<UndoCommand>> undoList = new ArrayList<>();  //Undo-list to undo actions regarding entering and leaving
+    UndoCommand uComm = new UndoCommand();  //Handles undo-requests
 
     /**
      * HTTP GET
@@ -106,7 +106,7 @@ public abstract class CarParkServlet extends HttpServlet {
             case "beginHeatmap":
                 out.println(stats.generateBeginHeatmap());
                 break;
-            case "getPrices":       //  /100 because of €
+            case "getPrices":
                 out.printf(" price per minute day/night:€%.2f/€%.2f"+
                         " | "+
                         " price per hour day/night:€%.2f/€%.2f"+
@@ -149,12 +149,12 @@ public abstract class CarParkServlet extends HttpServlet {
                 // re-direct car to another parking lot
                 int xi = locator(newCar);
                 if(xi != 0)  {
-                    undoList.add(uC -> uC.enter(garage,newCar));
+                    undoList.add(uC -> uC.undoEnter(garage,newCar));
                     out.println(xi);
                 }
 
                 break;
-            case "leave":  // ToDo remove car from list
+            case "leave":
                 //ToDo needs to be own method so i can call it for resizing
                 double price = 0.0d;
                 if (params.length > 4) {
@@ -165,18 +165,18 @@ public abstract class CarParkServlet extends HttpServlet {
                         Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
                         stats.addCar(xc);
-                        undoList.add(uC -> uC.leave(stats,garage));
+                        undoList.add(uC -> uC.undoLeave(stats,garage));
                         // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
                     }
                 }
                 out.println(price);  // server calculated price
                 System.out.println("leave," + Arrays.toString(restParams) + ", price = " + price);
                 break;
-/*            case "invalid":
+            case "invalid":
                 break;
             case "occupied":
                 System.out.println(body);
-                break;*/
+                break;
             case "tomcat":
                 out.println(getServletConfig().getServletContext().getServerInfo()
                         + getServletConfig().getServletContext().getMajorVersion()
