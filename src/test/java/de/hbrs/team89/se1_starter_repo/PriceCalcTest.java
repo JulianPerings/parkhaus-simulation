@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PriceCalcTest {
     PriceCalc testCalc = new PriceCalc();
     @Test
-    void calcDayNightPrice_methodCorrect_expectsNear8() {
+    void calcDayNightPrice_methodCorrect_expectsNear1440() {
         long duration=1000*60*60*5;  //5 hours
         long begin=0;
         double expectedPrice=((5*60*60)/10d)*0.8;    //should cost 8 cent
@@ -31,7 +31,7 @@ class PriceCalcTest {
         assertEquals(0.8,testCalc.getNightPrice(),0.01);
     }
     @Test
-    void calcDayNightPrice_methodCorrect() {
+    void calcDayNightPrice_methodCorrectexpects1440() {
         long duration=1000*60*60*5;  //5 hours
         long begin=1000*60*60*22;
         double expectedPrice=((5*60*60)/10d)*testCalc.getNightPrice();    //should cost 8 cent
