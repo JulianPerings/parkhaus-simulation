@@ -1,7 +1,11 @@
 package de.hbrs.team89.se1_starter_repo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 public class CarTest {
     String[] params1,params2,params3;
@@ -42,6 +46,29 @@ public class CarTest {
         car2 = new Car(params2);
     }
     @Test
+    void Car_expectsRandomCars(){
+        List<Car> test= new ArrayList<>();
+        for(int i=0;i<100;i++){
+            Car testcar=new Car();
+            for(Car x:test){
+                assertFalse(x.equals(testcar));
+            }
+            test.add(testcar);
+        }
+    }
+    @Test
+    void Car_expectsRandomCarsWithSetNumber(){
+        List<Car> test= new ArrayList<>();
+        for(int i=0;i<100;i++){
+            Car testcar=new Car(i);
+            assertEquals(i,testcar.nr());
+            for(Car x:test){
+                assertFalse(x.equals(testcar));
+            }
+            test.add(testcar);
+        }
+    }
+    @Test
     void nr() {
         assertEquals(11,car1.nr());
     }
@@ -55,7 +82,10 @@ public class CarTest {
     void end() {
         assertEquals(car2.begin()+car2.getDuration(),car1.end());
     }
-
+    @Test
+    void getSpace_expects14(){
+        assertEquals(14,car1.getSpace());
+    }
     @Test
     void getDuration() {
         assertEquals(99,car1.getDuration());
