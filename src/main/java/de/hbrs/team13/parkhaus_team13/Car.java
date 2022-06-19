@@ -1,5 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class Car implements CarIF {
      * random generator for car constructor with start time and duration based on current time and random nr
      */
     public Car(){
-        this((int) (Math.random() * 1000));
+        this(getSecureRandomNumber(1000));
     }
 
     /**
@@ -27,11 +28,11 @@ public class Car implements CarIF {
      * @param nr sets the first param value
      */
     public Car(int nr){
-        long startzeit=System.currentTimeMillis()-((long) (Math.random() * 1000 * 60 * 60 * 24));
-        long dauer=(long)(Math.random()*(System.currentTimeMillis()-startzeit));
+        long startzeit=System.currentTimeMillis()-((long) (getSecureRandomNumber(1000) * 60 * 60 * 24));
+        long dauer=(long)(getSecureRandomNumber(System.currentTimeMillis()-startzeit));
         StringBuilder hash= new StringBuilder();
         for(int i=0;i<32;i++){
-            hash.append(Integer.toHexString((int) (Math.random() * 16)));
+            hash.append(Integer.toHexString((getSecureRandomNumber(16))));
         }
         String[] randParams=new String[10];
         randParams[0]="\"nr\": "+ nr;
@@ -40,10 +41,10 @@ public class Car implements CarIF {
         randParams[3]="\"price\": "+(dauer/10000L);
         randParams[4]="\"hash\": \""+hash.toString()+"\"";
         randParams[5]="\"color\": \"#"+hash.substring(0,6)+"\"";
-        randParams[6]="\"space\": "+(int)(Math.random()*20);
-        randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[(int)(Math.random()*4)])+"\"";
-        randParams[8]="\"vehicle_type\": \""+(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"}[(int)(Math.random()*4)])+"\"";
-        randParams[9]="\"license\": \"SU-X "+(int)(Math.random()*100)+"\"";
+        randParams[6]="\"space\": "+getSecureRandomNumber(25);
+        randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[getSecureRandomNumber(4)])+"\"";
+        randParams[8]="\"vehicle_type\": \""+(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"}[getSecureRandomNumber(4)])+"\"";
+        randParams[9]="\"license\": \"SU-X "+(getSecureRandomNumber(100)) + nr+"\"";
         this.params=randParams;
         sortOutPriority();
     }
@@ -82,6 +83,18 @@ public class Car implements CarIF {
     public String getColor() {
         String s = params[5].split(":")[1];
         return s.substring(2, s.length() - 1);
+    }
+    static private int getSecureRandomNumber(int number){
+        SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
+        byte bytes[] = new byte[2];
+        random.nextBytes(bytes);
+        return Math.abs(bytes[0]+bytes[1])%number;
+    }
+    static private long getSecureRandomNumber(long number){
+        SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
+        byte bytes[] = new byte[6];
+        random.nextBytes(bytes);
+        return (Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number);
     }
 
     @Override
