@@ -91,5 +91,6 @@
             </plugin>
 
         </plugins>
+        <testSourceDirectory>${project.basedir}/src/test/java/de/hbrs/team89/se1_starter_repo</testSourceDirectory>
     </build>
 </project>
