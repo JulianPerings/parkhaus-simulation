@@ -20,7 +20,7 @@ public class Car implements CarIF {
      * random generator for car constructor with start time and duration based on current time and random nr
      */
     public Car(){
-        this((int) (Math.random() * 1000));
+        this(getSecureRandomNumber(1000));
     }
 
     /**
@@ -28,8 +28,8 @@ public class Car implements CarIF {
      * @param nr sets the first param value
      */
     public Car(int nr){
-        long startzeit=System.currentTimeMillis()-((long) (Math.random() * 1000 * 60 * 60 * 24));
-        long dauer=(long)(Math.random()*(System.currentTimeMillis()-startzeit));
+        long startzeit=System.currentTimeMillis()-((long) (getSecureRandomNumber(1000) * 60 * 60 * 24));
+        long dauer=(long)(getSecureRandomNumber(System.currentTimeMillis()-startzeit));
         StringBuilder hash= new StringBuilder();
         for(int i=0;i<32;i++){
             hash.append(Integer.toHexString((getSecureRandomNumber(16))));
@@ -84,11 +84,17 @@ public class Car implements CarIF {
         String s = params[5].split(":")[1];
         return s.substring(2, s.length() - 1);
     }
-    private int getSecureRandomNumber(int number){
+    static private int getSecureRandomNumber(int number){
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte bytes[] = new byte[2];
         random.nextBytes(bytes);
         return Math.abs(bytes[0]+bytes[1])%number;
+    }
+    static private long getSecureRandomNumber(long number){
+        SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
+        byte bytes[] = new byte[6];
+        random.nextBytes(bytes);
+        return (Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number);
     }
 
     @Override
