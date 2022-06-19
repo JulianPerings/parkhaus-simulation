@@ -1,9 +1,10 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 
-public class ParkingGarage extends Observable implements ParkingGarageIF,Iterator ,Iterable<Car> {
+public class ParkingGarage extends Observable implements ParkingGarageIF,Iterator<Car> ,Iterable<Car> {
     ParkingLot[] spaces;
     private int cursor = 0;
     private int counter;
@@ -58,20 +59,18 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
      * Example: getFreeParkingSpaces({"PKW", "E_VEHICLE"}) returns {10, 7} would mean that there are 10 lots where a PKW can park
      * and 7 lots suitable for E_VEHICLEs.*/
     @Override
-    public int[] getFreeParkingSpaces(String[] s) {
+    public int[] getFreeSpaces(String[] s) {
         if(s != null) {
-            int[] counter = new int[s.length];
+            int[] counter2 = new int[s.length];
             for (int i = 0; i < s.length; i++) {
-                counter[i] = 0;
+                counter2[i] = 0;
                 for (ParkingLot p : spaces) {
-                    if (p.isAllowed(new String[]{s[i]})) {
-                        if (!p.isOccupied()) {
-                            counter[i]++;
-                        }
+                    if (p.isAllowed(new String[]{s[i]}) && !p.isOccupied()) {
+                            counter2[i]++;
                     }
                 }
             }
-            return counter;
+            return counter2;
         } else {
             return new int[]{0};
         }
@@ -82,16 +81,16 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
     @Override
     public int[] getParkingSpaces(String[] s) {
         if(s != null) {
-            int[] counter = new int[s.length];
+            int[] counter2 = new int[s.length];
             for (int i = 0; i < s.length; i++) {
-                counter[i] = 0;
+                counter2[i] = 0;
                 for (ParkingLot p : spaces) {
                     if (p.isAllowed(new String[]{s[i]})) {
-                        counter[i]++;
+                        counter2[i]++;
                     }
                 }
             }
-            return counter;
+            return counter2;
         } else {
             return new int[]{0};
         }
@@ -162,11 +161,12 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
                 }
             }
         }
-        return null;
+        throw new NoSuchElementException();
     }
 
     @Override
     public Iterator<Car> iterator() {
+        cursor = 0;
         return this;
     }
     public boolean parkCarAt(Car c, int i){

@@ -85,16 +85,23 @@ public class Car implements CarIF {
         return s.substring(2, s.length() - 1);
     }
     static private int getSecureRandomNumber(int number){
+        if(number == 0){
+            return 0;
+        }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte bytes[] = new byte[2];
         random.nextBytes(bytes);
         return Math.abs(bytes[0]+bytes[1])%number;
     }
     static private long getSecureRandomNumber(long number){
+        if(number == 0){
+            return 0;
+        }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte bytes[] = new byte[6];
         random.nextBytes(bytes);
-        return (Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number);
+        long result = Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number;
+        return result < 0 ? result*(-1) : result;
     }
 
     @Override

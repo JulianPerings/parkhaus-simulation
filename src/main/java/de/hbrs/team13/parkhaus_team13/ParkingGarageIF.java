@@ -7,7 +7,7 @@ public interface ParkingGarageIF {
     ParkingLotIF[] getGarageUnprotected();
     //need to check out how response works for client (maybe needs to be an int to say which parking spot was taken)
     int parkCar(Car c);
-    int[] getFreeParkingSpaces(String[] s);
+    int[] getFreeSpaces(String[] s);
     int[] getParkingSpaces(String[] s);
     Car removeCar(Car c);
     void resize();
