@@ -3,6 +3,8 @@ package de.hbrs.team13.parkhaus_team13;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingGarageIFTest {
@@ -127,6 +129,12 @@ class ParkingGarageIFTest {
         }
         p.removeCar(car1);
         p.removeCar(car2);
-        assertNull(p.next());
+        boolean b = false;
+        try{
+            p.next();
+        }catch(NoSuchElementException e){
+            b = true;
+        }
+        assertTrue(b);
     }
 }
