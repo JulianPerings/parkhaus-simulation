@@ -84,7 +84,7 @@ public class Car implements CarIF {
         String s = params[5].split(":")[1];
         return s.substring(2, s.length() - 1);
     }
-    static private int getSecureRandomNumber(int number){
+    static int getSecureRandomNumber(int number){
         if(number == 0){
             return 0;
         }
@@ -93,7 +93,7 @@ public class Car implements CarIF {
         random.nextBytes(randbytes);
         return Math.abs(randbytes[0]+randbytes[1])%number;
     }
-    static private long getSecureRandomNumber(long number){
+    static long getSecureRandomNumber(long number){
         if(number == 0){
             return 0;
         }
@@ -165,11 +165,11 @@ public class Car implements CarIF {
                 if (counterV == vSa.size()) {
                     addRest(i, counterC, cSa);
                     break;
-                }
+                }/*Unreachable condition
                 if (counterC == cSa.size()) {
                     addRest(i, counterV, vSa);
                     break;
-                }
+                }*/
                 if (sortOrder.indexOf(vSa.get(counterV)) < sortOrder.indexOf(cSa.get(counterC))) {
                     priority[i] = vSa.get(counterV++);
                 } else {

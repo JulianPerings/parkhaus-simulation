@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static de.hbrs.team13.parkhaus_team13.Car.*;
 import static org.junit.jupiter.api.Assertions.*;
 public class CarTest {
     String[] params1,params2,params3;
@@ -68,6 +69,12 @@ public class CarTest {
             test.add(testcar);
         }
     }
+    @Test
+    void getSecureRandomNumber_expects0(){
+        assertEquals(0,getSecureRandomNumber(0L));
+        assertEquals(0,getSecureRandomNumber(0));
+    }
+
     @Test
     void nr() {
         assertEquals(11,car1.nr());
@@ -132,7 +139,7 @@ public class CarTest {
 
     @Test
     void equals_2Cars_ShouldReturnTrue() {
-        assertTrue(car1.equals(car1));
+        assertEquals(car1, car1);
     }
 
     @Test
