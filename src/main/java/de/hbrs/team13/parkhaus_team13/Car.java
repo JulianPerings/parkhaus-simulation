@@ -28,8 +28,8 @@ public class Car implements CarIF {
      * @param nr sets the first param value
      */
     public Car(int nr){
-        long startzeit=System.currentTimeMillis()-((long) (getSecureRandomNumber(1000) * 60 * 60 * 24));
-        long dauer=(long)(getSecureRandomNumber(System.currentTimeMillis()-startzeit));
+        long startzeit=System.currentTimeMillis()-(((long) getSecureRandomNumber(1000) * 60 * 60 * 24));
+        long dauer=(getSecureRandomNumber(System.currentTimeMillis()-startzeit));
         StringBuilder hash= new StringBuilder();
         for(int i=0;i<32;i++){
             hash.append(Integer.toHexString((getSecureRandomNumber(16))));
@@ -39,7 +39,7 @@ public class Car implements CarIF {
         randParams[1]="\"timer\": "+startzeit;
         randParams[2]="\"duration\": "+dauer;
         randParams[3]="\"price\": "+(dauer/10000L);
-        randParams[4]="\"hash\": \""+hash.toString()+"\"";
+        randParams[4]="\"hash\": \""+hash+"\"";
         randParams[5]="\"color\": \"#"+hash.substring(0,6)+"\"";
         randParams[6]="\"space\": "+getSecureRandomNumber(25);
         randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[getSecureRandomNumber(4)])+"\"";
@@ -89,19 +89,18 @@ public class Car implements CarIF {
             return 0;
         }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
-        byte bytes[] = new byte[2];
-        random.nextBytes(bytes);
-        return Math.abs(bytes[0]+bytes[1])%number;
+        byte[] randbytes = new byte[2];
+        random.nextBytes(randbytes);
+        return Math.abs(randbytes[0]+randbytes[1])%number;
     }
     static private long getSecureRandomNumber(long number){
         if(number == 0){
             return 0;
         }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
-        byte bytes[] = new byte[6];
+        byte[] bytes = new byte[6];
         random.nextBytes(bytes);
-        long result = Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number;
-        return result < 0 ? result*(-1) : result;
+        return Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number;
     }
 
     @Override
@@ -142,7 +141,7 @@ public class Car implements CarIF {
 
     @Override
     public boolean equals(CarIF c) {
-        return c != null & getTicket().equals(c.getTicket());
+        return c != null && getTicket().equals(c.getTicket());
     }
     //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
     // "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
