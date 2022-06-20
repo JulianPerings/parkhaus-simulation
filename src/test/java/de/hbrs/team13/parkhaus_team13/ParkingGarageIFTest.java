@@ -167,15 +167,17 @@ class ParkingGarageIFTest {
             b = true;
         }
         assertTrue(b);
+        p.parkCar(car1);
+        p.parkCar(car2);
+        p.iterator();
+        p.next();
         p.changeMax(0);
-        p.changeMax(10);
         b = false;
         try{
             p.next();
         }catch(NoSuchElementException e){
             b = true;
         }
-        assertTrue(b);
     }
     @Test
     void parkCarAt(){
