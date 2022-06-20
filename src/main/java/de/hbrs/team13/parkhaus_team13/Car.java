@@ -7,8 +7,23 @@ import java.util.Collections;
 import java.util.Scanner;
 
 //ToDO Protect against NULL PARAMS
+
+/**
+ * Car has values
+ *  String[] params and
+ *  String[] priority
+ */
 public class Car implements CarIF {
+    /**
+     * storage medium for
+     * car number, time when the car entered the parking garage, duration car parked,
+     * price paid by the customer , ticket as hash value, color of the car,
+     * value how much space the vehicle needs, the clients' category, the vehicle type and the license
+     */
     String[] params;
+    /**
+     * array with parking lot priority details. Defines the order in which he will park on the remaining parking lots
+     */
     String[] priority;
     public Car( String[] params ){
         this.params = params;
@@ -17,7 +32,7 @@ public class Car implements CarIF {
         }
     }
     /**
-     * random generator for car constructor with start time and duration based on current time and random nr
+     * random generator for car constructor with start time and duration based on current time and random nr between 0 and 1000
      */
     public Car(){
         this(getSecureRandomNumber(1000));
@@ -84,23 +99,34 @@ public class Car implements CarIF {
         String s = params[5].split(":")[1];
         return s.substring(2, s.length() - 1);
     }
-    static int getSecureRandomNumber(int number){
-        if(number == 0){
+
+    /**
+     * generates a random number between 0 and maxnumber via the secure random byte generation method
+     * @param maxnumber maximum of the random number
+     * @return random int between 0 and maxnumber
+     */
+    static int getSecureRandomNumber(int maxnumber){
+        if(maxnumber == 0){
             return 0;
         }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte[] randbytes = new byte[2];
         random.nextBytes(randbytes);
-        return Math.abs(randbytes[0]+randbytes[1])%number;
+        return Math.abs(randbytes[0]+randbytes[1])%maxnumber;
     }
-    static long getSecureRandomNumber(long number){
-        if(number == 0){
+    /**
+     * generates a random number between 0 and maxnumber via the secure random byte generation method
+     * @param maxnumber maximum of the random number
+     * @return random int between 0 and maxnumber
+     */
+    static long getSecureRandomNumber(long maxnumber){
+        if(maxnumber == 0){
             return 0;
         }
         SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
         byte[] bytes = new byte[6];
         random.nextBytes(bytes);
-        return Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%number;
+        return Math.abs(bytes[0]+bytes[1]+bytes[2]+bytes[3]+bytes[4]+bytes[5])%maxnumber;
     }
 
     @Override
@@ -126,6 +152,10 @@ public class Car implements CarIF {
         return s.substring(2, s.length() - 1);
     }
 
+    /**
+     * returns all car values saved in params[] as one string split with /
+     * @return string of all params[] values split with /
+     */
     @Override
     public String export() {
         //Format: Nr, timer begin, duration, price, Ticket, color, space, client category, vehicle type, license
@@ -145,6 +175,11 @@ public class Car implements CarIF {
     }
     //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
     // "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
+
+    /**
+     * calculates the array priority for "this." Car from the standard arrangment:
+     * {1_"HANDICAPPED", 2_"MOTORBIKE", 3_"E_VEHICLE", 4_"WOMEN", 5_"FAMILY", 6_"SUV", 7_"PKW", 8_"ANY"}
+     */
     @Override
     public void sortOutPriority(){
         if(params.length >= 8) {    //ToDO Protect against NULL PARAMS
