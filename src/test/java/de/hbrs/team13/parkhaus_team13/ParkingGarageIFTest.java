@@ -63,6 +63,7 @@ class ParkingGarageIFTest {
         assertEquals(10,p.getFreeSpaces(new String[]{"PKW"})[0]);
         p.parkCar(new Car());
         assertEquals(9,p.getFreeSpaces(new String[]{"PKW"})[0]);
+        assertEquals(0,p.getFreeSpaces(new String[]{"TEST"})[0]);
         assertEquals(0,p.getFreeSpaces(new String[]{})[0]);
         assertEquals(0,p.getFreeSpaces(null)[0]);
 
@@ -72,6 +73,9 @@ class ParkingGarageIFTest {
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
         p.parkCar(new Car());
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
+        assertEquals(0,p.getFreeSpaces(new String[]{"TEST"})[0]);
+        assertEquals(0,p.getParkingSpaces(new String[]{})[0]);
+        assertEquals(0,p.getParkingSpaces(null)[0]);
     }
     @Test
     void removeCar() {
