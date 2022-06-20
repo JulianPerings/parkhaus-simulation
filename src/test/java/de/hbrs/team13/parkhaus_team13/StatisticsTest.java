@@ -3,6 +3,7 @@ package de.hbrs.team13.parkhaus_team13;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StatisticsTest {
@@ -71,13 +72,13 @@ public class StatisticsTest {
     @Test
     void test_VehicleTypes(){
         String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
-        assertEquals(vehicleTypes, s.getVehicleTypes());
+        assertArrayEquals(vehicleTypes, s.getVehicleTypes());
     }
 
     @Test
     void test_clientCategory(){
         String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
-        assertEquals(clientCategory, s.getClientCategory());
+        assertArrayEquals(clientCategory, s.getClientCategory());
     }
 
     @Test
