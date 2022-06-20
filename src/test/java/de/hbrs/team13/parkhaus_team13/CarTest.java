@@ -45,6 +45,8 @@ public class CarTest {
                 "\"license\": \"SU-X 47\""};
         car1 = new Car(params1);
         car2 = new Car(params2);
+        Car car3 = new Car(null);
+        assertNull(car3.priority);
     }
     @Test
     void Car_expectsRandomCars(){
@@ -120,6 +122,8 @@ public class CarTest {
 
     @Test
     void sortOutPriority() {
+        Car car3 = new Car(new String[]{});
+        assertNull(car3.priority);
         assertEquals(Arrays.toString(car1.priority),Arrays.toString(new String[]{"HANDICAPPED", "MOTORBIKE", "SUV", "PKW", "ANY"}));
         System.out.println(Arrays.toString(car2.priority));
         assertEquals(Arrays.toString(car2.priority),Arrays.toString(new String[]{"WOMEN", "SUV", "PKW", "ANY"}));
