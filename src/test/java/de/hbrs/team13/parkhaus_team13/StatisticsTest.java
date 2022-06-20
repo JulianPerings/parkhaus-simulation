@@ -52,8 +52,37 @@ public class StatisticsTest {
     }
 
     @Test
+    void getAvg_0Cars_ShouldReturn0(){
+        s = new Statistics();
+        assertEquals(0, s.getAvg());
+    }
+
+    @Test
     void getAvgTime_2Cars_ShouldReturnValue() {
         assertEquals(114.5, s.getAvgTime(), 1);
+    }
+
+    @Test
+    void getAvgTime_0Cars_ShouldReturn0(){
+        s = new Statistics();
+        assertEquals(0, s.getAvgTime());
+    }
+
+    @Test
+    void test_VehicleTypes(){
+        String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
+        assertEquals(vehicleTypes, s.getVehicleTypes());
+    }
+
+    @Test
+    void test_clientCategory(){
+        String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
+        assertEquals(clientCategory, s.getClientCategory());
+    }
+
+    @Test
+    void test_countVehicleType_Should_Return(){
+
     }
 
     @Test
