@@ -112,21 +112,17 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
 
     public Car findCar(String license){
         for(ParkingLot p : spaces){
-            if(p.isOccupied()) {
-                if (p.getVehicle().getLicense().equals(license)) {
+                if (p.isOccupied() && p.getVehicle().getLicense().equals(license)) {
                     return p.getVehicle();
                 }
-            }
         }
         return null;
     }
     public int findCar(Car c){
         for(int i = 0; i < spaces.length; i++){
-            if(spaces[i].isOccupied()){
-                if(spaces[i].getVehicle().equals(c)){
+                if(spaces[i].isOccupied() &&spaces[i].getVehicle().equals(c)){
                     return i+1;
                 }
-            }
         }
         return -1;
     }
