@@ -3,8 +3,7 @@ package de.hbrs.team13.parkhaus_team13;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StatisticsTest {
     Statistics s;
@@ -83,7 +82,36 @@ public class StatisticsTest {
 
     @Test
     void test_countVehicleType_Should_Return(){
+        String[] motorbike = {"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"WOMEN\"",
+                "\"vehicle_type\": \"MOTORBIKE\"",
+                "\"license\": \"SU-X 47\""};
 
+        String[] suv = {"\"nr\": 12",
+                "\"timer\": 1650896019513",
+                "\"duration\": 130000",
+                "\"price\": 1300",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"ANY\"",
+                "\"vehicle_type\": \"SUV\"",
+                "\"license\": \"SU-X 47\""};
+        assertArrayEquals(new int[]{0,1,0,1}, s.countVehicleType());
+        s.addCar(new Car(motorbike));
+        assertArrayEquals(new int[]{0,1,1,1}, s.countVehicleType());
+        s.addCar(new Car(suv));
+        assertArrayEquals(new int[]{1,1,1,1}, s.countVehicleType());
+        s.addCar(new Car(motorbike));
+        assertArrayEquals(new int[]{1,1,2,1}, s.countVehicleType());
+        s.addCar(new Car(suv));
+        assertArrayEquals(new int[]{2,1,2,1}, s.countVehicleType());
     }
 
     @Test
@@ -118,10 +146,21 @@ public class StatisticsTest {
     }
     @Test
     void getMin_2Cars_ShouldReturnCar1(){
-        assertEquals(s.getCarList().get(0),s.getMin());
+        assertEquals(s.getCarList().get(0), s.getMin());
     }
+
+    @Test
+    void getMin_0Cars_ShouldReturnNull(){
+        assertNull(s.getMin());
+    }
+
     @Test
     void getMax_2Cars_ShouldReturnCar2(){
-        assertEquals(s.getCarList().get(1),s.getMax());
+        assertEquals(s.getCarList().get(1), s.getMax());
+    }
+
+    @Test
+    void getMax_0Cars_ShouldReturnNull(){
+        assertNull(s.getMax());
     }
 }
