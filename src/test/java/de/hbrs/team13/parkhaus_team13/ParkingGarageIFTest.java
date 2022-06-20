@@ -178,6 +178,14 @@ class ParkingGarageIFTest {
         }catch(NoSuchElementException e){
             b = true;
         }
+        p.changeMax(1);
+        p.iterator();
+        b = false;
+        try{
+            p.next();
+        }catch(NoSuchElementException e){
+            b = true;
+        }
     }
     @Test
     void parkCarAt(){
