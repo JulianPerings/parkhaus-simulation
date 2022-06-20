@@ -1,6 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
-import de.hbrs.team13.parkhaus_team13.Singleton.VehicleTypesMultiton;
+import de.hbrs.team13.parkhaus_team13.singleton.VehicleTypesMultiton;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

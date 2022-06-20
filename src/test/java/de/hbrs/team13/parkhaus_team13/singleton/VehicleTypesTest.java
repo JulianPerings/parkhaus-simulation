@@ -1,4 +1,4 @@
-package de.hbrs.team13.parkhaus_team13.Singleton;
+package de.hbrs.team13.parkhaus_team13.singleton;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

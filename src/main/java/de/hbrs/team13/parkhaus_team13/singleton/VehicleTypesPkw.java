@@ -1,4 +1,4 @@
-package de.hbrs.team13.parkhaus_team13.Singleton;
+package de.hbrs.team13.parkhaus_team13.singleton;
 
 public class VehicleTypesPkw  extends VehicleTypes{
 
