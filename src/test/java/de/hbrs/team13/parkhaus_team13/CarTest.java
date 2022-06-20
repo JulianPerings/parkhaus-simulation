@@ -125,9 +125,19 @@ public class CarTest {
         Car car3 = new Car(new String[]{});
         assertNull(car3.priority);
         assertEquals(Arrays.toString(car1.priority),Arrays.toString(new String[]{"HANDICAPPED", "MOTORBIKE", "SUV", "PKW", "ANY"}));
-        System.out.println(Arrays.toString(car2.priority));
         assertEquals(Arrays.toString(car2.priority),Arrays.toString(new String[]{"WOMEN", "SUV", "PKW", "ANY"}));
-        System.out.println(Arrays.toString(new Car(params3).getPriority()));
+        Car car4 = new Car(new String[]{"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"\"",
+                "\"vehicle_type\": \"\"",
+                "\"license\": \"SU-X 47\""});
+        car4.sortOutPriority();
+        assertEquals(Arrays.toString(car4.priority),Arrays.toString(new String[]{"","", "SUV", "PKW", "ANY"}));
     }
 
     @Test
