@@ -60,7 +60,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
      * and 7 lots suitable for E_VEHICLEs.*/
     @Override
     public int[] getFreeSpaces(String[] s) {
-        if(s != null) {
+        if(s != null && s.length != 0) {
             int[] counter2 = new int[s.length];
             for (int i = 0; i < s.length; i++) {
                 counter2[i] = 0;
@@ -80,7 +80,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
      * Example: getFreeParkingSpaces({"PKW", "E_VEHICLE"}) returns {10, 7} would mean that there is a total of 10 PKS lots and 7 E_VEHICLE lots.*/
     @Override
     public int[] getParkingSpaces(String[] s) {
-        if(s != null) {
+        if(s != null && s.length != 0) {
             int[] counter2 = new int[s.length];
             for (int i = 0; i < s.length; i++) {
                 counter2[i] = 0;
