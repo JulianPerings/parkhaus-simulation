@@ -145,6 +145,10 @@ public class CarTest {
     void equals_2Cars_ShouldReturnTrue() {
         assertEquals(car1, car1);
     }
+    @Test
+    void equals(){
+        assertFalse(new Car().equals(null));
+    }
 
     @Test
     void export_SingleCar_ShouldReturnExportStringInFormat(){
