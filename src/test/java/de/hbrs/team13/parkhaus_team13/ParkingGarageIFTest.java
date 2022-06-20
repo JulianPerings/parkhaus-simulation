@@ -48,13 +48,13 @@ class ParkingGarageIFTest {
     @Test
     void parkCar() {
         Car c = new Car();
-        assertTrue(1==p.parkCar(c));
+        assertEquals(1,p.parkCar(c));
         Car c2 = new Car();
-        assertFalse(0==p.parkCar(c2));
+        assertEquals(0,p.parkCar(c2));
         p.changeMax(2);
-        assertTrue(0 == p.parkCar(c2));
+        assertEquals(0, p.parkCar(c2));
         p.changeMax(0);
-        assertTrue(0 == p.parkCar(c2));
+        assertEquals(0 , p.parkCar(c2));
 
     }
 
@@ -93,7 +93,7 @@ class ParkingGarageIFTest {
     @Test
     void removeCar() {
         Car c = new Car();
-        assertTrue(1==p.parkCar(c));
+        assertEquals(1,p.parkCar(c));
         CarIF d;
         d = p.removeCar(c);
         assertTrue(d.equals(c));
@@ -129,6 +129,12 @@ class ParkingGarageIFTest {
 
         p.changeMax(-1);
         assertEquals(0,p.spaces.length);
+
+        p.changeMax(9);
+        p.changeMax(9);
+        for(ParkingLot pl : p.spaces){
+            assertNotNull(pl);
+        }
     }
 
     @Test
@@ -161,5 +167,12 @@ class ParkingGarageIFTest {
             b = true;
         }
         assertTrue(b);
+    }
+    @Test
+    void parkCarAt(){
+        assertFalse(p.parkCarAt(new Car(params),11));
+        assertFalse(p.parkCarAt(new Car(params),-1));
+        assertTrue(p.parkCarAt(new Car(params),1));
+        assertFalse(p.parkCarAt(new Car(params),1));
     }
 }
