@@ -151,6 +151,7 @@ public class StatisticsTest {
 
     @Test
     void getMin_0Cars_ShouldReturnNull(){
+        s = new Statistics();
         assertNull(s.getMin());
     }
 
@@ -161,6 +162,7 @@ public class StatisticsTest {
 
     @Test
     void getMax_0Cars_ShouldReturnNull(){
+        s = new Statistics();
         assertNull(s.getMax());
     }
 }
