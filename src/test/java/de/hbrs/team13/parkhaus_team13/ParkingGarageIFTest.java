@@ -50,7 +50,7 @@ class ParkingGarageIFTest {
         Car c = new Car();
         assertEquals(1,p.parkCar(c));
         Car c2 = new Car();
-        assertEquals(0,p.parkCar(c2));
+        assertEquals(2,p.parkCar(c2));
         p.changeMax(2);
         assertEquals(0, p.parkCar(c2));
         p.changeMax(0);
