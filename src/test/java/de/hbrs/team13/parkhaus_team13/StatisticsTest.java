@@ -150,6 +150,35 @@ public class StatisticsTest {
     }
 
     @Test
+    void getMin_2Cars_ShouldReturnCar2(){
+        s = new Statistics();
+        String[] car1 = {"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"WOMEN\"",
+                "\"vehicle_type\": \"PKW\"",
+                "\"license\": \"SU-X 47\""};
+
+        String[] car2 = {"\"nr\": 12",
+                "\"timer\": 1650896019513",
+                "\"duration\": 130000",
+                "\"price\": 1300",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"ANY\"",
+                "\"vehicle_type\": \"E_VEHICLE\"",
+                "\"license\": \"SU-X 47\""};
+        s.addCar(new Car(car2));
+        s.addCar(new Car(car1));
+        assertEquals(s.getCarList().get(1), s.getMin());
+    }
+
+    @Test
     void getMin_0Cars_ShouldReturnNull(){
         s = new Statistics();
         assertNull(s.getMin());
@@ -158,6 +187,35 @@ public class StatisticsTest {
     @Test
     void getMax_2Cars_ShouldReturnCar2(){
         assertEquals(s.getCarList().get(1), s.getMax());
+    }
+
+    @Test
+    void getMax_2Cars_ShouldReturnCar1(){
+        s = new Statistics();
+        String[] car1 = {"\"nr\": 11",
+                "\"timer\": 1650896019513",
+                "\"duration\": 99100",
+                "\"price\": 991",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"WOMEN\"",
+                "\"vehicle_type\": \"PKW\"",
+                "\"license\": \"SU-X 47\""};
+
+        String[] car2 = {"\"nr\": 12",
+                "\"timer\": 1650896019513",
+                "\"duration\": 130000",
+                "\"price\": 1300",
+                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"color\": \"#f15bec\"",
+                "\"space\": 14",
+                "\"client_category\": \"ANY\"",
+                "\"vehicle_type\": \"E_VEHICLE\"",
+                "\"license\": \"SU-X 47\""};
+        s.addCar(new Car(car2));
+        s.addCar(new Car(car1));
+        assertEquals(s.getCarList().get(0), s.getMax());
     }
 
     @Test
