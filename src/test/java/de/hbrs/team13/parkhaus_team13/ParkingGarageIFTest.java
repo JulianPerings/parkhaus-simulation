@@ -168,6 +168,7 @@ class ParkingGarageIFTest {
         }
         assertTrue(b);
         p.changeMax(0);
+        p.changeMax(10);
         b = false;
         try{
             p.next();
