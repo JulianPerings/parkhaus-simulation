@@ -59,14 +59,12 @@ public class Statistics extends Observable {
 
     Car getMin(){
         Comparator<Car> c = (s1, s2) -> s1.getDuration() - s2.getDuration();
-        Car min = cars.stream().reduce((c1, c2) -> c.compare(c1, c2) <= 0 ? c1 : c2).orElse(null);
-        return min;
+        return cars.stream().reduce((c1, c2) -> c.compare(c1, c2) <= 0 ? c1 : c2).orElse(null);
     }
 
     Car getMax(){
         Comparator<Car> c = (s1, s2) -> s1.getDuration() - s2.getDuration();
-        Car max = cars.stream().reduce((c1, c2) -> c.compare(c1, c2) >= 0 ? c1 : c2).orElse(null);
-        return max;
+        return cars.stream().reduce((c1, c2) -> c.compare(c1, c2) >= 0 ? c1 : c2).orElse(null);
     }
 
     String generateClientCategoryChart() {
@@ -94,6 +92,7 @@ public class Statistics extends Observable {
 
 
 
+    /*
     private JsonArrayBuilder carsAsBeginArray() {
         JsonArrayBuilder beginArray = Json.createArrayBuilder();
         for (Car car :
@@ -110,5 +109,5 @@ public class Statistics extends Observable {
             endArray.add(car.end());
         }
         return endArray;
-    }
+    }*/
 }
