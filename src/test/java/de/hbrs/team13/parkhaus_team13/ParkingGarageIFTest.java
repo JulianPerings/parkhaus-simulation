@@ -27,12 +27,12 @@ class ParkingGarageIFTest {
                 "\"timer\": 1650896019513",
                 "\"duration\": 99100",
                 "\"price\": 991",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                "\"hash\": \"c6d68ad63d346c13bd521316f40b039\"",
                 "\"color\": \"#f15bec\"",
                 "\"space\": 14",
                 "\"client_category\": \"WOMEN\"",
                 "\"vehicle_type\": \"SUV\"",
-                "\"license\": \"SU-X 47\""};
+                "\"license\": \"SU-X 48\""};
     }
 
     @Test
@@ -73,9 +73,22 @@ class ParkingGarageIFTest {
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
         p.parkCar(new Car());
         assertEquals(10,p.getParkingSpaces(new String[]{"PKW"})[0]);
-        assertEquals(0,p.getFreeSpaces(new String[]{"TEST"})[0]);
+        assertEquals(0,p.getParkingSpaces(new String[]{"TEST"})[0]);
         assertEquals(0,p.getParkingSpaces(new String[]{})[0]);
         assertEquals(0,p.getParkingSpaces(null)[0]);
+    }
+    @Test
+    void findCar(){
+        Car c = new Car(params);
+        Car c2 = new Car(params2);
+        int i = p.parkCar(c);
+        int x = p.findCar(c);
+        assertEquals(i,x);
+        assertEquals(-1,p.findCar(c2));
+        assertNull(p.findCar("KW"));
+        p.changeMax(0);
+        assertNull(p.findCar("KW"));
+        assertEquals(-1,p.findCar(c));
     }
     @Test
     void removeCar() {
@@ -84,6 +97,8 @@ class ParkingGarageIFTest {
         CarIF d;
         d = p.removeCar(c);
         assertTrue(d.equals(c));
+        d = p.removeCar(c);
+        assertNull(d);
     }
 
 
