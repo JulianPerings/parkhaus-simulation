@@ -55,6 +55,14 @@ class ParkingLotIFTest {
         p1.vehicle =c;
         assertNull(p1.getVehicle());
     }
+    @Test
+    void parkVehicle_expectsCarWithNR1(){
+        Car car1=new Car(1);
+        Car car2=new Car(2);
+        p1.parkVehicle(car1);
+        p1.parkVehicle(car2);
+        assertEquals(car1,p1.getVehicle());
+    }
 
     @Test
     void getAllowed() {
