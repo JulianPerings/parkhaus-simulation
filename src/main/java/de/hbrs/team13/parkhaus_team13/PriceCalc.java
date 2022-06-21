@@ -8,6 +8,12 @@ public class PriceCalc {
 
     }
 
+    /**
+     * calculates price for parking cars based on the time, they started parking and their parking duration
+     * @param beginInMillisec timetstamp when they started parking in milliseconds since unix birth
+     * @param durationInMillisec duration how long the car parked in milliseconds
+     * @return price in euros as double value
+     */
     public double calcDayNightPrice(long beginInMillisec, long durationInMillisec) { //Time in milliseconds since unix; 3600000= hour; 86400000= day
         //In case that either of the parameters are negative then prevent an error by setting them to 0
         beginInMillisec=Math.max(beginInMillisec,0);
