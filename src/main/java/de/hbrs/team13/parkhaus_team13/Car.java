@@ -65,12 +65,30 @@ public class Car implements CarIF {
     }
     @Override
     public int nr() {
-        return new Scanner(params[0]).useDelimiter("\\D+").nextInt();
+        Scanner scan = new Scanner(params[0]);
+        int nr=0;
+        try{
+            nr=scan.useDelimiter("\\D+").nextInt();
+        }catch (Exception e){
+            System.out.println("scanner can't scan nr from "+this);
+        }finally{
+            scan.close();
+        }
+        return nr;
     }
 
     @Override
     public long begin() {
-        return new Scanner(params[1]).useDelimiter("\\D+").nextLong();
+        Scanner scan = new Scanner(params[1]);
+        long begin=0;
+        try{
+            begin=scan.useDelimiter("\\D+").nextLong();
+        }catch (Exception e){
+            System.out.println("scanner can't scan begin from "+this);
+        }finally{
+            scan.close();
+        }
+        return begin;
     }
 
     @Override
@@ -80,12 +98,32 @@ public class Car implements CarIF {
 
     @Override
     public int getDuration() {
-        return (int) ((new Scanner(params[2]).useDelimiter("\\D+").nextInt()) / 1000.);
+        Scanner scan = new Scanner(params[2]);
+        int duration=0;
+        try{
+            duration=scan.useDelimiter("\\D+").nextInt();
+            duration/=1000;
+        }catch (Exception e){
+            System.out.println("scanner can't scan duration from "+this);
+        }finally{
+            scan.close();
+        }
+        return duration;
     }
 
     @Override
     public double getPrice() {
-        return (new Scanner(params[3]).useDelimiter("\\D+").nextInt()) / 10000.;
+        Scanner scan = new Scanner(params[3]);
+        double price=0;
+        try{
+            price=scan.useDelimiter("\\D+").nextInt();
+            price/=10000;
+        }catch (Exception e){
+            System.out.println("scanner can't scan price from "+this);
+        }finally{
+            scan.close();
+        }
+        return price;
     }
 
     @Override
@@ -131,7 +169,16 @@ public class Car implements CarIF {
 
     @Override
     public int getSpace() {
-        return new Scanner(params[6]).useDelimiter("\\D+").nextInt();
+        Scanner scan = new Scanner(params[6]);
+        int space=0;
+        try{
+            space=scan.useDelimiter("\\D+").nextInt();
+        }catch (Exception e){
+            System.out.println("scanner can't scan space from "+this);
+        }finally{
+            scan.close();
+        }
+        return space;
     }
 
     @Override
