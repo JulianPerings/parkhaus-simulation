@@ -160,7 +160,20 @@ public abstract class CarParkServlet extends HttpServlet {
                 if (params.length > 4) {
                     String priceString = params[4];
                     if (!"_".equals(priceString)) {
-                        price=priceCalc.calcDayNightPrice(new Scanner( params[2] ).useDelimiter("\\D+").nextLong(),new Scanner( params[3] ).useDelimiter("\\D+").nextLong());
+                        long begin=System.currentTimeMillis();
+                        long duration=0;
+                        Scanner beginscan= new Scanner(params[2]);
+                        Scanner durationscan= new Scanner(params[3]);
+                        try{
+                            begin=beginscan.useDelimiter("\\D+").nextLong();
+                            duration=durationscan.useDelimiter("\\D+").nextLong();
+                        }catch (Exception e){
+                            System.out.println("can't scan time values from leaving car "+Arrays.toString(params));
+                        }finally{
+                            beginscan.close();
+                            durationscan.close();
+                        }
+                        price=priceCalc.calcDayNightPrice(begin,duration);
                         restParams[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
                         Car xc = new Car(restParams);
                         System.out.print("Removing: " + garage.removeCar(new Car(restParams)));
