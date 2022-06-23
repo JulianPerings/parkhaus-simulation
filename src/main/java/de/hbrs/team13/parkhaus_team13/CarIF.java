@@ -10,7 +10,6 @@ package de.hbrs.team13.parkhaus_team13;
     /**Returns price in euros*/
     double getPrice();
     String getVehicleType();
-    boolean equals(CarIF c);
     String getTicket();
     String getColor();
     int getSpace();

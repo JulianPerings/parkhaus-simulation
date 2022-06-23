@@ -168,7 +168,7 @@ public class Car implements CarIF {
     }
 
     @Override
-    public int getSpace() {
+    public int getSpace(){
         Scanner scan = new Scanner(params[6]);
         int space=0;
         try{
@@ -198,7 +198,6 @@ public class Car implements CarIF {
         String s = params[9].split(":")[1];
         return s.substring(2, s.length() - 1);
     }
-
     /**
      * returns all car values saved in params[] as one string split with /
      * @return string of all params[] values split with /
@@ -208,21 +207,14 @@ public class Car implements CarIF {
         //Format: Nr, timer begin, duration, price, Ticket, color, space, client category, vehicle type, license
         return "" + nr() + "/" + begin() + "/" + getDuration() + "/"
                 + getPrice() + "/" + getTicket() + "/" + getColor() + "/"
-                + getClientCategory() + "/" + getVehicleType() + "/" + getLicense();
-    }
-
+                + getClientCategory() + "/" + getVehicleType() + "/" + getLicense();}
     @Override
     public String toString() {
         return Arrays.toString(params);
     }
-
-    @Override
-    public boolean equals(CarIF c) {
+    public boolean equals(Car c) {
         return c != null && getTicket().equals(c.getTicket());
     }
-    //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
-    // "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
-
     /**
      * calculates the array priority for "this." Car from the standard arrangment:
      * {1_"HANDICAPPED", 2_"MOTORBIKE", 3_"E_VEHICLE", 4_"WOMEN", 5_"FAMILY", 6_"SUV", 7_"PKW", 8_"ANY"}
@@ -262,9 +254,7 @@ public class Car implements CarIF {
     }
 
     @Override
-    public String[] getPriority() {
-        return priority;
-    }
+    public String[] getPriority() {return priority;}
 
     private void addMissing(ArrayList<String> a, String type, String[] missing){
         a.add(type);
