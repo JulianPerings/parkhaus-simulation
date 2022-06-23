@@ -3,6 +3,7 @@ package de.hbrs.team13.parkhaus_team13;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -137,55 +138,29 @@ class ParkingGarageIFTest {
         }
     }
 
-    @Test
-    void hasNext() {
-        assertFalse(p.hasNext());
-        Car c = new Car();
-        p.parkCar(c);
-        assertTrue(p.hasNext());
-        p.removeCar(c);
-        assertFalse(p.hasNext());
-    }
 
     @Test
-    void next() {
+    void iterator_expectsFunctionalIterator() {
         Car car1 = new Car();
         Car car2 = new Car();
         p.parkCar(car1);
         p.parkCar(car2);
-        Car[] cArray = new Car[]{car1,car2};
-        int i = 0;
-        for( Car c : p){
-            assertEquals(c,cArray[i++]);
-        }
-        p.removeCar(car1);
-        p.removeCar(car2);
-        boolean b = false;
-        try{
-            p.next();
-        }catch(NoSuchElementException e){
-            b = true;
-        }
-        assertTrue(b);
+        Iterator<Car> test=p.iterator();
+        assertEquals(car1,test.next());
+        assertEquals(car2,test.next());
+    }
+    @Test
+    void iterator_ForEmptyGarage_ShouldBeNoSuchElementException(){
+        Iterator<Car> test=p.iterator();
+        assertThrows(NoSuchElementException.class, test::next);
+        Car car1 = new Car();
+        Car car2 = new Car();
         p.parkCar(car1);
         p.parkCar(car2);
-        p.iterator();
-        p.next();
-        p.changeMax(0);
-        b = false;
-        try{
-            p.next();
-        }catch(NoSuchElementException e){
-            b = true;
-        }
-        p.changeMax(1);
-        p.iterator();
-        b = false;
-        try{
-            p.next();
-        }catch(NoSuchElementException e){
-            b = true;
-        }
+        p.removeCar(car1);
+        p.removeCar(car2);
+        test=p.iterator();
+        assertThrows(NoSuchElementException.class, test::next);
     }
     @Test
     void parkCarAt(){

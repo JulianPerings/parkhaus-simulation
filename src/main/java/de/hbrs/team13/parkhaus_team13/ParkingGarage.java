@@ -4,14 +4,14 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Observable;
 
-public class ParkingGarage extends Observable implements ParkingGarageIF,Iterator<Car> ,Iterable<Car> {
+public class ParkingGarage extends Observable implements ParkingGarageIF,Iterable<Car> {
     ParkingLot[] spaces;
-    private int cursor = 0;
     private int counter;
     int max;
     /**Initialize ParkingGarage with m parking lots which only allow PKW's.*/
     public ParkingGarage(int m){
         max = m;
+        counter=0;
         spaces = new ParkingLot[max];
         for(int i = 0; i < spaces.length;i++){
             spaces[i] = new ParkingLot(new String[]{"PKW","SUV","ANY"});
@@ -146,28 +146,35 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterato
         max = m;
         resize();
     }
-    @Override
-    public boolean hasNext() {
-        return cursor < counter;
-    }
 
-    @Override
-    public Car next() {
-        if(hasNext()) {
-            for (int i = cursor; i < spaces.length; i++) {
-                if(spaces[i].isOccupied()){
-                    cursor++;
-                    return spaces[i].getVehicle();
-                }
-            }
-        }
-        throw new NoSuchElementException();
-    }
-
+    /**
+     * gives < Car > Iterator over Parking garge slots <big>
+     * Notvication: only for direct use
+     * @return Iterator< Car >
+     */
     @Override
     public Iterator<Car> iterator() {
-        cursor = 0;
-        return this;
+        return new Iterator<>(){
+            private int cursor = 0;
+            private int position = 0;
+            @Override
+            public boolean hasNext() {
+                return cursor < counter;
+            }
+
+            @Override
+            public Car next() throws NoSuchElementException {
+                if(hasNext()) {
+                    for (; position < spaces.length; position++) {
+                        if(spaces[position].isOccupied()){
+                            cursor++;
+                            return spaces[position++].getVehicle();
+                        }
+                    }
+                }
+                throw new NoSuchElementException();
+            }
+        };
     }
     public boolean parkCarAt(Car c, int i){
         if(i >= spaces.length || i < 0){
