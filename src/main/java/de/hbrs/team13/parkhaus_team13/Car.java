@@ -1,10 +1,7 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 //ToDO Protect against NULL PARAMS
 
@@ -213,8 +210,15 @@ public class Car implements CarIF {
         return Arrays.toString(params);
     }
     @Override
-    public boolean equals(Car c) {
-        return c != null && getTicket().equals(c.getTicket());
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Car other = (Car)o;
+        return this.getTicket().equals(other.getTicket());
     }
     /**
      * calculates the array priority for "this." Car from the standard arrangment:

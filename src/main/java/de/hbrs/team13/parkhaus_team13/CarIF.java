@@ -18,9 +18,6 @@ package de.hbrs.team13.parkhaus_team13;
     String getClientCategory();
     String getLicense();
     String export();
-
-    boolean equals(Car c);
-
     void sortOutPriority();
     String[] getPriority();
 }

@@ -179,7 +179,7 @@ public class CarTest {
 
     @Test
     void equals_2Cars_ShouldReturnFalse() {
-        assertFalse(car1.equals(car2));
+        assertNotEquals(car1, car2);
     }
 
     @Test
@@ -187,10 +187,15 @@ public class CarTest {
         assertEquals(car1, car1);
     }
     @Test
-    void equals(){
-        assertFalse(new Car().equals(null));
+    void equals_CarToStatistics_ShouldReturnFalse(){
+        Statistics test =new Statistics();
+        assertFalse(car1.equals(test));
     }
-
+    @Test
+    void equals_CarToNull_ShouldReturnFalse(){
+        Car test=null;
+        assertFalse(car1.equals(test));
+    }
     @Test
     void export_SingleCar_ShouldReturnExportStringInFormat(){
         assertEquals("11/1650896019513/99/0.1/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/HANDICAPPED/MOTORBIKE/SU-X 47", car1.export());
