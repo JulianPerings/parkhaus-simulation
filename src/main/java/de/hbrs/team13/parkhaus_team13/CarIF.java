@@ -13,9 +13,14 @@ package de.hbrs.team13.parkhaus_team13;
     String getTicket();
     String getColor();
     int getSpace();
+    @Override
+    boolean equals(Object o);
     String getClientCategory();
     String getLicense();
     String export();
+
+    boolean equals(Car c);
+
     void sortOutPriority();
     String[] getPriority();
 }

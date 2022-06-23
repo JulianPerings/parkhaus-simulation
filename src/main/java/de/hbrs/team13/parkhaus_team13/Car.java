@@ -212,6 +212,7 @@ public class Car implements CarIF {
     public String toString() {
         return Arrays.toString(params);
     }
+    @Override
     public boolean equals(Car c) {
         return c != null && getTicket().equals(c.getTicket());
     }
