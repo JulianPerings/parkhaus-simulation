@@ -23,33 +23,31 @@ public class ServletPostLogic {
             case "leave":
                 //ToDo needs to be own method so i can call it for resizing
                 double price = 0.0d;
-                if (params.length > 4) {
-                    String priceString = params[4];
-                    if (!"_".equals(priceString)) {
-                        long begin=System.currentTimeMillis();
-                        long duration=0;
-                        Scanner beginscan= new Scanner(params[2]);
-                        Scanner durationscan= new Scanner(params[3]);
-                        try{
-                            begin=beginscan.useDelimiter("\\D+").nextLong();
-                            duration=durationscan.useDelimiter("\\D+").nextLong();
-                        }catch (Exception e){
-                            System.out.println("can't scan time values from leaving car "+ Arrays.toString(params));
-                        }finally{
-                            beginscan.close();
-                            durationscan.close();
-                        }
-                        price=priceCalc.calcDayNightPrice(begin,duration)*100.0;
-                        params[3]="  \"price\": "+((int)(price*100.0d));   //adjusting the price in restParams after calculation
-                        Car xc = new Car(params);
-                        System.out.print("Removing: " + garage.removeCar(new Car(params)));
-                        stats.addCar(xc);
-                        undoList.add(uC -> uC.undoLeave(stats,garage));
-                        // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
+                if (params.length > 3) {
+                    long begin = System.currentTimeMillis();
+                    long duration = 0;
+                    Scanner beginscan = new Scanner(params[1]);
+                    Scanner durationscan = new Scanner(params[2]);
+                    try {
+                        begin = beginscan.useDelimiter("\\D+").nextLong();
+                        duration = durationscan.useDelimiter("\\D+").nextLong();
+                    } catch (Exception e) {
+                        System.out.println("can't scan time values from leaving car " + Arrays.toString(params));
+                    } finally {
+                        beginscan.close();
+                        durationscan.close();
                     }
+                    price = priceCalc.calcDayNightPrice(begin, duration);
+                    params[3] = "  \"price\": " + ((int) (price * 100.0d));   //adjusting the price in restParams after calculation
+                    Car xc = new Car(params);
+                    System.out.print("Removing: " + garage.removeCar(new Car(params)));
+                    stats.addCar(xc);
+                    undoList.add(uC -> uC.undoLeave(stats, garage));
+                    // ToDo getContext().setAttribute("sum"+NAME(), stats.getSum() + price );
+                    System.out.println("leave," + Arrays.toString(params) + ", price = " + price);
+                    return "" + price;
                 }
-                System.out.println("leave," + Arrays.toString(params) + ", price = " + price);
-                return ""+price;
+                break;
             case "invalid":
                 return "";
             case "change_max":
