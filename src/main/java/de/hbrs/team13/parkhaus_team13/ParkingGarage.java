@@ -190,4 +190,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterabl
         }
         return false;
     }
+    public int getCounter(){
+        return counter;
+    }
 }

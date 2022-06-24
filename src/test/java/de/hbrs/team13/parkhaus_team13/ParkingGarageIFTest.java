@@ -169,4 +169,10 @@ class ParkingGarageIFTest {
         assertTrue(p.parkCarAt(new Car(params),1));
         assertFalse(p.parkCarAt(new Car(params),1));
     }
+    @Test
+    void getCounter_2Cars_expects2(){
+        p.parkCar(new Car(params));
+        p.parkCar(new Car(params2));
+        assertEquals(2,p.getCounter());
+    }
 }
