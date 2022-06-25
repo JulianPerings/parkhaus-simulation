@@ -82,35 +82,21 @@ public class StatisticsTest {
 
     @Test
     void test_countVehicleType_Should_Return(){
-        String[] motorbike = {"\"nr\": 11",
-                "\"timer\": 1650896019513",
-                "\"duration\": 99100",
-                "\"price\": 991",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"WOMEN\"",
-                "\"vehicle_type\": \"MOTORBIKE\"",
-                "\"license\": \"SU-X 47\""};
 
-        String[] suv = {"\"nr\": 12",
-                "\"timer\": 1650896019513",
-                "\"duration\": 130000",
-                "\"price\": 1300",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"ANY\"",
-                "\"vehicle_type\": \"SUV\"",
-                "\"license\": \"SU-X 47\""};
+        CarBuilder motorbikeCar = new CarBuilder();
+        motorbikeCar.buildVehicle_type("MOTORBIKE");
+
+        CarBuilder suvCar = new CarBuilder();
+        suvCar.buildVehicle_type("SUV");
+
         assertArrayEquals(new int[]{0,1,0,1}, s.countVehicleType());
-        s.addCar(new Car(motorbike));
+        s.addCar(motorbikeCar.buildCar());
         assertArrayEquals(new int[]{0,1,1,1}, s.countVehicleType());
-        s.addCar(new Car(suv));
+        s.addCar(suvCar.buildCar());
         assertArrayEquals(new int[]{1,1,1,1}, s.countVehicleType());
-        s.addCar(new Car(motorbike));
+        s.addCar(motorbikeCar.buildCar());
         assertArrayEquals(new int[]{1,1,2,1}, s.countVehicleType());
-        s.addCar(new Car(suv));
+        s.addCar(suvCar.buildCar());
         assertArrayEquals(new int[]{2,1,2,1}, s.countVehicleType());
     }
 
@@ -150,32 +136,18 @@ public class StatisticsTest {
     }
 
     @Test
-    void getMin_2Cars_ShouldReturnCar2(){
+    void getMin_2Cars_ShouldReturnFirstCar(){
         s = new Statistics();
-        String[] car1 = {"\"nr\": 11",
-                "\"timer\": 1650896019513",
-                "\"duration\": 99100",
-                "\"price\": 991",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"WOMEN\"",
-                "\"vehicle_type\": \"PKW\"",
-                "\"license\": \"SU-X 47\""};
 
-        String[] car2 = {"\"nr\": 12",
-                "\"timer\": 1650896019513",
-                "\"duration\": 130000",
-                "\"price\": 1300",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"ANY\"",
-                "\"vehicle_type\": \"E_VEHICLE\"",
-                "\"license\": \"SU-X 47\""};
-        s.addCar(new Car(car2));
-        s.addCar(new Car(car1));
-        assertEquals(s.getCarList().get(1), s.getMin());
+        CarBuilder cb1 = new CarBuilder();
+        cb1.buildDuration(99100);
+
+        CarBuilder cb2 = new CarBuilder();
+        cb2.buildDuration(130000);
+
+        s.addCar(cb1.buildCar());
+        s.addCar(cb2.buildCar());
+        assertEquals(cb1.buildCar(), s.getMin());
     }
 
     @Test
@@ -190,32 +162,17 @@ public class StatisticsTest {
     }
 
     @Test
-    void getMax_2Cars_ShouldReturnCar1(){
+    void getMax_2Cars_ShouldReturnSecondCar(){
         s = new Statistics();
-        String[] car1 = {"\"nr\": 11",
-                "\"timer\": 1650896019513",
-                "\"duration\": 99100",
-                "\"price\": 991",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"WOMEN\"",
-                "\"vehicle_type\": \"PKW\"",
-                "\"license\": \"SU-X 47\""};
+        CarBuilder cb1 = new CarBuilder();
+        cb1.buildDuration(99100);
 
-        String[] car2 = {"\"nr\": 12",
-                "\"timer\": 1650896019513",
-                "\"duration\": 130000",
-                "\"price\": 1300",
-                "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                "\"color\": \"#f15bec\"",
-                "\"space\": 14",
-                "\"client_category\": \"ANY\"",
-                "\"vehicle_type\": \"E_VEHICLE\"",
-                "\"license\": \"SU-X 47\""};
-        s.addCar(new Car(car2));
-        s.addCar(new Car(car1));
-        assertEquals(s.getCarList().get(0), s.getMax());
+        CarBuilder cb2 = new CarBuilder();
+        cb2.buildDuration(130000);
+
+        s.addCar(cb1.buildCar());
+        s.addCar(cb2.buildCar());
+        assertEquals(cb2.buildCar(), s.getMax());
     }
 
     @Test
