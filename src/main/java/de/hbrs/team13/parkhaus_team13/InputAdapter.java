@@ -83,7 +83,7 @@ public class InputAdapter implements InputAdapterIF{
         Scanner scan = new Scanner(params[4]);
         String color=null;
         try{
-            color=scan.useDelimiter("\\D+").findInLine("^[\\da-f]{6}$");
+            color=scan.useDelimiter("\\D+").findInLine("^#[\\da-f]{6}$");
         }catch (Exception e){
             System.out.println("scanner can't scan ticket from "+this);
         }finally{
@@ -139,7 +139,7 @@ public class InputAdapter implements InputAdapterIF{
         Scanner scan = new Scanner(params[4]);
         String license=null;
         try{
-            license=scan.useDelimiter("\\D+").findInLine("^SU-[A-Z] [\\d]{2,3}$");
+            license=scan.useDelimiter("\\D+").findInLine("^SU-[A-Z] [\\d]{1,3}$");
         }catch (Exception e){
             System.out.println("scanner can't scan ticket from "+this);
         }finally{
