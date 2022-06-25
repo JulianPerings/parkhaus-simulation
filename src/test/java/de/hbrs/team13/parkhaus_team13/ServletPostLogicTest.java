@@ -35,7 +35,7 @@ class ServletPostLogicTest {
         expected=""+garage.parkCar(car3);
         garage.removeCar(car3);
         assertEquals(2,garage.getCounter());
-        assertEquals(expected,ServletPostLogic.response("enter",car3.params));
+        assertEquals(expected,ServletPostLogic.response("enter",car3.getParams()));
         assertEquals(3,garage.getCounter());
     }
 }
