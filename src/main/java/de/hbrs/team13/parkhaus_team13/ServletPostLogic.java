@@ -22,17 +22,7 @@ public class ServletPostLogic {
                 Car tet=new Car(params);
                 InputAdapter adapter=new InputAdapter(tet.getParams());
                 if(!adapter.isCorrect()){
-                    System.out.println(adapter.getNr());
-                    System.out.println(adapter.getBegin());
-                    System.out.println(adapter.getDuration());
-                    System.out.println(adapter.getPrice());
-                    System.out.println(adapter.getTicket());
-                    System.out.println(adapter.getColor());
-                    System.out.println(adapter.getSpace());
-                    System.out.println(adapter.getClient_category());
-                    System.out.println(adapter.getVehicle_type());
-                    System.out.println(adapter.getLicense());
-                    System.out.println("ENTER: Wrong input"+params.length +Arrays.toString(params));
+                    System.out.println("ENTER: Wrong input "+Arrays.toString(params));
                     return null;
                 }
                 CarBuilder carbuilder1=new CarBuilder(params);
@@ -45,7 +35,6 @@ public class ServletPostLogic {
                     undoList.add(uC -> uC.undoEnter(garage,newCar));
                     return ""+xi;
                 }
-
                 break;
             case "leave":
                 InputAdapter leaveInputAdapter=new InputAdapter(params);
@@ -53,16 +42,20 @@ public class ServletPostLogic {
                     System.out.println("LEAVE: Wrong input"+ Arrays.toString(params));
                     return null;
                 }
-                Car leavecar=garage.findCar(leaveInputAdapter.getTicket());
+                Car leavecar=garage.findTicket(leaveInputAdapter.getTicket());
+                if(leavecar==null){
+                    System.out.println("\n\nLEAVE: Car not in park "+leaveInputAdapter.getTicket()+"\n\n");
+                    return null;
+                }
                 CarBuilder carbuilder2=new CarBuilder(leavecar.getParams());
-                carbuilder2.buildDuration((int)(System.currentTimeMillis()-leavecar.begin()));
+                carbuilder2.buildDuration((int)(System.currentTimeMillis()-leavecar.begin())*100);
                 carbuilder2.buildPrice((int)(priceCalc.calcDayNightPrice(leavecar.begin(),System.currentTimeMillis()-leavecar.begin())*10000));
                 System.out.print("Removing: " + garage.removeCar(leavecar));
                 leavecar=carbuilder2.buildCar();
                 stats.addCar(leavecar);
                 undoList.add(uC -> uC.undoLeave(stats, garage));
                 System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
-                return "" + leavecar.getPrice();
+                return "" + leavecar.getPrice()*100;
             case "invalid":
                 return "";
             case "change_max":

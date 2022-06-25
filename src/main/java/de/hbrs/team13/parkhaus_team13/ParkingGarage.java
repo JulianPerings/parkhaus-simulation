@@ -126,7 +126,14 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterabl
         }
         return -1;
     }
-
+    public Car findTicket(String ticket){
+        for(ParkingLot p : spaces){
+            if (p.isOccupied() && p.getVehicle().getTicket().equals(ticket)) {
+                return p.getVehicle();
+            }
+        }
+        return null;
+    }
     @Override
     public void resize() {
         if(max != spaces.length && max >= 0){
