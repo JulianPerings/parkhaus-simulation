@@ -38,4 +38,8 @@ class ServletPostLogicTest {
         assertEquals(expected,ServletPostLogic.response("enter",car3.getParams()));
         assertEquals(3,garage.getCounter());
     }
+    @Test
+    void response_caseLeave_expectsCorrectStringAndCarInStats(){
+        assertEquals("",ServletPostLogic.response("leave", car1.getParams()));
+    }
 }

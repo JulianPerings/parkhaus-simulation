@@ -1,5 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
+import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,10 +15,12 @@ public class InputAdapter implements InputAdapterIF{
         int nr=-1;
         try{
             nr=scan.useDelimiter("\\D+").nextInt();
-        }catch (Exception e){
-            System.out.println("scanner can't scan nr from "+ Arrays.toString(this.params));
+        }catch (Exception ignored){
         }finally{
             scan.close();
+        }
+        if(nr==-1){
+            System.out.println("scanner can't scan nr from "+ Arrays.toString(this.params));
         }
         return nr;
     }
@@ -28,10 +31,13 @@ public class InputAdapter implements InputAdapterIF{
         long begin=-1;
         try{
             begin=scan.useDelimiter("\\D+").nextLong();
-        }catch (Exception e){
-            System.out.println("scanner can't scan begin from "+ Arrays.toString(this.params));
+        }catch (Exception ignored){
+
         }finally{
             scan.close();
+        }
+        if(begin==-1){
+            System.out.println("scanner can't scan begin from "+ Arrays.toString(this.params));
         }
         return begin;
     }
@@ -43,10 +49,12 @@ public class InputAdapter implements InputAdapterIF{
         try{
             duration=scan.useDelimiter("\\D+").nextInt();
             duration/=1000;
-        }catch (Exception e){
-            System.out.println("scanner can't scan duration from "+ Arrays.toString(this.params));
+        }catch (Exception ignored){
         }finally{
             scan.close();
+        }
+        if(duration==-1){
+            System.out.println("scanner can't scan duration from "+ Arrays.toString(this.params));
         }
         return duration;
     }
@@ -57,10 +65,13 @@ public class InputAdapter implements InputAdapterIF{
         int price=-1;
         try{
             price=scan.useDelimiter("\\D+").nextInt();
-        }catch (Exception e){
-            System.out.println("scanner can't scan price from "+ Arrays.toString(this.params));
+        }catch (Exception ignored){
+
         }finally{
             scan.close();
+        }
+        if(price==-1){
+            System.out.println("scanner can't scan price from "+ Arrays.toString(this.params));
         }
         return price;
     }
@@ -71,8 +82,13 @@ public class InputAdapter implements InputAdapterIF{
         String ticket=null;
         try{
             ticket=scan.useDelimiter("\\D+").findInLine("[\\da-f]{32}");
-        }finally{
+        }catch (Exception ignored){
+
+        } finally {
             scan.close();
+        }
+        if(ticket!=null){
+            System.out.println("scanner can't scan ticket from "+ Arrays.toString(this.params));
         }
         return ticket;
     }
@@ -83,8 +99,12 @@ public class InputAdapter implements InputAdapterIF{
         String color=null;
         try{
             color=scan.useDelimiter("\\D+").findInLine("#[\\da-f]{6}");
+        }catch(Exception ignored) {
         }finally{
             scan.close();
+        }
+        if(color!=null){
+            System.out.println("scanner can't scan price from "+ Arrays.toString(this.params));
         }
         return color;
     }
@@ -95,10 +115,13 @@ public class InputAdapter implements InputAdapterIF{
         int space=-1;
         try{
             space=scan.useDelimiter("\\D+").nextInt();
-        }catch (Exception e){
-            System.out.println("scanner can't scan space from "+ Arrays.toString(this.params));
+        }catch (Exception ignored){
+
         }finally{
             scan.close();
+        }
+        if(space==-1){
+            System.out.println("scanner can't scan space from "+ Arrays.toString(this.params));
         }
         return space;
     }
@@ -106,11 +129,16 @@ public class InputAdapter implements InputAdapterIF{
     @Override
     public String getClient_category() {
         Scanner scan = new Scanner(params[7]);
-        String client_category=null;
-        try{
-            client_category=scan.useDelimiter("\\D+").findInLine("(FAMILY|WOMEN|ANY|HANDICAPPED)");
+        String client_category = null;
+        try {
+            client_category = scan.useDelimiter("\\D+").findInLine("(FAMILY|WOMEN|ANY|HANDICAPPED)");
+        }catch(Exception ingonred){
+
         }finally{
             scan.close();
+        }
+        if(client_category!=null){
+            System.out.println("scanner can't scan client_category from "+ Arrays.toString(this.params));
         }
         return client_category;
     }
@@ -120,8 +148,13 @@ public class InputAdapter implements InputAdapterIF{
         String vehicle_type=null;
         try{
             vehicle_type=scan.useDelimiter("\\D+").findInLine("(PKW|SUV|MOTORBIKE|E_VEHICLE)");
+        }catch(Exception ignored) {
+
         }finally{
             scan.close();
+        }
+        if(vehicle_type!=null){
+            System.out.println("scanner can't scan vehicle_type from "+ Arrays.toString(this.params));
         }
         return vehicle_type;
     }
@@ -131,16 +164,21 @@ public class InputAdapter implements InputAdapterIF{
         String license=null;
         try{
             license=scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
+        }catch(Exception ignored){
+
         }finally{
             scan.close();
+        }
+        if(license!=null){
+            System.out.println("scanner can't scan license from "+ Arrays.toString(this.params));
         }
         return license;
     }
 
     @Override
     public boolean isCorrect() {
-        return (this.getNr()>-1&&this.getBegin()>-1&&this.getDuration()>-1&&
-                this.getPrice()>-1&&this.getTicket()!=null&&
+        return (this.getNr()>=0&&this.getBegin()>=0&&this.getDuration()>=0&&
+                this.getPrice()>=0&&this.getTicket()!=null&&
                 this.getColor()!=null&&this.getClient_category()!=null&&
                 this.getVehicle_type()!=null&&this.getLicense()!=null);
     }

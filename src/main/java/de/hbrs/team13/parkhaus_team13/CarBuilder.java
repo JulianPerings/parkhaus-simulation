@@ -9,6 +9,7 @@ public class CarBuilder implements CarBuilderIF{
     public CarBuilder(){
         params = new Car().getParams();
     }
+    public CarBuilder(String[] params){ this.params=params;  }
 
     @Override
     public void buildNr(int nr) {
