@@ -41,7 +41,7 @@ public class Car implements CarIF {
      */
     public Car(int nr){
         long startzeit=System.currentTimeMillis()-(((long) getSecureRandomNumber(1000) * 60 * 60 * 24));
-        long dauer=(getSecureRandomNumber(System.currentTimeMillis()-startzeit));
+        long dauer=(getSecureRandomNumber(System.currentTimeMillis()-startzeit))*1000;
         StringBuilder hash= new StringBuilder();
         for(int i=0;i<32;i++){
             hash.append(Integer.toHexString((getSecureRandomNumber(16))));
@@ -93,6 +93,10 @@ public class Car implements CarIF {
         return this.begin() + this.getDuration();
     }
 
+    /**
+     * Duration how long the car parked in the parking garage in <big>seconds</big>
+     * @return int time in <big>seconds</big>
+     */
     @Override
     public int getDuration() {
         Scanner scan = new Scanner(params[2]);

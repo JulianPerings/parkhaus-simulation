@@ -40,6 +40,8 @@ class ServletPostLogicTest {
     }
     @Test
     void response_caseLeave_expectsCorrectStringAndCarInStats(){
-        assertEquals("",ServletPostLogic.response("leave", car1.getParams()));
+        expected=""+priceCalc.calcDayNightPrice(car1.begin(), System.currentTimeMillis()-car1.begin())*100;
+        System.out.println(car1.begin()+" "+car1.getDuration());
+        assertEquals(expected,ServletPostLogic.response("leave", car1.getParams()));
     }
 }

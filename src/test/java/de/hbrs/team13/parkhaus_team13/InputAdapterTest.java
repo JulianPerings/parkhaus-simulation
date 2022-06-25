@@ -46,7 +46,7 @@ class InputAdapterTest {
 
     @Test
     void getPrice() {
-        assertEquals(testcar.getPrice(),testadapter.getPrice());
+        assertEquals(testcar.getPrice(),testadapter.getPrice()/10000.0);
         assertEquals(-1,wrongadapter.getPrice());
     }
 
