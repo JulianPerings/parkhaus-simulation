@@ -25,7 +25,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterabl
             ParkingLot p2 = new ParkingLot();
             p2.allowed = spaces[i].allowed;
             if(spaces[i].getVehicle() != null) {
-                p2.vehicle = new Car(spaces[i].getVehicle().params);
+                p2.vehicle = new Car(spaces[i].getVehicle().getParams());
             }
             p[i] = p2;
         }
