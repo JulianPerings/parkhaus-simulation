@@ -5,11 +5,36 @@ import java.util.Scanner;
 
 import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
 
+/**
+ * evaluater for http post messages
+ */
 public class ServletPostLogic {
+    /**
+     * evaluates the postmessages based on param event and param params
+     * @param event possible Events are enter, leave and change_max
+     * @param params input values for the possible events
+     * @return String with needed response text or null when wrong input
+     */
     public static String response(String event,String[] params){
+
         switch (event) {
             case "enter":
-                Car newCar = new Car(params);
+                InputAdapter adapter=new InputAdapter(params);
+                if(!adapter.isCorrect()){
+                    return null;
+                }
+                CarBuilder carbuilder=new CarBuilder();
+                carbuilder.buildNr(adapter.getNr());
+                carbuilder.buildTimer(System.currentTimeMillis());
+                carbuilder.buildDuration(0);
+                carbuilder.buildPrice(0);
+                carbuilder.buildHash(adapter.getTicket());
+                carbuilder.buildColor(adapter.getColor());
+                carbuilder.buildSpace(adapter.getSpace());
+                carbuilder.buildClient_Category(adapter.getClient_category());
+                carbuilder.buildVehicle_type(adapter.getVehicle_type());
+                carbuilder.buildLicense(adapter.getLicense());
+                Car newCar= carbuilder.buildCar();
                 // System.out.println( "enter," + newCar );
 
                 // re-direct car to another parking lot
@@ -22,7 +47,6 @@ public class ServletPostLogic {
                 break;
             case "leave":
                 //ToDo needs to be own method so i can call it for resizing
-                double price = 0.0d;
                 if (params.length > 3) {
                     long begin = System.currentTimeMillis();
                     long duration = 0;
@@ -37,7 +61,7 @@ public class ServletPostLogic {
                         beginscan.close();
                         durationscan.close();
                     }
-                    price = priceCalc.calcDayNightPrice(begin, duration);
+                    double price = priceCalc.calcDayNightPrice(begin, duration);
                     params[3] = "  \"price\": " + ((int) (price * 100.0d));   //adjusting the price in restParams after calculation
                     Car xc = new Car(params);
                     System.out.print("Removing: " + garage.removeCar(new Car(params)));

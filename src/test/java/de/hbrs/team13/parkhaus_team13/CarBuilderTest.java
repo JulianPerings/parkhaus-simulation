@@ -24,7 +24,7 @@ class CarBuilderTest {
         cb.buildDuration(99100);
         cb.buildPrice(991);
         cb.buildHash("c6d68ad63d346c13bd5345ec6f40b039");
-        cb.buildColour("#f15bec");
+        cb.buildColor("#f15bec");
         cb.buildSpace(14);
         cb.buildClient_Category("WOMEN");
         cb.buildVehicle_type("PKW");

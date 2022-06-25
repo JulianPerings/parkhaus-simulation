@@ -6,7 +6,7 @@ public interface CarBuilderIF {
     public void buildDuration(int duration);
     public void buildPrice(int price);
     public void buildHash(String hash);
-    public void buildColour(String colour);
+    public void buildColor(String color);
     public void buildSpace(int space);
     public void buildClient_Category(String clientCat);
     public void buildVehicle_type(String VehicleType);

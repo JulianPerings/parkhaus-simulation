@@ -56,7 +56,7 @@ public class Car implements CarIF {
         randParams[6]="\"space\": "+getSecureRandomNumber(25);
         randParams[7]="\"client_category\": \""+(new String[]{"FAMILY","WOMEN","ANY","HANDICAPPED"}[getSecureRandomNumber(4)])+"\"";
         randParams[8]="\"vehicle_type\": \""+(new String[]{"PKW","SUV","MOTORBIKE","E_VEHICLE"}[getSecureRandomNumber(4)])+"\"";
-        randParams[9]="\"license\": \"SU-X "+(getSecureRandomNumber(100)) + nr+"\"";
+        randParams[9]="\"license\": \"SU-X "+(getSecureRandomNumber(100)) +"\"";
         this.params=randParams;
         sortOutPriority();
     }

@@ -36,8 +36,8 @@ public class CarBuilder implements CarBuilderIF{
     }
 
     @Override
-    public void buildColour(String colour) {
-        params[5] = "\"color\": \"" +colour + "\"";
+    public void buildColor(String color) {
+        params[5] = "\"color\": \"" +color + "\"";
     }
 
     @Override

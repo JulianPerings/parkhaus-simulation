@@ -11,4 +11,5 @@ public interface InputAdapterIF {
     String getClient_category();
     String getVehicle_type();
     String getLicense();
+    boolean isCorrect();
 }
