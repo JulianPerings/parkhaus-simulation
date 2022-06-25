@@ -17,7 +17,7 @@ public class Car implements CarIF {
      * price paid by the customer , ticket as hash value, color of the car,
      * value how much space the vehicle needs, the clients' category, the vehicle type and the license
      */
-    String[] params;
+    private String[] params;
     /**
      * array with parking lot priority details. Defines the order in which he will park on the remaining parking lots
      */
@@ -273,5 +273,12 @@ public class Car implements CarIF {
         for(; i < priority.length ; i++){
             priority[i] = missing.get(counter++);
         }
+    }
+
+    /**
+     * @return params String[]
+     */
+    public String[] getParams(){
+        return params;
     }
 }
