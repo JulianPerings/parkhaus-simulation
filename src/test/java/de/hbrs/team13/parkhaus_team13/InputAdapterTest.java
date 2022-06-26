@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InputAdapterTest {
-    InputAdapter testadapter,wrongadapter;
+    InputAdapter testadapter,wrongadapter,emptyadapter;
     Car testcar;
     @BeforeEach
     void setUp() {
@@ -23,7 +23,9 @@ class InputAdapterTest {
                 "\"client_category\": \"HANDICAPEDt\"",
                 "\"vehicle_type\": \"MOTORBIKS\"",
                 "\"license\": \"SU- 47\""};
+        String[] params3= new String[]{};
         wrongadapter=new InputAdapter(params2);
+        emptyadapter=new InputAdapter(params3);
     }
 
     @Test
@@ -90,5 +92,6 @@ class InputAdapterTest {
     void isCorrect() {
         assertTrue(testadapter.isCorrect());
         assertFalse(wrongadapter.isCorrect());
+        assertFalse(emptyadapter.isCorrect());
     }
 }
