@@ -1,7 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
+
 import java.util.*;
 
 public class Statistics extends Observable {
