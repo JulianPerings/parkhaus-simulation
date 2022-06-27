@@ -26,10 +26,8 @@ public class InputAdapter implements InputAdapterIF{
     public long getBegin() {
 
         long begin=-1;
-        try{
-            Scanner scan = new Scanner(params[1].replace("\n",""));
+        try(Scanner scan = new Scanner(params[1].replace("\n",""))){
             begin=scan.useDelimiter("\\D+").nextLong();
-            scan.close();
         }catch (Exception ignored){
 
         }
@@ -43,11 +41,9 @@ public class InputAdapter implements InputAdapterIF{
     public int getDuration() {
 
         int duration=-1;
-        try{
-            Scanner scan = new Scanner(params[2].replace("\n",""));
+        try(Scanner scan = new Scanner(params[2].replace("\n",""))){
             duration=scan.useDelimiter("\\D+").nextInt();
             duration/=1000;
-            scan.close();
         }catch (Exception ignored){
         }
         if(duration==-1){
@@ -60,10 +56,8 @@ public class InputAdapter implements InputAdapterIF{
     public int getPrice() {
 
         int price=-1;
-        try{
-            Scanner scan = new Scanner(params[3].replace("\n",""));
+        try( Scanner scan = new Scanner(params[3].replace("\n",""))){
             price=scan.useDelimiter("\\D+").nextInt();
-            scan.close();
         }catch (Exception ignored){
 
         }
@@ -77,10 +71,8 @@ public class InputAdapter implements InputAdapterIF{
     public String getTicket() {
 
         String ticket=null;
-        try{
-            Scanner scan = new Scanner(params[4].replace("\n",""));
+        try(Scanner scan = new Scanner(params[4].replace("\n",""))){
             ticket=scan.findInLine("[\\da-f]{32}");
-            scan.close();
         }catch (Exception ignored){
 
         }
@@ -94,10 +86,8 @@ public class InputAdapter implements InputAdapterIF{
     public String getColor() {
 
         String color=null;
-        try{
-            Scanner scan = new Scanner(params[5].replace("\n",""));
+        try(Scanner scan = new Scanner(params[5].replace("\n",""))){
             color=scan.useDelimiter("\\D+").findInLine("#[\\da-f]{6}");
-            scan.close();
         }catch(Exception ignored) {
         }
         if(color==null){
@@ -110,10 +100,8 @@ public class InputAdapter implements InputAdapterIF{
     public int getSpace() {
 
         int space=-1;
-        try{
-            Scanner scan = new Scanner(params[6].replace("\n",""));
+        try(Scanner scan = new Scanner(params[6].replace("\n",""))){
             space=scan.useDelimiter("\\D+").nextInt();
-            scan.close();
         }catch (Exception ignored){
 
         }
@@ -127,10 +115,8 @@ public class InputAdapter implements InputAdapterIF{
     public String getClient_category() {
 
         String client_category = null;
-        try {
-            Scanner scan = new Scanner(params[7].replace("\n",""));
+        try(Scanner scan = new Scanner(params[7].replace("\n",""))) {
             client_category = scan.useDelimiter("\\D+").findInLine("(FAMILY|WOMEN|ANY|HANDICAPPED)");
-            scan.close();
         }catch(Exception ingonred){
 
         }
@@ -143,10 +129,8 @@ public class InputAdapter implements InputAdapterIF{
     public String getVehicle_type() {
 
         String vehicle_type=null;
-        try{
-            Scanner scan = new Scanner(params[8].replace("\n",""));
+        try(Scanner scan = new Scanner(params[8].replace("\n",""))){
             vehicle_type=scan.useDelimiter("\\D+").findInLine("(PKW|SUV|MOTORBIKE|E_VEHICLE)");
-            scan.close();
         }catch(Exception ignored) {
 
         }
@@ -159,10 +143,8 @@ public class InputAdapter implements InputAdapterIF{
     public String getLicense() {
 
         String license=null;
-        try{
-            Scanner scan = new Scanner(params[9].replace("\n",""));
+        try(Scanner scan = new Scanner(params[9].replace("\n",""))){
             license=scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
-            scan.close();
         }catch(Exception ignored){
 
         }
