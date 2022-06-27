@@ -8,8 +8,8 @@ public interface InputAdapterIF {
     String getTicket();
     String getColor();
     int getSpace();
-    String getClient_category();
-    String getVehicle_type();
+    String getClientCategory();
+    String getVehicleType();
     String getLicense();
     boolean isCorrect();
 }

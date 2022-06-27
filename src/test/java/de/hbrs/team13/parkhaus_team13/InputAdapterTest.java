@@ -72,14 +72,14 @@ class InputAdapterTest {
 
     @Test
     void getClient_category() {
-        assertEquals(testcar.getClientCategory(),testadapter.getClient_category());
-        assertNull(wrongadapter.getClient_category());
+        assertEquals(testcar.getClientCategory(),testadapter.getClientCategory());
+        assertNull(wrongadapter.getClientCategory());
     }
 
     @Test
     void getVehicle_type() {
-        assertEquals(testcar.getVehicleType(),testadapter.getVehicle_type());
-        assertNull(wrongadapter.getVehicle_type());
+        assertEquals(testcar.getVehicleType(),testadapter.getVehicleType());
+        assertNull(wrongadapter.getVehicleType());
     }
 
     @Test

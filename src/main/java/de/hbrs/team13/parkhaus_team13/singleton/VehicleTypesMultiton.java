@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VehicleTypesMultiton {
-    private static final Map<String, VehicleTypes> types = new HashMap<String, VehicleTypes>();
+    private VehicleTypesMultiton() {
+        throw new IllegalStateException("Utility class");
+    }
+    private static final Map<String, VehicleTypes> types = new HashMap<>();
     public static VehicleTypes getInstance(String s){
         if(types.containsKey(s)){
             return types.get(s);

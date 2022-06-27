@@ -95,31 +95,9 @@ public class Statistics extends Observable {
     }
 
 
-
     public String generateBeginHeatmap() {
         JSONHeatmap h = new JSONHeatmap(cars);
         return h.createJSON().build().get(0).toString();
     }
 
-
-
-
-    /*
-    private JsonArrayBuilder carsAsBeginArray() {
-        JsonArrayBuilder beginArray = Json.createArrayBuilder();
-        for (Car car :
-                cars) {
-            beginArray.add(car.begin());
-        }
-        return beginArray;
-    }
-
-    private JsonArrayBuilder carsAsEndArray() {
-        JsonArrayBuilder endArray = Json.createArrayBuilder();
-        for (Car car :
-                cars) {
-            endArray.add(car.end());
-        }
-        return endArray;
-    }*/
 }

@@ -14,12 +14,12 @@ class BaseServletTest {
 
     @Test
     void NAME_expects_Super_Duper_Parkhaus() {
-        assertEquals("Super Duper Parkhaus",test.NAME());
+        assertEquals("Super Duper Parkhaus",test.name());
     }
 
     @Test
     void MAX() {
-        assertEquals(10,test.MAX());
+        assertEquals(10,test.max());
     }
 
     @Test

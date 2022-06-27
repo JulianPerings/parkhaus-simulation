@@ -14,12 +14,12 @@ class Level2ServletTest {
 
     @Test
     void NAME_expects_Super_Duper_Parkhaus() {
-        assertEquals("Level2",test.NAME());
+        assertEquals("Level2",test.name());
     }
 
     @Test
     void MAX() {
-        assertEquals(14,test.MAX());
+        assertEquals(14,test.max());
     }
 
     @Test

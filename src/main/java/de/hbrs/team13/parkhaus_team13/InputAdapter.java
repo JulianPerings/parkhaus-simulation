@@ -1,6 +1,5 @@
 package de.hbrs.team13.parkhaus_team13;
 
-import java.rmi.server.ExportException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -15,6 +14,7 @@ public class InputAdapter implements InputAdapterIF{
         try(Scanner scan = new Scanner(params[0].replace("\n",""))){
             nr=scan.useDelimiter("\\D+").nextInt();
         }catch (Exception ignored){
+            // Exception ignored on purpose
         }
         if(nr==-1){
             System.out.println("scanner can't scan nr from "+ Arrays.toString(this.params));
@@ -29,7 +29,7 @@ public class InputAdapter implements InputAdapterIF{
         try(Scanner scan = new Scanner(params[1].replace("\n",""))){
             begin=scan.useDelimiter("\\D+").nextLong();
         }catch (Exception ignored){
-
+            // Exception ignored on purpose
         }
         if(begin==-1){
             System.out.println("scanner can't scan begin from "+ Arrays.toString(this.params));
@@ -45,6 +45,7 @@ public class InputAdapter implements InputAdapterIF{
             duration=scan.useDelimiter("\\D+").nextInt();
             duration/=1000;
         }catch (Exception ignored){
+            // Exception ignored on purpose
         }
         if(duration==-1){
             System.out.println("scanner can't scan duration from "+ Arrays.toString(this.params));
@@ -59,7 +60,7 @@ public class InputAdapter implements InputAdapterIF{
         try( Scanner scan = new Scanner(params[3].replace("\n",""))){
             price=scan.useDelimiter("\\D+").nextInt();
         }catch (Exception ignored){
-
+            // Exception ignored on purpose
         }
         if(price==-1){
             System.out.println("scanner can't scan price from "+ Arrays.toString(this.params));
@@ -74,7 +75,7 @@ public class InputAdapter implements InputAdapterIF{
         try(Scanner scan = new Scanner(params[4].replace("\n",""))){
             ticket=scan.findInLine("[\\da-f]{32}");
         }catch (Exception ignored){
-
+            // Exception ignored on purpose
         }
         if(ticket==null){
             System.out.println("scanner can't scan ticket from "+ Arrays.toString(this.params));
@@ -89,6 +90,7 @@ public class InputAdapter implements InputAdapterIF{
         try(Scanner scan = new Scanner(params[5].replace("\n",""))){
             color=scan.useDelimiter("\\D+").findInLine("#[\\da-f]{6}");
         }catch(Exception ignored) {
+            // Exception ignored on purpose
         }
         if(color==null){
             System.out.println("scanner can't scan price from "+ Arrays.toString(this.params));
@@ -103,7 +105,7 @@ public class InputAdapter implements InputAdapterIF{
         try(Scanner scan = new Scanner(params[6].replace("\n",""))){
             space=scan.useDelimiter("\\D+").nextInt();
         }catch (Exception ignored){
-
+            // Exception ignored on purpose
         }
         if(space==-1){
             System.out.println("scanner can't scan space from "+ Arrays.toString(this.params));
@@ -112,41 +114,40 @@ public class InputAdapter implements InputAdapterIF{
     }
 
     @Override
-    public String getClient_category() {
+    public String getClientCategory() {
 
-        String client_category = null;
+        String clientCategory = null;
         try(Scanner scan = new Scanner(params[7].replace("\n",""))) {
-            client_category = scan.useDelimiter("\\D+").findInLine("(FAMILY|WOMEN|ANY|HANDICAPPED)");
+            clientCategory = scan.useDelimiter("\\D+").findInLine("(FAMILY|WOMEN|ANY|HANDICAPPED)");
         }catch(Exception ingonred){
-
+            // Exception ignored on purpose
         }
-        if(client_category==null){
-            System.out.println("scanner can't scan client_category from "+ Arrays.toString(this.params));
+        if(clientCategory==null){
+            System.out.println("scanner can't scan clientCategory from "+ Arrays.toString(this.params));
         }
-        return client_category;
+        return clientCategory;
     }
     @Override
-    public String getVehicle_type() {
-
-        String vehicle_type=null;
+    public String getVehicleType() {
+        String vehicleType = null;
         try(Scanner scan = new Scanner(params[8].replace("\n",""))){
-            vehicle_type=scan.useDelimiter("\\D+").findInLine("(PKW|SUV|MOTORBIKE|E_VEHICLE)");
+            vehicleType=scan.useDelimiter("\\D+").findInLine("(PKW|SUV|MOTORBIKE|E_VEHICLE)");
         }catch(Exception ignored) {
-
+            // Exception ignored on purpose
         }
-        if(vehicle_type==null){
-            System.out.println("scanner can't scan vehicle_type from "+ Arrays.toString(this.params));
+        if(vehicleType==null){
+            System.out.println("scanner can't scan vehicleType from "+ Arrays.toString(this.params));
         }
-        return vehicle_type;
+        return vehicleType;
     }
     @Override
     public String getLicense() {
 
-        String license=null;
+        String license = null;
         try(Scanner scan = new Scanner(params[9].replace("\n",""))){
             license=scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
         }catch(Exception ignored){
-
+            // Exception ignored on purpose
         }
         if(license==null){
             System.out.println("scanner can't scan license from "+ Arrays.toString(this.params));
@@ -158,7 +159,7 @@ public class InputAdapter implements InputAdapterIF{
     public boolean isCorrect() {
         return (this.getNr()>=0&&this.getBegin()>=0&&this.getDuration()>=0&&
                 this.getPrice()>=0&&this.getTicket()!=null&&
-                this.getColor()!=null&&this.getClient_category()!=null&&
-                this.getVehicle_type()!=null&&this.getLicense()!=null);
+                this.getColor()!=null&&this.getClientCategory()!=null&&
+                this.getVehicleType()!=null&&this.getLicense()!=null);
     }
 }

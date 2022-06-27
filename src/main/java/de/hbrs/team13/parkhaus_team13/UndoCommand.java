@@ -28,7 +28,7 @@ public class UndoCommand {
      * @param undoList List-Pointer
      * */
     void undo(List<Consumer<UndoCommand>> undoList){
-        if(undoList.size() > 0){
+        if(!undoList.isEmpty()){
             undoList.remove(undoList.size()-1).accept(this);
         }
     }

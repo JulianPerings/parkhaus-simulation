@@ -5,11 +5,11 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet(name ="Super Duper Parkhaus" ,value= "/BaseServlet")
 public class BaseServlet extends CarParkServlet {
     @Override
-    String NAME() {
+    String name() {
         return "Super Duper Parkhaus";
     }
     @Override
-    int MAX() {
+    int max() {
         return 10;
     }
 

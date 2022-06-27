@@ -3,10 +3,10 @@ package de.hbrs.team13.parkhaus_team13;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
-import java.util.ArrayList;
+import java.util.List;
 
 public class JSONDurationChart extends JsonStatististicsTemplate{
-    public JSONDurationChart(ArrayList<Car> cars) {
+    public JSONDurationChart(List<Car> cars) {
         super(cars);
     }
 

@@ -4,10 +4,6 @@ public class PriceCalc {
     private float dayPrice = 1.0f;
     private float nightPrice = 0.8f;
 
-    public PriceCalc() {
-
-    }
-
     /**
      * calculates price for parking cars based on the time, they started parking and their parking duration
      * @param beginInMillisec timetstamp when they started parking in milliseconds since unix birth
@@ -67,7 +63,6 @@ public class PriceCalc {
         nightTime += durationInMillisec - parkedDay;
         double pricePerMillisecond = Math.abs(priceInEuros / (nightTime + dayTime + 1));// +1 prevents dividing with 0 and has barely any effect
         double price = pricePerMillisecond * nightTime * nightPrice + pricePerMillisecond * dayTime * dayPrice;
-        //System.out.println(priceInEuros + " " + price);
         return (Math.round(price * 100) / 100.0d);
     }
 

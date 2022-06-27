@@ -170,7 +170,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF,Iterabl
             }
 
             @Override
-            public Car next() throws NoSuchElementException {
+            public Car next() {
                 if(hasNext()) {
                     for (; position < spaces.length; position++) {
                         if(spaces[position].isOccupied()){

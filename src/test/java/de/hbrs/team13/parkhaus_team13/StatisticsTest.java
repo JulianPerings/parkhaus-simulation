@@ -84,10 +84,10 @@ public class StatisticsTest {
     void test_countVehicleType_Should_Return(){
 
         CarBuilder motorbikeCar = new CarBuilder();
-        motorbikeCar.buildVehicle_type("MOTORBIKE");
+        motorbikeCar.buildVehicleType("MOTORBIKE");
 
         CarBuilder suvCar = new CarBuilder();
-        suvCar.buildVehicle_type("SUV");
+        suvCar.buildVehicleType("SUV");
 
         assertArrayEquals(new int[]{0,1,0,1}, s.countVehicleType());
         s.addCar(motorbikeCar.buildCar());
@@ -120,14 +120,20 @@ public class StatisticsTest {
 
     @Test
     void generateBeginHeatmap_2Cars_ShouldReturn2AtMonday4pmHeatMap() {
-        assertEquals("{\"data\":[{\"z\":[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
-                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
-                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[2,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
-                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]," +
-                        "\"x\":[\"Monday\",\"Tuesday\",\"Wednesday\",\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]," +
-                        "\"y\":[\"00:00am\",\"01:00am\",\"02:00am\",\"03:00am\",\"04:00am\",\"05:00am\",\"06:00am\",\"07:00am\"," +
-                        "\"08:00am\",\"09:00am\",\"10:00am\",\"11:00am\",\"00:00pm\",\"01:00pm\",\"02:00pm\",\"03:00pm\",\"04:00pm\"," +
-                        "\"05:00pm\",\"06:00pm\",\"07:00pm\",\"08:00pm\",\"09:00pm\",\"10:00pm\",\"11:00pm\"],\"type\":\"heatmap\"}]}",
+        String test = s.generateBeginHeatmap();
+
+        assertEquals("{\"data\":[{\"z\":[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[2,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]," +
+                        "[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]],\"x\":[\"Monday\",\"Tuesday\",\"Wednesday\"," +
+                        "\"Thursday\",\"Friday\",\"Saturday\",\"Sunday\"]," +
+                        "\"y\":[\"11:00pm\",\"10:00pm\",\"09:00pm\",\"08:00pm\",\"07:00pm\",\"06:00pm\"," +
+                        "\"05:00pm\",\"04:00pm\",\"03:00pm\",\"02:00pm\",\"01:00pm\",\"12:00pm\",\"11:00am\"" +
+                        ",\"10:00am\",\"09:00am\",\"08:00am\",\"07:00am\",\"06:00am\",\"05:00am\",\"04:00am\"" +
+                        ",\"03:00am\",\"02:00am\",\"01:00am\",\"12:00am\"],\"type\":\"heatmap\"}]}",
                 s.generateBeginHeatmap());
     }
     @Test

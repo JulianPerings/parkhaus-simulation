@@ -26,8 +26,8 @@ class CarBuilderTest {
         cb.buildHash("c6d68ad63d346c13bd5345ec6f40b039");
         cb.buildColor("#f15bec");
         cb.buildSpace(14);
-        cb.buildClient_Category("WOMEN");
-        cb.buildVehicle_type("PKW");
+        cb.buildClientCategory("WOMEN");
+        cb.buildVehicleType("PKW");
         cb.buildLicense("SU-X 47");
 
         Car c2 = cb.buildCar();

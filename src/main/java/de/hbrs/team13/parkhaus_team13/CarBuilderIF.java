@@ -8,8 +8,8 @@ public interface CarBuilderIF {
     public void buildHash(String hash);
     public void buildColor(String color);
     public void buildSpace(int space);
-    public void buildClient_Category(String clientCat);
-    public void buildVehicle_type(String VehicleType);
+    public void buildClientCategory(String clientCat);
+    public void buildVehicleType(String vehicleType);
     public void buildLicense(String license);
 
     public Car buildCar();

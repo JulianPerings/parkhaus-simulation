@@ -1,7 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
 
@@ -9,6 +8,11 @@ import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
  * evaluater for http post messages
  */
 public class ServletPostLogic {
+
+    private ServletPostLogic() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * evaluates the postmessages based on param event and param params
      * @param event possible Events are enter, leave and change_max

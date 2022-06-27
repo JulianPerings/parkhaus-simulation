@@ -16,9 +16,9 @@ import java.util.function.Consumer;
 public abstract class CarParkServlet extends HttpServlet {
 
     /* abstract methods, to be defined in subclasses */
-    abstract String NAME(); // each ParkhausServlet should have a name, e.g. "Level1"
+    abstract String name(); // each ParkhausServlet should have a name, e.g. "Level1"
 
-    abstract int MAX(); // maximum number of parking slots of a single parking level
+    abstract int max(); // maximum number of parking slots of a single parking level
 
     abstract String config(); // configuration of a single parking level
 
@@ -79,21 +79,16 @@ public abstract class CarParkServlet extends HttpServlet {
     String getBody(HttpServletRequest request) throws IOException {
 
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader bufferedReader = null;
 
-        try {
-            InputStream inputStream = request.getInputStream();
+        try(InputStream inputStream = request.getInputStream()) {
             if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                char[] charBuffer = new char[128];
-                int bytesRead;
-                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-                    stringBuilder.append(charBuffer, 0, bytesRead);
+                try( BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))){
+                    char[] charBuffer = new char[128];
+                    int bytesRead;
+                    while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                        stringBuilder.append(charBuffer, 0, bytesRead);
+                    }
                 }
-            }
-        } finally {
-            if (bufferedReader != null) {
-                bufferedReader.close();
             }
         }
         return stringBuilder.toString();

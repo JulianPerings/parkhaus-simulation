@@ -47,13 +47,13 @@ public class CarBuilder implements CarBuilderIF{
     }
 
     @Override
-    public void buildClient_Category(String clientCat) {
+    public void buildClientCategory(String clientCat) {
         params[7] = "\"client_category\": \"" + clientCat + "\"";
     }
 
     @Override
-    public void buildVehicle_type(String VehicleType) {
-        params[8] = "\"vehicle_type\": \"" + VehicleType + "\"";
+    public void buildVehicleType(String vehicleType) {
+        params[8] = "\"vehicle_type\": \"" + vehicleType + "\"";
     }
 
     @Override
