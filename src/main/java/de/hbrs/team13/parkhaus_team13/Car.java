@@ -39,7 +39,7 @@ public class Car implements CarIF {
      * @param nr sets the first param value
      */
     public Car(int nr){
-        long startzeit=System.currentTimeMillis()-(((long) getSecureRandomNumber(1000) * 60 * 60 * 24));
+        long startzeit=System.currentTimeMillis()-((long) getSecureRandomNumber(1000) * 60 * 60 * 24);
         long dauer=(getSecureRandomNumber(System.currentTimeMillis()-startzeit))*1000;
         StringBuilder hash= new StringBuilder();
         for(int i=0;i<32;i++){
@@ -228,8 +228,8 @@ public class Car implements CarIF {
         return this.getTicket().equals(other.getTicket());
     }
     /**
-     * calculates the array priority for "this." Car from the standard arrangment:
-     * {1_"HANDICAPPED", 2_"MOTORBIKE", 3_"E_VEHICLE", 4_"WOMEN", 5_"FAMILY", 6_"SUV", 7_"PKW", 8_"ANY"}
+     * calculates the array priority for "this." Car from the standard arrangement:
+     * 1_"HANDICAPPED", 2_"MOTORBIKE", 3_"E_VEHICLE", 4_"WOMEN", 5_"FAMILY", 6_"SUV", 7_"PKW", 8_"ANY"
      */
     @Override
     public void sortOutPriority(){
