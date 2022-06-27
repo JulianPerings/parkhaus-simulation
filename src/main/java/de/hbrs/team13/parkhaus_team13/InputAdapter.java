@@ -12,10 +12,8 @@ public class InputAdapter implements InputAdapterIF{
     @Override
     public int getNr() {
         int nr=-1;
-        try{
-            Scanner scan = new Scanner(params[0].replace("\n",""));
+        try(Scanner scan = new Scanner(params[0].replace("\n",""))){
             nr=scan.useDelimiter("\\D+").nextInt();
-            scan.close();
         }catch (Exception ignored){
         }
         if(nr==-1){
