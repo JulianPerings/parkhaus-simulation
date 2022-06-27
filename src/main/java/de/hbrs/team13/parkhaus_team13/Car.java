@@ -3,7 +3,6 @@ package de.hbrs.team13.parkhaus_team13;
 import java.security.SecureRandom;
 import java.util.*;
 
-//ToDO Protect against NULL PARAMS
 
 /**
  * Car has values
@@ -62,28 +61,22 @@ public class Car implements CarIF {
     }
     @Override
     public int nr() {
-        Scanner scan = new Scanner(params[0]);
         int nr=0;
-        try{
+        try(Scanner scan = new Scanner(params[0])){
             nr=scan.useDelimiter("\\D+").nextInt();
         }catch (Exception e){
             System.out.println("scanner can't scan nr from "+this);
-        }finally{
-            scan.close();
         }
         return nr;
     }
 
     @Override
     public long begin() {
-        Scanner scan = new Scanner(params[1]);
         long begin=0;
-        try{
+        try(Scanner scan = new Scanner(params[1])){
             begin=scan.useDelimiter("\\D+").nextLong();
         }catch (Exception e){
             System.out.println("scanner can't scan begin from "+this);
-        }finally{
-            scan.close();
         }
         return begin;
     }
@@ -99,44 +92,46 @@ public class Car implements CarIF {
      */
     @Override
     public int getDuration() {
-        Scanner scan = new Scanner(params[2]);
+
         int duration=0;
-        try{
+        try(Scanner scan = new Scanner(params[2]);){
             duration=scan.useDelimiter("\\D+").nextInt();
             duration/=1000;
         }catch (Exception e){
             System.out.println("scanner can't scan duration from "+this);
-        }finally{
-            scan.close();
         }
         return duration;
     }
 
     @Override
     public double getPrice() {
-        Scanner scan = new Scanner(params[3]);
+
         double price=0;
-        try{
+        try(Scanner scan = new Scanner(params[3])){
             price=scan.useDelimiter("\\D+").nextInt();
             price/=10000;
         }catch (Exception e){
             System.out.println("scanner can't scan price from "+this);
-        }finally{
-            scan.close();
         }
         return price;
     }
 
     @Override
     public String getTicket() {
-        String s = params[4].split(":")[1];
-        return s.substring(2, s.length() - 1);
+        if(params != null && params[4] != null)  {
+            String s = params[4].split(":")[1];
+            return s.substring(2, s.length() - 1);
+        }
+        return "";
     }
 
     @Override
     public String getColor() {
-        String s = params[5].split(":")[1];
-        return s.substring(2, s.length() - 1);
+        if(params != null && params[5] != null)  {
+            String s = params[5].split(":")[1];
+            return s.substring(2, s.length() - 1);
+        }
+        return "";
     }
 
     /**
@@ -170,34 +165,41 @@ public class Car implements CarIF {
 
     @Override
     public int getSpace(){
-        Scanner scan = new Scanner(params[6]);
+
         int space=0;
-        try{
+        try(Scanner scan = new Scanner(params[6]);){
             space=scan.useDelimiter("\\D+").nextInt();
         }catch (Exception e){
             System.out.println("scanner can't scan space from "+this);
-        }finally{
-            scan.close();
         }
         return space;
     }
 
     @Override
     public String getClientCategory() {
-        String s = params[7].split(":")[1];
-        return s.substring(2, s.length() - 1);
+        if(params != null && params[7] != null){
+            String s = params[7].split(":")[1];
+            return s.substring(2, s.length() - 1);
+        }
+        return "";
     }
 
     @Override
     public String getVehicleType() {
-        String s = params[8].split(":")[1];
-        return s.substring(2, s.length() - 1);
+        if(params != null && params[8] != null){
+            String s = params[8].split(":")[1];
+            return s.substring(2, s.length() - 1);
+        }
+        return "PKW";
     }
 
     @Override
     public String getLicense() {
-        String s = params[9].split(":")[1];
-        return s.substring(2, s.length() - 1);
+        if(params != null && params[9] != null) {
+            String s = params[9].split(":")[1];
+            return s.substring(2, s.length() - 1);
+        }
+        return "";
     }
     /**
      * returns all car values saved in params[] as one string split with /
@@ -208,7 +210,8 @@ public class Car implements CarIF {
         //Format: Nr, timer begin, duration, price, Ticket, color, space, client category, vehicle type, license
         return "" + nr() + "/" + begin() + "/" + getDuration() + "/"
                 + getPrice() + "/" + getTicket() + "/" + getColor() + "/"
-                + getClientCategory() + "/" + getVehicleType() + "/" + getLicense();}
+                + getClientCategory() + "/" + getVehicleType() + "/" + getLicense();
+    }
     @Override
     public String toString() {
         return Arrays.toString(params);
@@ -230,7 +233,7 @@ public class Car implements CarIF {
      */
     @Override
     public void sortOutPriority(){
-        if(params.length >= 8) {    //ToDO Protect against NULL PARAMS
+        if(params != null && params.length >= 8) {
             ArrayList<String> sortOrder = new ArrayList<>();
             String[] s = new String[]{"HANDICAPPED", "MOTORBIKE", "E_VEHICLE", "WOMEN", "FAMILY", "SUV", "PKW", "ANY"};
             Collections.addAll(sortOrder, s);
