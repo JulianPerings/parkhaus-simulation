@@ -6,26 +6,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BaseServletTest {
-    BaseServlet test;
-    @BeforeEach
-    void setUp() {
-        test= new BaseServlet();
-    }
+  BaseServlet test;
 
-    @Test
-    void NAME_expects_Super_Duper_Parkhaus() {
-        assertEquals("Super Duper Parkhaus",test.NAME());
-    }
+  @BeforeEach
+  void setUp() {
+    test = new BaseServlet();
+  }
 
-    @Test
-    void MAX() {
-        assertEquals(10,test.MAX());
-    }
+  @Test
+  void NAME_expects_Super_Duper_Parkhaus() {
+    assertEquals("Super Duper Parkhaus", test.name());
+  }
 
-    @Test
-    void config() {
-       /*
-        assertNotNull(test.config());
-        */
-    }
+  @Test
+  void MAX() {
+    assertEquals(10, test.max());
+  }
+
+  @Test
+  void config() {
+
+    assertNull(test.config());
+  }
 }
