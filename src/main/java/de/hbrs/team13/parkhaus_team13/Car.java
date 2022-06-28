@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-//ToDO Protect against NULL PARAMS
 
 /**
  * Car has values
@@ -182,29 +181,32 @@ public class Car implements CarIF {
      */
     @Override
     public void sortOutPriority(){
-        if(params.length >= 8) {    //ToDO Protect against NULL PARAMS
+        if(params != null && params.length >= 8) {
             ArrayList<String> sortOrder = new ArrayList<>();
+            // priority
             String[] s = new String[]{"HANDICAPPED", "MOTORBIKE", "E_VEHICLE", "WOMEN", "FAMILY", "SUV", "PKW", "ANY"};
             Collections.addAll(sortOrder, s);
 
-            ArrayList<String> vSa = new ArrayList<>();
-            String vHS = getVehicleType();
-            addMissing(vSa, vHS, new String[]{"SUV", "PKW"});
-            ArrayList<String> cSa = new ArrayList<>();
-            String cHS = getClientCategory();
-            addMissing(cSa, cHS, new String[]{"ANY"});
+            ArrayList<String> vSa = new ArrayList<>(); //vehicle sort Array
+            String vHS = getVehicleType(); //vehicle help string
+            addMissing(vSa, vHS, new String[]{"SUV", "PKW"}); //base case if nothing is there it can park on spots for SUV and PKW
+            ArrayList<String> cSa = new ArrayList<>(); //client sort Array
+            String cHS = getClientCategory();   //client help string
+            addMissing(cSa, cHS, new String[]{"ANY"}); //base case if nothing is there it can park on spots for ANY
             priority = new String[vSa.size() + cSa.size()];
             int counterV = 0;
             int counterC = 0;
-            for (int i = 0; i < priority.length; i++) {
-                if (counterV == vSa.size()) {
+            for (int i = 0; i < priority.length; i++) { //fill the priority array
+                if (counterV == vSa.size()) { //if all vehicle priorities are through
                     addRest(i, counterC, cSa);
                     break;
-                }/*Unreachable condition
-                if (counterC == cSa.size()) {
+                }
+                if (counterC == cSa.size()) { //if all client priorities are through
                     addRest(i, counterV, vSa);
                     break;
-                }*/
+                }
+                //compares the index of the next to be inserted parts on client and vehicle lists with each other
+                //and inserts the lower one (basically the merge part of merge sort
                 if (sortOrder.indexOf(vSa.get(counterV)) < sortOrder.indexOf(cSa.get(counterC))) {
                     priority[i] = vSa.get(counterV++);
                 } else {
@@ -219,6 +221,12 @@ public class Car implements CarIF {
         return priority;
     }
 
+    /**
+     * Adds the type of Client or vehicle and its base cases to an ArrayList
+     * @param a helper Array that all the types are added to
+     * @param type the specific type as the car params specify
+     * @param missing the missing base cases
+     */
     private void addMissing(ArrayList<String> a, String type, String[] missing){
         a.add(type);
         for(String s : missing) {
@@ -227,9 +235,14 @@ public class Car implements CarIF {
             }
         }
     }
+    /**
+     * Fills the rest of the priority Array with the missing priorites
+     * @param i index of priority array empty spot
+     * @param counter index for missing arrayList
+     */
     private void addRest(int i,int counter, ArrayList<String> missing){
-        for(; i < priority.length ; i++){
-            priority[i] = missing.get(counter++);
+        while(i < priority.length){
+            priority[i++] = missing.get(counter++);
         }
     }
 }
