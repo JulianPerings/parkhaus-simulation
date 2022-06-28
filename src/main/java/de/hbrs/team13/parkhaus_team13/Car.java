@@ -328,4 +328,11 @@ public class Car implements CarIF {
             priority[i++] = missing.get(counter++);
         }
     }
+    /**
+     * @return params String[]
+     */
+    public String[] getParams() {
+      return params;
+    }
+
 }
