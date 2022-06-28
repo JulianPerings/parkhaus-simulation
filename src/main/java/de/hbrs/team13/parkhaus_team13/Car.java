@@ -252,6 +252,9 @@ public class Car implements CarIF {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    Car other = (Car) o;
+    return this.getTicket().equals(other.getTicket());
+  }
     //"vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
     // "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"]
 
