@@ -45,14 +45,16 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
   @Override
   // without priority atm
   public int parkCar(Car c) {
-    for (int i = 0; i < spaces.length; i++) {
-      if (spaces[i].canPark(c)) {
-        spaces[i].parkVehicle(c);
-        System.out.println("Parked at spot" + (i + 1));
-        counter++;
-        setChanged();
-        notifyObservers(this);
-        return i + 1;
+    if(c != null) {
+      for (int i = 0; i < spaces.length; i++) {
+        if (spaces[i].canPark(c)) {
+          spaces[i].parkVehicle(c);
+          System.out.println("Parked at spot " + (i + 1));
+          counter++;
+          setChanged();
+          notifyObservers(this);
+          return i + 1;
+        }
       }
     }
     return 0;
@@ -120,6 +122,9 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
 
   public Car findCar(String license) {
     for (ParkingLot p : spaces) {
+      if(p.isOccupied()){
+        System.out.println(p.getVehicle().getLicense() + " <---- Hier");
+      }
       if (p.isOccupied() && p.getVehicle().getLicense().equals(license)) {
         return p.getVehicle();
       }

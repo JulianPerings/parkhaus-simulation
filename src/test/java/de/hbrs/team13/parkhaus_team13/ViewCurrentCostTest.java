@@ -31,7 +31,6 @@ class ViewCurrentCostTest {
     double tmp = price.calcDayNightPrice(car.begin(), System.currentTimeMillis() - car.begin());
 
     p.parkCar(car);
-
     assertEquals(tmp, v.get());
   }
 }

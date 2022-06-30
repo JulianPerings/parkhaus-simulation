@@ -19,7 +19,6 @@ public class ViewCurrentCost implements Observer {
     Car c = p.findCar(license);
     price = pc.calcDayNightPrice(c.begin(), System.currentTimeMillis() - c.begin());
   }
-
   public double get() {
     return price;
   }

@@ -62,6 +62,7 @@ public class CarBuilder implements CarBuilderIF {
   @Override
   public void buildLicense(String license) {
     params[9] = "\"license\": \"" + license + "\"";
+    System.out.println("AOUUUUGA " + params[9]);
   }
 
   @Override

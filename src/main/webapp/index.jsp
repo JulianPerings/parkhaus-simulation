@@ -59,13 +59,13 @@
     </style>
 </head>
 <body>
+<div class="grey-background">
+    <h2><a href="costCalculator.jsp">Kasse</a></h2>
+</div>
 <!--
 <div class="box center grey-background">
     <h1>Parkhaus Team 13</h1>
     <p>Tomcat Version : <%= application.getServerInfo() %></p>
-</div>
-<div class="box lightblue">
-    <h2><a href="kasse.jsp">Kasse</a></h2>
 </div>
 <div class="box lightyellow">
     <h1>Parkhaus Frauenparkplätze</h1>

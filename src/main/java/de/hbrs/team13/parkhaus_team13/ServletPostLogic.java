@@ -64,6 +64,13 @@ public class ServletPostLogic {
         undoList.add(uC -> uC.undoLeave(stats, garage));
         System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
         return "" + leavecar.getPrice() * 100;
+      case "licencePlate":
+            String licencePlate = params[0].replace("+", " ");
+            System.out.println(garage.findCar(licencePlate));
+            ViewCurrentCost v = new ViewCurrentCost(garage,licencePlate);
+            return "Cost for " + licencePlate + ": " + v.get() + "\n<html> \n" +
+                    "<a href=\"costCalculator.jsp\">zurück zum Parkhaus</a>" +
+                    "</html>";
       case "invalid":
         return "";
       case "change_max":

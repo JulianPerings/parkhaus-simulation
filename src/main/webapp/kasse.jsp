@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1><%= "Parkhaus Kasse" %></h1>
-<form action="pay-servlet" method="get">
+<form action="CarParkServlet.java" method="get">
     <input type="number" name="amount">
     <input type="submit">
 </form>
