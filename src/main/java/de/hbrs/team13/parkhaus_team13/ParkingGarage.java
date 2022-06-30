@@ -123,10 +123,13 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
   public Car findCar(String license) {
     for (ParkingLot p : spaces) {
       if(p.isOccupied()){
-        System.out.println(p.getVehicle().getLicense() + " <---- Hier");
-      }
-      if (p.isOccupied() && p.getVehicle().getLicense().equals(license)) {
-        return p.getVehicle();
+        license=license.replace("\"","");
+        String carlicense=p.getVehicle().getLicense().replace("\"","");
+        carlicense=carlicense.replace("\n","");
+        System.out.println("Hier -----> :"+license+": = :"+carlicense+":");
+        if (license.equals(carlicense)) {
+          return p.getVehicle();
+        }
       }
     }
     return null;
@@ -134,6 +137,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
 
   public int findCar(Car c) {
     for (int i = 0; i < spaces.length; i++) {
+
       if (spaces[i].isOccupied() && spaces[i].getVehicle().equals(c)) {
         return i + 1;
       }

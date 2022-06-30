@@ -30,7 +30,6 @@ class ServletPostLogicTest {
     stats.addCar(car4);
     undoList.add(uC -> uC.undoLeave(stats, garage));
   }
-
   @Test
   void response_caseEnter_expectsCorrectStringAndCarInGarage() {
     expected = "" + garage.parkCar(car3);
@@ -39,14 +38,13 @@ class ServletPostLogicTest {
     assertEquals(expected, ServletPostLogic.response("enter", car3.getParams()));
     assertEquals(3, garage.getCounter());
   }
-
   @Test
   void response_caseLeave_expectsCorrectStringAndCarInStats() {
     expected =
         ""
-            + priceCalc.calcDayNightPrice(car1.begin(), System.currentTimeMillis() - car1.begin())
+            + (int) (priceCalc.calcDayNightPrice(car1.begin(), System.currentTimeMillis() - car1.begin()))
                 * 100;
     System.out.println(car1.begin() + " " + car1.getDuration());
-    assertEquals(expected, ServletPostLogic.response("leave", car1.getParams()));
+    assertEquals(Long.parseLong(expected), Long.valueOf(ServletPostLogic.response("leave", car1.getParams())),100);
   }
 }

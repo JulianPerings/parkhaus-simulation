@@ -63,13 +63,18 @@ public class ServletPostLogic {
         stats.addCar(leavecar);
         undoList.add(uC -> uC.undoLeave(stats, garage));
         System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
-        return "" + leavecar.getPrice() * 100;
+        return "" + (long)(leavecar.getPrice() * 100);
       case "licencePlate":
             String licencePlate = params[0].replace("+", " ");
             System.out.println(garage.findCar(licencePlate));
-            ViewCurrentCost v = new ViewCurrentCost(garage,licencePlate);
-            return "Cost for " + licencePlate + ": " + v.get() + "\n<html> \n" +
-                    "<a href=\"costCalculator.jsp\">zurück zum Parkhaus</a>" +
+            Car foundcar = garage.findCar(licencePlate);
+            if(foundcar == null){
+              return "No car found with "+licencePlate+"\n<html> \n" +
+                      "<a href=\"costCalculator.jsp\">back to the search</a>" +
+                      "</html>";
+            }
+            return "Cost for " + licencePlate + ": " + priceCalc.calcDayNightPrice(foundcar.begin(),System.currentTimeMillis()-foundcar.begin()) + "\n<html> \n" +
+                    "<a href=\"costCalculator.jsp\">back to the carpark</a>" +
                     "</html>";
       case "invalid":
         return "";
