@@ -6,36 +6,37 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleTypesTest {
-    VehicleTypes a,c;
-    @BeforeEach
-    void setUp() {
-        a= new VehicleTypes("MOTORBIKE",0.8,0.5);
-        c= new VehicleTypes("",0,0);
-    }
+  VehicleTypes a, c;
 
-    @Test
-    void getInstance() {
-        VehicleTypes b = VehicleTypes.getInstance();
-        assertEquals(VehicleTypes.instance,b);
-    }
+  @BeforeEach
+  void setUp() {
+    a = new VehicleTypes("MOTORBIKE", 0.8, 0.5);
+    c = new VehicleTypes("", 0, 0);
+  }
 
-    @Test
-    void getVehicleType() {
-        assertEquals("MOTORBIKE",a.getVehicleType());
-    }
+  @Test
+  void getInstance() {
+    VehicleTypes b = VehicleTypes.getInstance();
+    assertEquals(VehicleTypes.instance, b);
+  }
 
-    @Test
-    void getPriceFactor() {
-        assertEquals(0.8,a.getPriceFactor());
-    }
+  @Test
+  void getVehicleType() {
+    assertEquals("MOTORBIKE", a.getVehicleType());
+  }
 
-    @Test
-    void getReqSpace() {
-        assertEquals(0.5,a.getReqSpace());
-    }
+  @Test
+  void getPriceFactor() {
+    assertEquals(0.8, a.getPriceFactor());
+  }
 
-    @Test
-    void testToString() {
-        assertEquals("Type : MOTORBIKE",a.toString());
-    }
+  @Test
+  void getReqSpace() {
+    assertEquals(0.5, a.getReqSpace());
+  }
+
+  @Test
+  void testToString() {
+    assertEquals("Type : MOTORBIKE", a.toString());
+  }
 }
