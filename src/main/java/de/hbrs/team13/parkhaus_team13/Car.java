@@ -60,6 +60,11 @@ public class Car implements CarIF {
         this.params=randParams;
         sortOutPriority();
     }
+
+    /**
+     *
+     * @return Number of car > 0 if given, if not set then 0.
+     */
     @Override
     public int nr() {
         Scanner scan = new Scanner(params[0]);
@@ -74,6 +79,10 @@ public class Car implements CarIF {
         return nr;
     }
 
+    /**
+     *
+     * @return Time when car entered the garage in ms since 1.1.1970, if not set then 0.
+     */
     @Override
     public long begin() {
         Scanner scan = new Scanner(params[1]);
@@ -88,6 +97,10 @@ public class Car implements CarIF {
         return begin;
     }
 
+    /**
+     *
+     * @return Time the car stayed in the garage in ms, if not set then 0.
+     */
     @Override
     public long end() {
         return this.begin() + this.getDuration();
@@ -112,6 +125,10 @@ public class Car implements CarIF {
         return duration;
     }
 
+    /**
+     *
+     * @return The price the car had to pay, if not set then 0.
+     */
     @Override
     public double getPrice() {
         Scanner scan = new Scanner(params[3]);
