@@ -102,24 +102,4 @@ public class Statistics extends Observable {
     }
 
 
-
-
-    /*
-    private JsonArrayBuilder carsAsBeginArray() {
-        JsonArrayBuilder beginArray = Json.createArrayBuilder();
-        for (Car car :
-                cars) {
-            beginArray.add(car.begin());
-        }
-        return beginArray;
-    }
-
-    private JsonArrayBuilder carsAsEndArray() {
-        JsonArrayBuilder endArray = Json.createArrayBuilder();
-        for (Car car :
-                cars) {
-            endArray.add(car.end());
-        }
-        return endArray;
-    }*/
 }
