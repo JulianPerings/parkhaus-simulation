@@ -237,10 +237,10 @@ public class CarTest {
   @Test
   void export_SingleCar_ShouldReturnExportStringInFormat() {
     assertEquals(
-        "11/1650896019513/99/0.1/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/HANDICAPPED/MOTORBIKE/SU-X 47",
+        "11/1650896019513/99000/10.0/c6d68ad63d346c13bd5345ec6f40b039/#f15bec/HANDICAPPED/MOTORBIKE/SU-X 47",
         car1.export());
     assertEquals(
-        "11/1650896019513/99/0.0991/00008ad63d346c13bd5345ec6f40b039/#f15bec/WOMEN/SUV/SU-X 47",
+        "11/1650896019513/99000/9.91/00008ad63d346c13bd5345ec6f40b039/#f15bec/WOMEN/SUV/SU-X 47",
         car2.export());
   }
 }
