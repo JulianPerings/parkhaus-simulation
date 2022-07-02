@@ -65,9 +65,16 @@ public class ServletPostLogic {
         System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
         return "" + (long)(leavecar.getPrice() * 100);
       case "licencePlate":
-            String licencePlate = params[0].replace("+", " ");
-            System.out.println(garage.findCar(licencePlate));
-            Car foundcar = garage.findCar(licencePlate);
+        Car foundcar;
+        String licencePlate;
+            if(params.length > 0) {
+              licencePlate = params[0].replace("+", " ");
+              System.out.println(garage.findCar(licencePlate));
+              foundcar = garage.findCar(licencePlate);
+            } else {
+              foundcar = null;
+              licencePlate = "NaN";
+            }
             if(foundcar == null){
               return "No car found with "+licencePlate+"\n<html> \n" +
                       "<a href=\"costCalculator.jsp\">back to the search</a>" +

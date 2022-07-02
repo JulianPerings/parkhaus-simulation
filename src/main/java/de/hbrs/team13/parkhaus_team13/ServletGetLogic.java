@@ -55,6 +55,7 @@ public class ServletGetLogic {
             result.append(",");
           }
         }
+        System.out.println("Result: " + result.toString());
         return result.toString();
       case "clientCategoryChart":
         return stats.generateClientCategoryChart();
