@@ -6,7 +6,7 @@ import javax.json.JsonObject;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class TypeChartTemplate extends JsonStatististicsTemplate {
+public abstract class TypeChartTemplate extends JsonStatisticsTemplate {
 
   TypeChartTemplate(List<Car> cars) {
     super(cars);
