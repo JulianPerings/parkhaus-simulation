@@ -9,7 +9,7 @@
                                 "background_color":"white",
                                 "max":15,
                                 "license_max":128,
-                                "json_format":true,
+                                "json_format":false,
                                 "vehicle_types":["PKW","SUV","MOTORBIKE","E_VEHICLE"],
                                 "client_categories":["FAMILY","WOMEN","ANY","HANDICAPPED"],
                                 "delay":500,"open_from":0,"open_to":24,
