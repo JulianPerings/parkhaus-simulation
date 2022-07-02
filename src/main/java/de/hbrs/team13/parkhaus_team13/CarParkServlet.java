@@ -50,20 +50,20 @@ public abstract class CarParkServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
 
     System.out.println(body);
-      String[] params = body.split(",");
-      String event = params[0];
+    String[] params = body.split(",");
+    String event = params[0];
 
-      if(event.contains("licencePlate")){
-        params = event.split("=");
-        event = params[0];
-      }
-      String[] restParams = Arrays.copyOfRange(params, 1, params.length);
-      if (event.equals("tomcat")) {
-        out.println(
-                getServletConfig().getServletContext().getServerInfo()
-                        + getServletConfig().getServletContext().getMajorVersion()
-                        + getServletConfig().getServletContext().getMinorVersion());
-      }
+    if (event.contains("licencePlate")) {
+      params = event.split("=");
+      event = params[0];
+    }
+    String[] restParams = Arrays.copyOfRange(params, 1, params.length);
+    if (event.equals("tomcat")) {
+      out.println(
+          getServletConfig().getServletContext().getServerInfo()
+              + getServletConfig().getServletContext().getMajorVersion()
+              + getServletConfig().getServletContext().getMinorVersion());
+    }
     String result = ServletPostLogic.response(event, restParams);
     if (result != null) {
       out.println(result);

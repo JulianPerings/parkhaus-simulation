@@ -1,6 +1,5 @@
 package de.hbrs.team13.parkhaus_team13;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -23,7 +22,7 @@ public class UndoCommand {
    * @param p ParkingGarage-Pointer
    */
   static void undoLeave(Statistics s, ParkingGarage p) {
-    ArrayList<Car> cars = s.getCarList();
+    List<Car> cars = s.getCarList();
     Car c = cars.remove(cars.size() - 1);
     p.parkCar(c);
   }

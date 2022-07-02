@@ -2,11 +2,12 @@ package de.hbrs.team13.parkhaus_team13;
 
 import javax.json.JsonArrayBuilder;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleTypeChart extends TypeChartTemplate {
   String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
 
-  VehicleTypeChart(ArrayList<Car> cars) {
+  VehicleTypeChart(List<Car> cars) {
     super(cars);
   }
 

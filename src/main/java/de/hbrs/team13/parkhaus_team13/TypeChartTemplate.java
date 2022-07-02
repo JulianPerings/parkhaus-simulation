@@ -3,12 +3,12 @@ package de.hbrs.team13.parkhaus_team13;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class TypeChartTemplate extends JsonStatististicsTemplate {
 
-  TypeChartTemplate(ArrayList<Car> cars) {
+  TypeChartTemplate(List<Car> cars) {
     super(cars);
   }
 
