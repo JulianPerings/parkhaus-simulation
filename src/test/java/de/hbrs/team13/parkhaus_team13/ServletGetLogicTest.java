@@ -29,6 +29,8 @@ class ServletGetLogicTest {
     stats.addCar(car3);
     stats.addCar(car4);
     undoList.add(uC -> uC.undoLeave(stats, garage));
+    dailyEarnings = new ViewDailyEarnings(stats);
+    weeklyEarnings = new ViewWeeklyEarnings(stats);
   }
 
   @Test
@@ -155,5 +157,77 @@ class ServletGetLogicTest {
     assertNull(ServletGetLogic.response(""));
     assertNull(ServletGetLogic.response("test"));
     assertNull(ServletGetLogic.response("<script>Alert(1)</script>"));
+  }
+
+  @Test
+  void response_caseDailyEarnings_expectsCorrectString() {
+    stats = new Statistics();
+    dailyEarnings = new ViewDailyEarnings(stats);
+    assertEquals("0.0 €", ServletGetLogic.response("dailyEarnings"));
+    car1 = new Car(new String[] {
+            "\"nr\": 11",
+            "\"timer\": "+ (System.currentTimeMillis() - 99101),
+            "\"duration\": 99100",
+            "\"price\": 1000",
+            "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+            "\"color\": \"#f15bec\"",
+            "\"space\": 14",
+            "\"client_category\": \"HANDICAPPED\"",
+            "\"vehicle_type\": \"MOTORBIKE\"",
+            "\"license\": \"SU-X 47\""
+    });
+
+    car2 = new Car(new String[] {
+            "\"nr\": 11",
+            "\"timer\": "+ (System.currentTimeMillis() - 99101),
+            "\"duration\": 99100",
+            "\"price\": 25000",
+            "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+            "\"color\": \"#f15bec\"",
+            "\"space\": 14",
+            "\"client_category\": \"HANDICAPPED\"",
+            "\"vehicle_type\": \"MOTORBIKE\"",
+            "\"license\": \"SU-X 47\""
+    });
+    stats.addCar(car1);
+    assertEquals("0.1 €", ServletGetLogic.response("dailyEarnings"));
+    stats.addCar(car2);
+    assertEquals("2.6 €", ServletGetLogic.response("dailyEarnings"));
+  }
+
+  @Test
+  void response_caseWeeklyEarnings_expectsCorrectString() {
+    stats = new Statistics();
+    weeklyEarnings = new ViewWeeklyEarnings(stats);
+    assertEquals("0.0 €", ServletGetLogic.response("weeklyEarnings"));
+    car1 = new Car(new String[] {
+            "\"nr\": 11",
+            "\"timer\": "+ (System.currentTimeMillis() - 99101),
+            "\"duration\": 99100",
+            "\"price\": 1000",
+            "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+            "\"color\": \"#f15bec\"",
+            "\"space\": 14",
+            "\"client_category\": \"HANDICAPPED\"",
+            "\"vehicle_type\": \"MOTORBIKE\"",
+            "\"license\": \"SU-X 47\""
+    });
+
+    car2 = new Car(new String[] {
+            "\"nr\": 11",
+            "\"timer\": "+ (System.currentTimeMillis() - 99101),
+            "\"duration\": 99100",
+            "\"price\": 25000",
+            "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+            "\"color\": \"#f15bec\"",
+            "\"space\": 14",
+            "\"client_category\": \"HANDICAPPED\"",
+            "\"vehicle_type\": \"MOTORBIKE\"",
+            "\"license\": \"SU-X 47\""
+    });
+    stats.addCar(car1);
+    assertEquals("0.1 €", ServletGetLogic.response("weeklyEarnings"));
+    stats.addCar(car2);
+    assertEquals("2.6 €", ServletGetLogic.response("weeklyEarnings"));
   }
 }

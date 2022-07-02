@@ -97,6 +97,10 @@ public class ServletGetLogic {
                         priceCalc.calcDayNightPrice(0, 365L * 24 * 60 * 60 * 1000) / 100d * 100.0)
                     / 100.0;
         return prices;
+      case "dailyEarnings":
+        return dailyEarnings.get() + " €";
+      case "weeklyEarnings":
+        return weeklyEarnings.get() + " €";
       default:
     }
     return null;

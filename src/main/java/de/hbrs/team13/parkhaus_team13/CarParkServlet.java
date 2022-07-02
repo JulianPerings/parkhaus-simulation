@@ -26,6 +26,8 @@ public abstract class CarParkServlet extends HttpServlet {
   static List<Consumer<UndoCommand>> undoList =
       new ArrayList<>(); // Undo-list to undo actions regarding entering and leaving
   static UndoCommand uComm = new UndoCommand(); // Handles undo-requests
+  static ViewDailyEarnings dailyEarnings = new ViewDailyEarnings(stats);
+  static ViewWeeklyEarnings weeklyEarnings = new ViewWeeklyEarnings(stats);
   /** HTTP GET */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
