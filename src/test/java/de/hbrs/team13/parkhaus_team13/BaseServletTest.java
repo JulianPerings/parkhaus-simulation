@@ -19,13 +19,12 @@ class BaseServletTest {
   }
 
   @Test
-  void MAX() {
-    assertEquals(10, test.max());
+  void MAX_expects30() {
+    assertEquals(30, test.max());
   }
 
   @Test
-  void config() {
-
-    assertNull(test.config());
+  void config_expectsSomething() {
+    assertEquals("30,0,24,100,10",test.config());
   }
 }

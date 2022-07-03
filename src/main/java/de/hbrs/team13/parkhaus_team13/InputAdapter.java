@@ -5,11 +5,9 @@ import java.util.Scanner;
 
 public class InputAdapter implements InputAdapterIF {
   String[] params;
-
   public InputAdapter(String[] params) {
     this.params = params;
   }
-
   @Override
   public int getNr() {
     int nr = -1;
@@ -23,7 +21,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return nr;
   }
-
   @Override
   public long getBegin() {
 
@@ -38,7 +35,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return begin;
   }
-
   @Override
   public int getDuration() {
 
@@ -54,7 +50,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return duration;
   }
-
   @Override
   public int getPrice() {
 
@@ -69,7 +64,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return price;
   }
-
   @Override
   public String getTicket() {
 
@@ -84,7 +78,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return ticket;
   }
-
   @Override
   public String getColor() {
 
@@ -99,10 +92,8 @@ public class InputAdapter implements InputAdapterIF {
     }
     return color;
   }
-
   @Override
   public int getSpace() {
-
     int space = -1;
     try (Scanner scan = new Scanner(params[6].replace("\n", ""))) {
       space = scan.useDelimiter("\\D+").nextInt();
@@ -114,7 +105,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return space;
   }
-
   @Override
   public String getClientCategory() {
 
@@ -129,7 +119,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return clientCategory;
   }
-
   @Override
   public String getVehicleType() {
     String vehicleType = null;
@@ -143,10 +132,8 @@ public class InputAdapter implements InputAdapterIF {
     }
     return vehicleType;
   }
-
   @Override
   public String getLicense() {
-
     String license = null;
     try (Scanner scan = new Scanner(params[9].replace("\n", ""))) {
       license = scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
@@ -158,7 +145,6 @@ public class InputAdapter implements InputAdapterIF {
     }
     return license;
   }
-
   @Override
   public boolean isCorrect() {
     return (this.getNr() >= 0
