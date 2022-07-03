@@ -1,6 +1,7 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
 
@@ -66,14 +67,19 @@ public class ServletPostLogic {
         System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
         return "" + (long)(leavecar.getPrice() * 100);
       case "licencePlate":
-        Car foundcar;
-        String licencePlate;
+        Car foundcar=null;
+        String licencePlate=null;
             if(params.length > 0) {
-              licencePlate = params[0].replace("+", " ");
-              System.out.println(garage.findCar(licencePlate));
-              foundcar = garage.findCar(licencePlate);
+              params[0] = params[0].replace("+", " ");
+              try (Scanner scan = new Scanner(params[0].replace("\n", ""))) {
+                licencePlate = scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
+                System.out.println(garage.findCar(licencePlate));
+                foundcar = garage.findCar(licencePlate);
+              } catch (Exception ignored) {
+                // Exception ignored on purpose
+              }
+
             } else {
-              foundcar = null;
               licencePlate = "NaN";
             }
             if(foundcar == null){
