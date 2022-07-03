@@ -31,12 +31,32 @@ class ServletPostLogicTest {
     undoList.add(uC -> uC.undoLeave(stats, garage));
   }
   @Test
+  void response_caseEnterWorngInput_expectsNull(){
+    CarBuilder builder=new CarBuilder();
+    builder.buildHash("");
+    String[] params=builder.buildCar().getParams();
+    assertNull(ServletPostLogic.response("enter",params));
+  }
+  @Test
   void response_caseEnter_expectsCorrectStringAndCarInGarage() {
     expected = "" + garage.parkCar(car3);
     garage.removeCar(car3);
     assertEquals(2, garage.getCounter());
     assertEquals(expected, ServletPostLogic.response("enter", car3.getParams()));
     assertEquals(3, garage.getCounter());
+  }
+  @Test
+  void response_caseLeaveWrongInput_expectsNull(){
+    CarBuilder builder=new CarBuilder();
+    builder.buildHash("");
+    String[] params=builder.buildCar().getParams();
+    assertNull(ServletPostLogic.response("leave",params));
+  }
+  @Test
+  void response_caseLeaveWrongCar_expectsNull(){
+    CarBuilder builder=new CarBuilder();
+    String[] params=builder.buildCar().getParams();
+    assertNull(ServletPostLogic.response("leave",params));
   }
   @Test
   void response_caseLeave_expectsCorrectStringAndCarInStats() {
@@ -46,5 +66,38 @@ class ServletPostLogicTest {
                 * 100;
     System.out.println(car1.begin() + " " + car1.getDuration());
     assertEquals(Long.parseLong(expected), Long.valueOf(ServletPostLogic.response("leave", car1.getParams())),100);
+  }
+  @Test
+  void response_caseInvalid(){
+    assertNull(ServletPostLogic.response("invalide",new String[]{}));
+    assertEquals("",ServletPostLogic.response("invalid",new String[]{}));
+  }
+  @Test
+  void response_caseChangeMax_expectsCorrectStringandCarparkSize999(){
+    assertEquals("",ServletPostLogic.response("change_max",new String[]{"999"}));
+    assertEquals(999,garage.getGarage().length);
+  }
+  @Test
+  void response_caseLicencePlateWrongCar_expectsCorrectString(){
+    String licencePlate=new Car().getLicense();
+    expected="No car found with "+ licencePlate +"\n<html> \n" +
+            "<a href=\"costCalculator.jsp\">back to the search</a>" +
+            "</html>";
+    assertEquals(expected,ServletPostLogic.response("licencePlate",new String[]{licencePlate}));
+  }
+  @Test
+  void response_caseLicencePlateButNoInput_expectsCorrectString(){
+    expected="No car found with "+ "NaN" +"\n<html> \n" +
+            "<a href=\"costCalculator.jsp\">back to the search</a>" +
+            "</html>";
+    assertEquals(expected,ServletPostLogic.response("licencePlate",new String[]{}));
+  }
+  @Test
+  void response_caseLicencePlate_expectsCorrectString(){
+    String licencePlate= car1.getLicense();
+    expected="No car found with "+ licencePlate +"\n<html> \n" +
+            "<a href=\"costCalculator.jsp\">back to the search</a>" +
+            "</html>";
+    assertNotEquals(expected,ServletPostLogic.response("licencePlate",new String[]{car1.getLicense()}));
   }
 }
