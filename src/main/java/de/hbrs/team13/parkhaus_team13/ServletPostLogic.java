@@ -38,7 +38,8 @@ public class ServletPostLogic {
           undoList.add(uC -> uC.undoEnter(garage, newCar));
           return "" + xi;
         }
-        break;
+         return "-";
+
       case "leave":
         InputAdapter leaveInputAdapter = new InputAdapter(params);
         if (!leaveInputAdapter.isCorrect()) {
