@@ -2,7 +2,7 @@ package de.hbrs.team13.parkhaus_team13;
 
 public class ParkingLot implements ParkingLotIF {
   String[] allowed;
-  Car vehicle = null;
+  private Car vehicle = null;
 
   public ParkingLot() {
     allowed = null;
@@ -31,12 +31,12 @@ public class ParkingLot implements ParkingLotIF {
 
   @Override
   public void parkVehicle(Car c) {
-    if (vehicle == null) {
+    if (vehicle == null && c != null) {
       if (canPark(c)) {
         vehicle = c;
       }
     } else {
-      System.out.println(c.nr() + " tried to Park on a occupied Spot");
+      System.out.println(c + " tried to Park on a occupied Spot");
     }
   }
 

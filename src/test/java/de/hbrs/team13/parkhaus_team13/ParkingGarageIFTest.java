@@ -119,7 +119,7 @@ class ParkingGarageIFTest {
     p.changeMax(9);
     for (ParkingLot pl : p.spaces) {
       assertNotNull(pl);
-      assertNull(pl.vehicle);
+      assertNull(pl.getVehicle());
     }
     p.changeMax(11);
     for (ParkingLot pl : p.spaces) {

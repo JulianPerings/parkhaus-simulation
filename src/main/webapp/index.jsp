@@ -31,6 +31,7 @@
     <meta property="og:description" content="Bachelor Course Software Engineering 1 (SE1), Hochschule Bonn-Rhein-Sieg.">
     <link rel="shortcut icon" href="https://kaul.inf.h-brs.de/favicon.ico" />
     <title>Parkhaus von Team 13 </title>
+    <script src="https://kaul.inf.h-brs.de/ccmjs/mkaul-components/parkhaus/versions/ccm.parkhaus-11.0.0.js"></script>
     <style>
         * {
             font-family: sans-serif, Helvetica, Arial;
@@ -59,7 +60,7 @@
 </head>
 <body>
 <div class="grey-background">
-    <h2><a href="costCalculator.jsp">Kasse</a></h2>
+    <h2><a href="costCalculator.jsp">Kostenrechner</a></h2>
 </div>
 <!--
 <div class="box center grey-background">
