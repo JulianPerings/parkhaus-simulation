@@ -22,7 +22,7 @@ public abstract class CarParkServlet extends HttpServlet {
   static Statistics stats = new Statistics(); // Handles all our statistics
   static PriceCalc priceCalc = new PriceCalc(); // Handles price calculations
   static ParkingGarage garage =
-      new ParkingGarage(20); // Stores vehicles currently parking in our garage
+      new ParkingGarage(30); // Stores vehicles currently parking in our garage
   static List<Consumer<UndoCommand>> undoList =
       new ArrayList<>(); // Undo-list to undo actions regarding entering and leaving
   static UndoCommand uComm = new UndoCommand(); // Handles undo-requests
