@@ -31,12 +31,14 @@ public class ParkingLot implements ParkingLotIF {
 
   @Override
   public void parkVehicle(Car c) {
-    if (vehicle == null && c != null) {
+    if (c != null) {
       if (canPark(c)) {
         vehicle = c;
+      }else {
+        System.out.println(c.getLicense() + " tried to Park on a occupied Spot");
       }
     } else {
-      System.out.println(c + " tried to Park on a occupied Spot");
+      System.out.println("No Car tried to Park on a occupied Spot");
     }
   }
 
