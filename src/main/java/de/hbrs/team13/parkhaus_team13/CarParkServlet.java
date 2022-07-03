@@ -35,6 +35,10 @@ public abstract class CarParkServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     String cmd = request.getParameter("cmd");
     System.out.println(cmd + " requested: " + request.getQueryString());
+    if(cmd.equals("config")){
+      out.println(config());
+      return;
+    }
     String result = ServletGetLogic.response(cmd);
     if (result != null) {
       out.println(result);

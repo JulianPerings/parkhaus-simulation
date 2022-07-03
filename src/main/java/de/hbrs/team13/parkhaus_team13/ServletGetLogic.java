@@ -55,7 +55,7 @@ public class ServletGetLogic {
             result.append(",");
           }
         }
-        System.out.println("Result: " + result.toString());
+        System.out.println("Current Car List: " + result.toString());
         return result.toString();
       case "clientCategoryChart":
         return stats.generateClientCategoryChart();

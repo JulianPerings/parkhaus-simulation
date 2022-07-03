@@ -11,11 +11,27 @@ public class BaseServlet extends CarParkServlet {
 
   @Override
   int max() {
+    return 30;
+  }
+
+  int openingFrom(){
+    return 0;
+  }
+
+  int openTo(){
+    return 24;
+  }
+
+  int delay(){
+    return 100;
+  }
+
+  int simulationSpeed(){
     return 10;
   }
 
   @Override
   String config() {
-    return null;
+    return max()+","+openingFrom()+","+openTo()+","+delay()+","+simulationSpeed();
   }
 }
