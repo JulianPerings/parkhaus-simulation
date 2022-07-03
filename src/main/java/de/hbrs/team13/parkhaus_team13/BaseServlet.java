@@ -27,7 +27,7 @@ public class BaseServlet extends CarParkServlet {
   }
 
   int simulationSpeed(){
-    return 10;
+    return 5;
   }
 
   @Override
