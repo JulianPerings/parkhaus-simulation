@@ -25,6 +25,6 @@ class BaseServletTest {
 
   @Test
   void config_expectsSomething() {
-    assertEquals("30,0,24,100,10",test.config());
+    assertEquals("30,0,24,100,5",test.config());
   }
 }
