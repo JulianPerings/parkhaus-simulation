@@ -1,6 +1,15 @@
 # Parkhaus Simulation Team 13
 
 ## links
+
+**Userstories** : [](Artifacts/Userstories.md)
+
+**Prioritized Userstories** : [](Artifacts/PrioUserstories.md)
+
+**MVP** : [](Artifacts/MVP.md)
+
+**Digital Concept** : [](Artifacts/DigitalKonzept.txt)
+
 - **Jenkins** : https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/
                 [](https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/)
 - **SonarQube** : https://sepp-sonar.inf.h-brs.de/dashboard?id=Team_13
