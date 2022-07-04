@@ -2,13 +2,13 @@
 
 ## links
 
-**Userstories** : [](Artifacts/Userstories.md)
+**Userstories** : [here](Artifacts/Userstories.md)
 
-**Prioritized Userstories** : [](Artifacts/PrioUserstories.md)
+**Prioritized Userstories** : [here](Artifacts/PrioUserstories.md)
 
-**MVP** : [](Artifacts/MVP.md)
+**MVP** : [here](Artifacts/MVP.md)
 
-**Digital Concept** : [](Artifacts/DigitalKonzept.txt)
+**Digital Concept** : [here](Artifacts/DigitalKonzept.txt)
 
 - **Jenkins** : https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/
                 [](https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/)
