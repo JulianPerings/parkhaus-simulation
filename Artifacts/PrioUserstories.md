@@ -2,10 +2,8 @@
 
 | Story/Task | Nutzen | Aufwand | Nutzen/Aufwand |
 | --- | --- | --- | --- |
-| Git Repository einrichten
- | 89 | 1 | 89 |
-| Server einrichten/Grundgerüst schreiben (das ganze Testen)
- | 89 | 2 | 44,5 |
+| Git Repository einrichten| 89 | 1 | 89 |
+| Server einrichten/Grundgerüst schreiben (das ganze Testen)| 89 | 2 | 44,5 |
 | Änderung der Parkhaus API um E-Autos/Zweiräder zuzulassen (Vielleicht auch Eigene Typen unterstützt, Recherche benötigt | 8 | 5 | 1,6 |
 | Recherche SEPP / Einzelne Komponenten | 89 | 3 | 26,66666 |
 | Parkhaus API recherchieren | 89 | 3 | 26,66666 |
