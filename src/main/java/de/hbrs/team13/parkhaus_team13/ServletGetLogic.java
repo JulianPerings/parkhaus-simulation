@@ -1,6 +1,6 @@
 package de.hbrs.team13.parkhaus_team13;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
 
@@ -47,7 +47,7 @@ public class ServletGetLogic {
         // type, license (PKW Kennzeichen)
         // For example:
         // 1/1648465400000/_/_/Ticket1/#0d1e0a/2/any/PKW/1,2/1648465499999/_/_/Ticket2/#dd10aa/3/any/PKW/2
-        ArrayList<Car> exportCars = stats.getCarList();
+        List<Car> exportCars = stats.getCarList();
         result = new StringBuilder();
         for (Car car : exportCars) {
           result.append(car.export());
@@ -55,6 +55,7 @@ public class ServletGetLogic {
             result.append(",");
           }
         }
+        System.out.println("Current Car List: " + result.toString());
         return result.toString();
       case "clientCategoryChart":
         return stats.generateClientCategoryChart();
@@ -96,6 +97,10 @@ public class ServletGetLogic {
                         priceCalc.calcDayNightPrice(0, 365L * 24 * 60 * 60 * 1000) / 100d * 100.0)
                     / 100.0;
         return prices;
+      case "dailyEarnings":
+        return dailyEarnings.get() + " €";
+      case "weeklyEarnings":
+        return weeklyEarnings.get() + " €";
       default:
     }
     return null;

@@ -1,6 +1,7 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,7 +14,7 @@ public class ViewWeeklyEarnings implements Observer {
 
   @Override
   public void update(Observable o, Object arg) {
-    ArrayList<Car> cars = (ArrayList<Car>) arg;
+    List<Car> cars = (ArrayList<Car>) arg;
     sum =
         cars.stream()
             .filter(car -> System.currentTimeMillis() - car.end() <= 86400000l * 7)

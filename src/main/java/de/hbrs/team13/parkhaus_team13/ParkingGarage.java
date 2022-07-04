@@ -25,7 +25,7 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
       ParkingLot p2 = new ParkingLot();
       p2.allowed = spaces[i].allowed;
       if (spaces[i].getVehicle() != null) {
-        p2.vehicle = new Car(spaces[i].getVehicle().getParams());
+        p2.parkVehicle(new Car(spaces[i].getVehicle().getParams()));
       }
       p[i] = p2;
     }
@@ -126,7 +126,6 @@ public class ParkingGarage extends Observable implements ParkingGarageIF, Iterab
         license=license.replace("\"","");
         String carlicense=p.getVehicle().getLicense().replace("\"","");
         carlicense=carlicense.replace("\n","");
-        System.out.println("Hier -----> :"+license+": = :"+carlicense+":");
         if (license.equals(carlicense)) {
           return p.getVehicle();
         }

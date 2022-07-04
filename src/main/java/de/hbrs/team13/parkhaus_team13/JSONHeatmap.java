@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 
-public class JSONHeatmap extends JsonStatististicsTemplate {
+public class JSONHeatmap extends JsonStatisticsTemplate {
   String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
   String[] hours = {
     "12:00am", "01:00am", "02:00am", "03:00am", "04:00am", "05:00am", "06:00am", "07:00am",

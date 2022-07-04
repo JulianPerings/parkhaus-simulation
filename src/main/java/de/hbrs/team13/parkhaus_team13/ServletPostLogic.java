@@ -1,6 +1,7 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static de.hbrs.team13.parkhaus_team13.CarParkServlet.*;
 
@@ -38,7 +39,8 @@ public class ServletPostLogic {
           undoList.add(uC -> uC.undoEnter(garage, newCar));
           return "" + xi;
         }
-        break;
+         return "-";
+
       case "leave":
         InputAdapter leaveInputAdapter = new InputAdapter(params);
         if (!leaveInputAdapter.isCorrect()) {
@@ -65,9 +67,21 @@ public class ServletPostLogic {
         System.out.println("leave," + leavecar.toString() + ", price = " + leavecar.getPrice());
         return "" + (long)(leavecar.getPrice() * 100);
       case "licencePlate":
-            String licencePlate = params[0].replace("+", " ");
-            System.out.println(garage.findCar(licencePlate));
-            Car foundcar = garage.findCar(licencePlate);
+        Car foundcar=null;
+        String licencePlate=null;
+            if(params.length > 0) {
+              params[0] = params[0].replace("+", " ");
+              try (Scanner scan = new Scanner(params[0].replace("\n", ""))) {
+                licencePlate = scan.useDelimiter("\\D+").findInLine("SU-[A-Z] [\\d]{1,3}");
+                System.out.println(garage.findCar(licencePlate));
+                foundcar = garage.findCar(licencePlate);
+              } catch (Exception ignored) {
+                // Exception ignored on purpose
+              }
+
+            } else {
+              licencePlate = "NaN";
+            }
             if(foundcar == null){
               return "No car found with "+licencePlate+"\n<html> \n" +
                       "<a href=\"costCalculator.jsp\">back to the search</a>" +

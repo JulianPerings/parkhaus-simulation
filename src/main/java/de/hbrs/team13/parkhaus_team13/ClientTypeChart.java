@@ -1,13 +1,13 @@
 package de.hbrs.team13.parkhaus_team13;
 
 import javax.json.JsonArrayBuilder;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ClientTypeChart extends TypeChartTemplate {
 
   String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
 
-  ClientTypeChart(ArrayList<Car> cars) {
+  ClientTypeChart(List<Car> cars) {
     super(cars);
   }
 

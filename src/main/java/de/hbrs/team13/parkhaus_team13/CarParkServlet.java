@@ -22,10 +22,12 @@ public abstract class CarParkServlet extends HttpServlet {
   static Statistics stats = new Statistics(); // Handles all our statistics
   static PriceCalc priceCalc = new PriceCalc(); // Handles price calculations
   static ParkingGarage garage =
-      new ParkingGarage(20); // Stores vehicles currently parking in our garage
+      new ParkingGarage(30); // Stores vehicles currently parking in our garage
   static List<Consumer<UndoCommand>> undoList =
       new ArrayList<>(); // Undo-list to undo actions regarding entering and leaving
   static UndoCommand uComm = new UndoCommand(); // Handles undo-requests
+  static ViewDailyEarnings dailyEarnings = new ViewDailyEarnings(stats);
+  static ViewWeeklyEarnings weeklyEarnings = new ViewWeeklyEarnings(stats);
   /** HTTP GET */
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
@@ -33,6 +35,10 @@ public abstract class CarParkServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     String cmd = request.getParameter("cmd");
     System.out.println(cmd + " requested: " + request.getQueryString());
+    if(cmd.equals("config")){
+      out.println(config());
+      return;
+    }
     String result = ServletGetLogic.response(cmd);
     if (result != null) {
       out.println(result);
@@ -50,20 +56,20 @@ public abstract class CarParkServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
 
     System.out.println(body);
-      String[] params = body.split(",");
-      String event = params[0];
+    String[] params = body.split(",");
+    String event = params[0];
 
-      if(event.contains("licencePlate")){
-        params = event.split("=");
-        event = params[0];
-      }
-      String[] restParams = Arrays.copyOfRange(params, 1, params.length);
-      if (event.equals("tomcat")) {
-        out.println(
-                getServletConfig().getServletContext().getServerInfo()
-                        + getServletConfig().getServletContext().getMajorVersion()
-                        + getServletConfig().getServletContext().getMinorVersion());
-      }
+    if (event.contains("licencePlate")) {
+      params = event.split("=");
+      event = params[0];
+    }
+    String[] restParams = Arrays.copyOfRange(params, 1, params.length);
+    if (event.equals("tomcat")) {
+      out.println(
+          getServletConfig().getServletContext().getServerInfo()
+              + getServletConfig().getServletContext().getMajorVersion()
+              + getServletConfig().getServletContext().getMinorVersion());
+    }
     String result = ServletPostLogic.response(event, restParams);
     if (result != null) {
       out.println(result);

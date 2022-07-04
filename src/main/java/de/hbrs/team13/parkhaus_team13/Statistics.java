@@ -3,7 +3,7 @@ package de.hbrs.team13.parkhaus_team13;
 import java.util.*;
 
 public class Statistics extends Observable {
-  private ArrayList<Car> cars = new ArrayList<>();
+  private List<Car> cars = new ArrayList<>();
   String[] vehicleTypes = {"SUV", "PKW", "MOTORBIKE", "E_VEHICLE"};
   String[] clientCategory = {"FAMILY", "WOMEN", "ANY", "HANDICAPPED"};
 
@@ -13,7 +13,7 @@ public class Statistics extends Observable {
     notifyObservers(cars);
   }
 
-  ArrayList<Car> getCarList() {
+  List<Car> getCarList() {
     return cars;
   }
 

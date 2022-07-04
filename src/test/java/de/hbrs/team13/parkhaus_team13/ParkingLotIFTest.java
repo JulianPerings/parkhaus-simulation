@@ -19,7 +19,20 @@ class ParkingLotIFTest {
   @Test
   void isOccupied() {
     assertFalse(p.isOccupied());
-    p.vehicle = new Car();
+    p.setAllowed(new String[]{"PKW"});
+    p.parkVehicle(new Car(
+            new String[] {
+                    "\"nr\": 11",
+                    "\"timer\": 1650896019513",
+                    "\"duration\": 99100",
+                    "\"price\": 991",
+                    "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
+                    "\"color\": \"#f15bec\"",
+                    "\"space\": 14",
+                    "\"client_category\": WOMEN\"\"",
+                    "\"vehicle_type\": PKW\"\"",
+                    "\"license\": \"SU-X 47\""
+            }));
     assertTrue(p.isOccupied());
   }
 
@@ -41,7 +54,7 @@ class ParkingLotIFTest {
   void parkVehicle() {
     Car c = new Car();
     p1.parkVehicle(c);
-    assertTrue(p1.vehicle.equals(c));
+    assertTrue(p1.getVehicle().equals(c));
     c = new Car();
     p.parkVehicle(c);
     assertFalse(p.carEquals(c));
@@ -54,7 +67,7 @@ class ParkingLotIFTest {
     assertTrue(p1.getVehicle().equals(c));
     c = null;
     p1.removeVehicle();
-    p1.vehicle = c;
+    p1.parkVehicle(c);
     assertNull(p1.getVehicle());
   }
 

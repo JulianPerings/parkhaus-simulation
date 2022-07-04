@@ -5,7 +5,7 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import java.util.List;
 
-public class JSONDurationChart extends JsonStatististicsTemplate {
+public class JSONDurationChart extends JsonStatisticsTemplate {
   public JSONDurationChart(List<Car> cars) {
     super(cars);
   }
