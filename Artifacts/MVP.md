@@ -16,11 +16,8 @@
 | Implementierung verschiedener Parkpreise/ Unterscheidung von Parkplätzen | 13 | 2 | 6,5 |
 | Weboberfläche Gestalten die Alle Daten veranschaulicht | 34 | 8 | 4,25 |
 | Verbindung Weboberfläche reale Daten | 34 | 8 | 4,25 |
-|
- |
- |
- |
- |
+||||
+||||
 | Aufbereitung von Parkdaten zur statistischen Analyse (Code) | 21 | 5 | 4,2 |
 | US08 | 13 | 5 | 2,6 |
 | US09 | 13 | 5 | 2,6 |
