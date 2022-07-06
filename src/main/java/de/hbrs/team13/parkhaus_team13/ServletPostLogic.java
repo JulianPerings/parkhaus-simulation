@@ -94,7 +94,6 @@ public class ServletPostLogic {
         return "";
       case "change_max":
         Integer i = Integer.valueOf(params[0]);
-        System.out.println(i);
         garage.changeMax(i);
         return "";
       default:
