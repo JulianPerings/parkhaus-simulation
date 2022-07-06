@@ -10,9 +10,9 @@
 
 [**MVP**](Basics/MVP.md)
 
-[**UML class diagram**](Basics/UMLClass.md)
+[**UML class diagram**](Basics/UMLClass.PNG)
 
-[**UML use case diagram**](Basics/UMLUseCase.md)
+[**UML use case diagram**](Basics/UMLUseCase.PNG)
 
 [**Jenkins**](https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/)
 
