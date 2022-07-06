@@ -205,6 +205,10 @@ public class CarTest {
     assertEquals(
         Arrays.toString(car4.priority),
         Arrays.toString(new String[] {"", "", "SUV", "PKW", "ANY"}));
+    Car car5 = new Car(null);
+    car5.sortOutPriority();
+    assertNull(car5.priority);
+
   }
 
   @Test
