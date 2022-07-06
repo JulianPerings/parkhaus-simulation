@@ -284,10 +284,6 @@ public class Car implements CarIF {
                     addRest(i, counterC, cSa);
                     break;
                 }
-                if (counterC == cSa.size()) { //if all client priorities are through
-                    addRest(i, counterV, vSa);
-                    break;
-                }
                 //compares the index of the next to be inserted parts on client and vehicle lists with each other
                 //and inserts the lower one (basically the merge part of merge sort
                 if (sortOrder.indexOf(vSa.get(counterV)) < sortOrder.indexOf(cSa.get(counterC))) {
