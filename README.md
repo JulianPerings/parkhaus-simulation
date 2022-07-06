@@ -12,6 +12,8 @@
 
 [**UML class diagram**](Basics/UMLClass.md)
 
+[**UML use case diagram**](Basics/UMLUseCase.md)
+
 [**Jenkins**](https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/)
 
 [**SonarQube**](https://sepp-sonar.inf.h-brs.de/dashboard?id=Team_13)
