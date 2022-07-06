@@ -2,13 +2,15 @@
 
 ## links
 
-[**Digital Concept**](Artifacts/DigitalKonzept.txt)
+[**Digital Concept**](Basics/DigitalKonzept.txt)
 
-[**Userstories**](Artifacts/Userstories.md)
+[**Userstories**](Basics/Userstories.md)
 
-[**Prioritized Userstories**](Artifacts/PrioUserstories.md)
+[**Prioritized Userstories**](Basics/PrioUserstories.md)
 
-[**MVP**](Artifacts/MVP.md)
+[**MVP**](Basics/MVP.md)
+
+[**UML class diagram**](Basics/UMLClass.md)
 
 [**Jenkins**](https://sepp-jenkins.inf.h-brs.de/view/SE1%20SoSe%202022%20(Kaul)/job/Team_13/)
 
