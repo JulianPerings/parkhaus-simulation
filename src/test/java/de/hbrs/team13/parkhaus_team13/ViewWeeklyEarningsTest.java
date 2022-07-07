@@ -7,34 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ViewWeeklyEarningsTest {
   @Test
   void test() {
-    String[] params =
-        new String[] {
-          "\"nr\": 11",
-          "\"timer\": " + (System.currentTimeMillis() - 99101),
-          "\"duration\": 99100",
-          "\"price\": 991",
-          "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-          "\"color\": \"#f15bec\"",
-          "\"space\": 14",
-          "\"client_category\": \"WOMEN\"",
-          "\"vehicle_type\": \"E_VEHICLE\"",
-          "\"license\": \"SU-X 47\""
-        };
-    String[] params2 =
-        new String[] {
-          "\"nr\": 11",
-          "\"timer\": " + (System.currentTimeMillis() - 9910000001l * 7),
-          "\"duration\": 9910000",
-          "\"price\": 991",
-          "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-          "\"color\": \"#f15bec\"",
-          "\"space\": 14",
-          "\"client_category\": \"WOMEN\"",
-          "\"vehicle_type\": \"E_VEHICLE\"",
-          "\"license\": \"SU-X 47\""
-        };
-    Car car1 = new Car(params);
-    Car car2 = new Car(params2);
+    CarBuilder cb1 = new CarBuilder();
+    cb1.buildTimer(System.currentTimeMillis() - 99101);
+
+    CarBuilder cb2 = new CarBuilder();
+    cb2.buildTimer(System.currentTimeMillis() - 9910000001l * 7);
+
+    Car car1 = cb1.buildCar();
+    Car car2 = cb2.buildCar();
     Statistics s = new Statistics();
 
     ViewWeeklyEarnings v = new ViewWeeklyEarnings(s);

@@ -20,19 +20,7 @@ class ParkingLotIFTest {
   void isOccupied() {
     assertFalse(p.isOccupied());
     p.setAllowed(new String[]{"PKW"});
-    p.parkVehicle(new Car(
-            new String[] {
-                    "\"nr\": 11",
-                    "\"timer\": 1650896019513",
-                    "\"duration\": 99100",
-                    "\"price\": 991",
-                    "\"hash\": \"c6d68ad63d346c13bd5345ec6f40b039\"",
-                    "\"color\": \"#f15bec\"",
-                    "\"space\": 14",
-                    "\"client_category\": WOMEN\"\"",
-                    "\"vehicle_type\": PKW\"\"",
-                    "\"license\": \"SU-X 47\""
-            }));
+    p.parkVehicle(new Car());
     assertTrue(p.isOccupied());
   }
 
