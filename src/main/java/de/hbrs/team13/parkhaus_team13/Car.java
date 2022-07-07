@@ -224,7 +224,7 @@ public class Car implements CarIF {
         + "/"
         + begin()
         + "/"
-        + getDuration()*1000
+        + getDuration()*50
         + "/"
         + getPrice()*100
         + "/"
