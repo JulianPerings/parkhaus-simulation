@@ -5,16 +5,15 @@ public interface ParkingGarageIF {
   ParkingLotIF[] getGarage();
   // gives a pointer to the array
   ParkingLotIF[] getGarageUnprotected();
-  // need to check out how response works for client (maybe needs to be an int to say which parking
-  // spot was taken)
   int parkCar(Car c);
-
   int[] getFreeSpaces(String[] s);
 
   int[] getParkingSpaces(String[] s);
 
   Car removeCar(Car c);
-
+  int findCar(Car c);
+  Car findCar(String licence);
+  Car findTicket(String ticket);
   void resize();
 
   void changeMax(int m);
