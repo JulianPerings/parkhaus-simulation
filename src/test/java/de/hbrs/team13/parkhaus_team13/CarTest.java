@@ -208,7 +208,8 @@ public class CarTest {
     Car car5 = new Car(null);
     car5.sortOutPriority();
     assertNull(car5.priority);
-
+    car4.priority = new String[]{};
+    car4.sortOutPriority();
   }
 
   @Test
