@@ -1,4 +1,5 @@
 # Parkhaus Simulation Team 13
+Dieses Projekt war eine 1 Semester lange Programmieraufgabe für 4 Personen mit dem Ziel durch wöchentlich erlerntes Wissen stückweise in dem Projekt umzusetzen und schlussendlich einen digitalen Ablauf eines Parkhauses zu simulieren. Aus den erhaltenen Werten eines simulierten Tagesablaufs werden Graphen und Tabellen geplottet und dargestellt. Vorlage des Projekts stammt von unserem Leiter [Manfred Kaul](https://github.com/mkaul). Durchführung des Projekts zusammen mit [Bruce](https://github.com/Amn3si4c), [Yasmin](https://github.com/YasminW) und [Alexander](https://github.com/roxtraAK).
 
 ## links
 
